@@ -164,4 +164,80 @@
         <tag>math intro</tag>
       </tags>
   </entry>
+  <entry>
+    <title>实用微分几何3</title>
+    <url>/2022/08/24/DiffGeo3/</url>
+    <content><![CDATA[<p>*此前已经从现代的角度介绍了微分几何的基本概念。以下将介绍古典微分几何——曲线曲面论。*本篇包含其第一章：曲线论的部分内容。</p>
+<p>参考：《Differential Geometry of Curves &amp; Surfaces》，Do Carmo，2nd ed。这本书写得相当简明易懂又不过分繁复，非常推荐。</p>
+<span id="more"></span>
+<h3 id="parameterized-differentiale-curve"><a class="markdownIt-Anchor" href="#parameterized-differentiale-curve"></a> parameterized differentiale curve</h3>
+<p>指一个从开区间（一维开集，也可以是整个<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">R</mi></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">R</span></span></span></span></span>）到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi mathvariant="double-struck">R</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span>的可微<strong>映射</strong>。</p>
+<h3 id="trace"><a class="markdownIt-Anchor" href="#trace"></a> trace</h3>
+<p>指曲线的像集。</p>
+<p>（注意，curve指映射，trace指像集（一个<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">R</mi></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">R</span></span></span></span></span>的子集，是人们通常所说的曲线）。像集相同时trace相同，但curve未必相同）</p>
+<h3 id="tangent-vector"><a class="markdownIt-Anchor" href="#tangent-vector"></a> tangent vector</h3>
+<p>对参数化可微曲线而言，其切向量就是三个分量各自求导组成的三维矢量。</p>
+<h4 id="tangent-line"><a class="markdownIt-Anchor" href="#tangent-line"></a> tangent line</h4>
+<p>当切向量非零向量时，其所在直线为切线。</p>
+<h4 id="singular-point"><a class="markdownIt-Anchor" href="#singular-point"></a> singular point</h4>
+<p>当某点切线不存在时，称对应的参数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">t</span></span></span></span>为（0阶）奇点。</p>
+<h4 id="regular"><a class="markdownIt-Anchor" href="#regular"></a> regular</h4>
+<p>当参数化可微曲线没有奇点，则称正则。</p>
+<p><em>以下总假设可参数化、可微、正则</em></p>
+<h3 id="arc-length"><a class="markdownIt-Anchor" href="#arc-length"></a> arc length</h3>
+<p>弧长是沿着参数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">t</span></span></span></span>对各点切向量的模长进行积分。</p>
+<h4 id="弧长参数"><a class="markdownIt-Anchor" href="#弧长参数"></a> 弧长参数</h4>
+<p>当参数值和开区间下确界之差正好就是这段参数的弧长时，称这个参数是弧长参数。</p>
+<p><strong>弧长参数下切向量模恒为1</strong></p>
+<h3 id="curvature"><a class="markdownIt-Anchor" href="#curvature"></a> curvature</h3>
+<p>弧长参数下，曲线的二阶导矢量的模称为曲率。</p>
+<p><em>由于弧长参数下，切向量模恒为1，因此此时的二阶导能反映曲线方向变化（即蜷曲）的程度</em></p>
+<p><em>显然，二阶导和曲线定向无关（负号会被消去），于是曲率也和定向无关</em></p>
+<h3 id="normal-vector"><a class="markdownIt-Anchor" href="#normal-vector"></a> normal vector</h3>
+<p>（弧长参数下，以下略）归一化的二阶导矢量就是法向量。法向量乘上曲率就是二阶导矢量。</p>
+<p><em>与切向量的正交性可以通过对切向量模恒为1的式子取微分得到。</em></p>
+<p><strong>在曲率为0的地方，法向量不可定义。<strong>这种点称为</strong>一阶奇点</strong>。曲率为0的部分就是局部和直线相似的部分。</p>
+<h3 id="osculating-plane"><a class="markdownIt-Anchor" href="#osculating-plane"></a> osculating plane</h3>
+<p>某点处的切向量和法向量确定的平面称为此点的密切平面。</p>
+<p><em>一阶奇点处同样无法定义密切平面。</em></p>
+<h3 id="binormal-vector"><a class="markdownIt-Anchor" href="#binormal-vector"></a> binormal vector</h3>
+<p>切向量和法向量的叉积<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>×</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">T\times N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span>称为副法向量。副法向量和密切平面正交。</p>
+<p><em>由于是两个单位向量之外积，因此副法向量模也是1</em>。</p>
+<p><em>重定向后切向量变向，因此副法向量也和定向有关</em></p>
+<p><em>对副法向量内积为1式进行微分，可知副法向量和其自身的导向量正交</em></p>
+<p><em>对副法向量定义式微分，可知副法向量的导向量和切向量也正交</em></p>
+<p><em>因此，副法向量的导向量和法向量平行</em></p>
+<h3 id="torsion"><a class="markdownIt-Anchor" href="#torsion"></a> torsion</h3>
+<p>副法向量的导向量和法向量之间差的一个系数称为挠率（有些地方使用相反数作为定义）</p>
+<p><em>可见挠率可正可负可0，而曲率恒正</em></p>
+<p><em>显然，在0、1阶奇点处均无法定义挠率</em></p>
+<p><em>当trace在同一个平面中时，由于副法向量不变，则挠率为0</em></p>
+<p><em>挠率和定向无关</em></p>
+<h3 id="frenet-trihedron"><a class="markdownIt-Anchor" href="#frenet-trihedron"></a> Frenet trihedron</h3>
+<p>切向量、法向量、副法向量组成Frenet标架（约等于坐标系）。</p>
+<p><em>实用：在Frenet标价下对法向量导数（与法向量垂直）进行分解，可以立即得到曲率和挠率的负值。这可以通过<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mi>b</mi><mo>×</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">n=b\times t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">t</span></span></span></span>证明。</em></p>
+<h3 id="frenet-formulas"><a class="markdownIt-Anchor" href="#frenet-formulas"></a> Frenet Formulas</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msup><mi>t</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mi>k</mi><mi>n</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msup><mi>n</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mo>−</mo><mi>k</mi><mi>t</mi><mo>−</mo><mi>τ</mi><mi>b</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msup><mi>b</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mi>τ</mi><mi>n</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+t^{\prime} &amp;=k n \\
+n^{\prime} &amp;=-k t-\tau b \\
+b^{\prime} &amp;=\tau n
+\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.500000000000002em;vertical-align:-2.000000000000001em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5000000000000004em;"><span style="top:-4.66em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">n</span></span></span><span style="top:-3.16em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">−</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mord mathnormal">b</span></span></span><span style="top:-1.6599999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mord mathnormal">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.000000000000001em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<h3 id="other-2-planes"><a class="markdownIt-Anchor" href="#other-2-planes"></a> other 2 planes</h3>
+<h4 id="rectifying-plane从切面"><a class="markdownIt-Anchor" href="#rectifying-plane从切面"></a> rectifying plane（从切面）</h4>
+<p>法向量的垂面，或由切向量和副法向量确定的平面。</p>
+<h4 id="normal-plane法面"><a class="markdownIt-Anchor" href="#normal-plane法面"></a> normal plane（法面）</h4>
+<p>切向量的垂面，或由法向量和副法向量确定的平面</p>
+<blockquote>
+<p>总结：3维曲线可以看成直线经过弯曲（曲率）和扭曲（挠率）得到的东西</p>
+</blockquote>
+<h3 id="fundamental-thm-of-local-theory-of-curves"><a class="markdownIt-Anchor" href="#fundamental-thm-of-local-theory-of-curves"></a> Fundamental Thm of Local Theory of Curves</h3>
+<p>具有<strong>相同弧长参数、曲率、挠率</strong>的所有正则曲线之间至多只相差一个刚体运动（rigid motion）<em>证略</em></p>
+]]></content>
+      <categories>
+        <category>Differential Geometry</category>
+      </categories>
+      <tags>
+        <tag>math intro</tag>
+      </tags>
+  </entry>
 </search>
