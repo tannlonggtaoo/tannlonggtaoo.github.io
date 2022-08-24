@@ -15,8 +15,79 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Fri, 19 Aug 2022 09:31:17 GMT</pubDate>
+    <pubDate>Wed, 24 Aug 2022 08:42:00 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>实用微分几何2</title>
+      <link>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo2/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo2/</guid>
+      <pubDate>Wed, 24 Aug 2022 07:24:32 GMT</pubDate>
+      
+      <description>&lt;p&gt;微分流形、坐标系（图）、图册（微分结构）、r阶连续、函数（标量场）、联通、弧连通&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Differential-Geometry/">Differential Geometry</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo2/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>实用微分几何1</title>
+      <link>https://tannlonggtaoo.github.io/2022/08/23/DiffGeo1/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/08/23/DiffGeo1/</guid>
+      <pubDate>Tue, 23 Aug 2022 15:32:47 GMT</pubDate>
+      
+      <description>&lt;p&gt;拓扑空间，开子集，通常拓扑，连续，同胚&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Differential-Geometry/">Differential Geometry</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/08/23/DiffGeo1/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>注意arccos在loss中时对梯度的影响</title>
+      <link>https://tannlonggtaoo.github.io/2022/08/23/arccos-in-loss/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/08/23/arccos-in-loss/</guid>
+      <pubDate>Tue, 23 Aug 2022 14:41:49 GMT</pubDate>
+      
+      <description>&lt;p&gt;arccos函数在定义域边界上梯度为无穷，因此会迅速导致梯度爆炸。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Optimization/">Optimization</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/machine-learning/">machine learning</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/loss/">loss</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/gradient-decent/">gradient decent</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/pose-estimation/">pose estimation</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/warning/">warning</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/08/23/arccos-in-loss/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>第二则/Second Blog</title>
