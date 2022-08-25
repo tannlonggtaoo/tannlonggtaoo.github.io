@@ -15,17 +15,16 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Wed, 24 Aug 2022 15:19:34 GMT</pubDate>
+    <pubDate>Thu, 25 Aug 2022 07:33:20 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>实用微分几何3</title>
-      <link>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo3/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo3/</guid>
-      <pubDate>Wed, 24 Aug 2022 09:49:09 GMT</pubDate>
+      <title>DiffGeo4</title>
+      <link>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo4/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo4/</guid>
+      <pubDate>Thu, 25 Aug 2022 05:39:08 GMT</pubDate>
       
-      <description>&lt;p&gt;*此前已经从现代的角度介绍了微分几何的基本概念。以下将介绍古典微分几何——曲线曲面论。*本篇包含其第一章：曲线论的部分内容。&lt;/p&gt;
-&lt;p&gt;参考：《Differential Geometry of Curves &amp;amp; Surfaces》，Do Carmo，2nd ed。这本书写得相当简明易懂又不过分繁复，非常推荐。&lt;/p&gt;</description>
+      <description>&lt;p&gt;经典曲面论基本概念&lt;/p&gt;</description>
       
       
       
@@ -34,6 +33,33 @@
       
       
       <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/classical-surface-theory/">classical surface theory</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo4/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>实用微分几何3</title>
+      <link>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo3/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo3/</guid>
+      <pubDate>Wed, 24 Aug 2022 09:49:09 GMT</pubDate>
+      
+      <description>&lt;p&gt;此前已经从现代的角度介绍了微分几何的基本概念。以下将介绍古典微分几何——曲线曲面论。本篇包含其第一章：曲线论的部分内容。&lt;/p&gt;
+&lt;p&gt;参考：《Differential Geometry of Curves &amp;amp; Surfaces》，Do Carmo，2nd ed。这本书写得相当简明易懂又不过分繁复，非常推荐。&lt;/p&gt;
+&lt;p&gt;注意：本书中的”可微“都指”光滑（任意阶可微）“&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Differential-Geometry/">Differential Geometry</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/classical-curve-theory/">classical curve theory</category>
       
       
       <comments>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo3/#disqus_thread</comments>
