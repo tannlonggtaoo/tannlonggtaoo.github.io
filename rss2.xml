@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Thu, 25 Aug 2022 07:37:54 GMT</pubDate>
+    <pubDate>Thu, 25 Aug 2022 13:26:03 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>实用微分几何5</title>
+      <link>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo5/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo5/</guid>
+      <pubDate>Thu, 25 Aug 2022 12:15:20 GMT</pubDate>
+      
+      <description>&lt;p&gt;在曲面基本概念的基础上的进一步探讨。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Diffrential-Geometry/">Diffrential Geometry</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo5/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>实用微分几何4</title>
