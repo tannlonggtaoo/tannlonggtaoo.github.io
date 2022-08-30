@@ -15,8 +15,30 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Tue, 30 Aug 2022 07:10:39 GMT</pubDate>
+    <pubDate>Tue, 30 Aug 2022 12:53:35 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>估计曲率的Rusinkiewicz法</title>
+      <link>https://tannlonggtaoo.github.io/2022/08/30/Rusinkiewiczs-method/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/08/30/Rusinkiewiczs-method/</guid>
+      <pubDate>Tue, 30 Aug 2022 11:40:52 GMT</pubDate>
+      
+      <description>&lt;p&gt;对各顶点已经有法向量信息的点云或mesh，可以使用该方法估计一个区域附近的Shape Operator，进而得到主曲率等二阶信息。&lt;/p&gt;
+&lt;p&gt;下面以三角mesh中求Shape Operator为例，简要介绍这种方法。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Numerical-Methods/">Numerical Methods</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/curvature/">curvature</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/08/30/Rusinkiewiczs-method/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>实用微分几何6</title>
@@ -51,7 +73,7 @@
       
       
       
-      <category domain="https://tannlonggtaoo.github.io/categories/Diffrential-Geometry/">Diffrential Geometry</category>
+      <category domain="https://tannlonggtaoo.github.io/categories/Differential-Geometry/">Differential Geometry</category>
       
       
       <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
