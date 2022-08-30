@@ -15,7 +15,7 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Fri, 26 Aug 2022 06:01:29 GMT</pubDate>
+    <pubDate>Tue, 30 Aug 2022 07:10:39 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -24,8 +24,8 @@
       <guid>https://tannlonggtaoo.github.io/2022/08/26/DiffGeo6/</guid>
       <pubDate>Fri, 26 Aug 2022 02:22:28 GMT</pubDate>
       
-      <description>&lt;p&gt;在曲面基本概念的基础上讨论曲率相关问题，对应原书第三章。&lt;/p&gt;
-&lt;p&gt;注意：未加声明，以下均只考虑正则曲面。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在曲面基本概念的基础上讨论曲率相关问题，对应原书第三章，并参考了Wiki等外部资料。&lt;/p&gt;
+&lt;p&gt;注意：未加声明，以下均只考虑正则曲面。由于不同地方对这些概念的定义有一定差异，因此这里给出的其实只是一种相容的说法。&lt;/p&gt;</description>
       
       
       
