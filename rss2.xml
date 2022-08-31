@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Wed, 31 Aug 2022 08:59:48 GMT</pubDate>
+    <pubDate>Wed, 31 Aug 2022 16:24:27 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>三维旋转的表示</title>
+      <link>https://tannlonggtaoo.github.io/2022/08/31/Rotation-representation/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/08/31/Rotation-representation/</guid>
+      <pubDate>Wed, 31 Aug 2022 10:57:01 GMT</pubDate>
+      
+      <description>&lt;p&gt;三维旋转的矩阵、欧拉角、角轴、反对称阵、四元数等表示法。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Geometry/">Geometry</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/08/31/Rotation-representation/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>基于顶点的法向量估计</title>
