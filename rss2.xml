@@ -15,8 +15,31 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Tue, 30 Aug 2022 16:07:29 GMT</pubDate>
+    <pubDate>Wed, 31 Aug 2022 08:59:48 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>基于顶点的法向量估计</title>
+      <link>https://tannlonggtaoo.github.io/2022/08/31/Estimating-normals/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/08/31/Estimating-normals/</guid>
+      <pubDate>Wed, 31 Aug 2022 07:59:03 GMT</pubDate>
+      
+      <description>&lt;p&gt;简单介绍通过某点附近的点估计该点法向量的方法，并介绍通过RANSAC进行优化的方法。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Numerical-Methods/">Numerical Methods</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/normal/">normal</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/RANSAC/">RANSAC</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/08/31/Estimating-normals/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>对顶点采样</title>
