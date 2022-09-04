@@ -15,8 +15,32 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sun, 04 Sep 2022 01:27:57 GMT</pubDate>
+    <pubDate>Sun, 04 Sep 2022 09:21:08 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>全景分割（Panoptic Segmetation）概述</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/04/Panoptic-segmentation/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/04/Panoptic-segmentation/</guid>
+      <pubDate>Sun, 04 Sep 2022 08:28:30 GMT</pubDate>
+      
+      <description>&lt;p&gt;根据个人理解，简要介绍全景分割任务的设定，重点讨论其设立的评价指标。&lt;/p&gt;
+&lt;p&gt;论文：&lt;a href=&quot;https://arxiv.org/pdf/1801.00868.pdf&quot;&gt;https://arxiv.org/pdf/1801.00868.pdf&lt;/a&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Computer-Vision/">Computer Vision</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/tasks/">tasks</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/04/Panoptic-segmentation/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>实用微分几何7（计算）</title>
