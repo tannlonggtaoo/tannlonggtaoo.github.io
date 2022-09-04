@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Wed, 31 Aug 2022 16:24:27 GMT</pubDate>
+    <pubDate>Sun, 04 Sep 2022 01:27:57 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>实用微分几何7（计算）</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/04/DiffGeo7/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/04/DiffGeo7/</guid>
+      <pubDate>Sun, 04 Sep 2022 00:50:49 GMT</pubDate>
+      
+      <description>&lt;p&gt;介绍微分几何基本量的解析公式和（没有曲面解析式时的）数值估计或替代方法。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Differential-Geometry/">Differential Geometry</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/04/DiffGeo7/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>三维旋转的表示</title>
