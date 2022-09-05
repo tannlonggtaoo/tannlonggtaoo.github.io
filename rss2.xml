@@ -15,8 +15,30 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Mon, 05 Sep 2022 13:42:01 GMT</pubDate>
+    <pubDate>Mon, 05 Sep 2022 16:15:43 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>实用点集拓扑2</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/05/Topology2/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/05/Topology2/</guid>
+      <pubDate>Mon, 05 Sep 2022 14:24:30 GMT</pubDate>
+      
+      <description>&lt;p&gt;以下介绍几个重要的拓扑性质：分离性、可数性、紧致性、连通性，对应尤书的第二章。&lt;/p&gt;
+&lt;p&gt;这一篇介绍前两个特性，以及其可以导出的一些深刻结果。由于拓扑的定义较弱，因此这两个特性通常作为“附加公理”，弥补拓扑本身的不足。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Topology/">Topology</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/05/Topology2/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>实用点集拓扑1</title>
