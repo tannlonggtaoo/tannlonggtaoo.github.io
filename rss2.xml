@@ -15,8 +15,30 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Mon, 05 Sep 2022 07:47:12 GMT</pubDate>
+    <pubDate>Mon, 05 Sep 2022 13:42:01 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>实用点集拓扑1</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/05/Topology1/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/05/Topology1/</guid>
+      <pubDate>Mon, 05 Sep 2022 08:27:18 GMT</pubDate>
+      
+      <description>&lt;p&gt;接续“实用微分几何2”中的拓扑内容，继续补完点集拓扑的一些基本概念。&lt;/p&gt;
+&lt;p&gt;参考：尤承业编著《基础拓扑学讲义》&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Topology/">Topology</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/05/Topology1/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>PSTNet简介</title>
