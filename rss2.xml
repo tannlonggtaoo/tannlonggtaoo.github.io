@@ -15,8 +15,36 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sun, 04 Sep 2022 09:21:08 GMT</pubDate>
+    <pubDate>Mon, 05 Sep 2022 07:47:12 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>PSTNet简介</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/05/PSTNet/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/05/PSTNet/</guid>
+      <pubDate>Mon, 05 Sep 2022 02:51:59 GMT</pubDate>
+      
+      <description>&lt;p&gt;简单介绍PST（point spatio-temporal）卷积的原理，掺杂大量个人浅见。&lt;/p&gt;
+&lt;p&gt;论文：&lt;a href=&quot;https://arxiv.org/pdf/2205.13713.pdf&quot;&gt;https://arxiv.org/pdf/2205.13713.pdf&lt;/a&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Computer-Vision/">Computer Vision</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/point-cloud/">point cloud</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/video/">video</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/sota/">sota</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/05/PSTNet/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>全景分割（Panoptic Segmetation）概述</title>
