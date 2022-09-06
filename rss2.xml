@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Tue, 06 Sep 2022 03:45:39 GMT</pubDate>
+    <pubDate>Tue, 06 Sep 2022 07:09:10 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>实用点集拓扑4</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/06/Topology4/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/06/Topology4/</guid>
+      <pubDate>Tue, 06 Sep 2022 05:54:06 GMT</pubDate>
+      
+      <description>&lt;p&gt;接前文，介绍拓扑空间的连通性。对应尤书第二章的最后一部分。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Topology/">Topology</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/06/Topology4/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>实用点集拓扑3</title>
