@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Mon, 05 Sep 2022 16:15:43 GMT</pubDate>
+    <pubDate>Tue, 06 Sep 2022 03:45:39 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>实用点集拓扑3</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/06/Topology3/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/06/Topology3/</guid>
+      <pubDate>Tue, 06 Sep 2022 02:03:37 GMT</pubDate>
+      
+      <description>&lt;p&gt;继续介绍紧致性。对应尤书第二章的一部分。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Topology/">Topology</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/06/Topology3/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>实用点集拓扑2</title>
