@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Tue, 06 Sep 2022 07:09:10 GMT</pubDate>
+    <pubDate>Thu, 08 Sep 2022 16:39:59 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>分析基础速览</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/06/QuickReview/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/06/QuickReview/</guid>
+      <pubDate>Tue, 06 Sep 2022 09:46:17 GMT</pubDate>
+      
+      <description>&lt;p&gt;记录一下个人已经遗忘的分析基础概念。主要涵盖选择公理、拓扑空间、度量空间和勒贝格积分等。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Functional-Analysis/">Functional Analysis</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/06/QuickReview/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>实用点集拓扑4</title>
@@ -458,33 +479,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/08/18/Second%20Blog/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>第一则/First Blog</title>
-      <link>https://tannlonggtaoo.github.io/2022/08/18/FirstBlog/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/08/18/FirstBlog/</guid>
-      <pubDate>Thu, 18 Aug 2022 14:06:08 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;第一则博客，使用GithubPage+Hexo完成。&lt;/p&gt;
-&lt;p&gt;计划收集整理&lt;strong&gt;技术研究&lt;/strong&gt;，&lt;strong&gt;课程笔记&lt;/strong&gt;，&lt;strong&gt;琐事及杂项&lt;/strong&gt;等内容，兼有帮助他人与存档备份之效。&lt;/p&gt;
-</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/%E6%9D%82%E9%A1%B9/">杂项</category>
-      
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/08/18/FirstBlog/#disqus_thread</comments>
       
     </item>
     
