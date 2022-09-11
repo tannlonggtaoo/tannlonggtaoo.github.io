@@ -15,8 +15,37 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sun, 11 Sep 2022 11:54:12 GMT</pubDate>
+    <pubDate>Sun, 11 Sep 2022 12:20:26 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>push出现连接失败的可能解决方法</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/11/FlushDNStoPush/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/11/FlushDNStoPush/</guid>
+      <pubDate>Sun, 11 Sep 2022 12:11:36 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+&lt;p&gt;git push环节有时会出现以下报错：&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/%E6%9D%82%E9%A1%B9/">杂项</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/git/">git</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/11/FlushDNStoPush/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>实用抽代1</title>
@@ -161,9 +190,9 @@
       <category domain="https://tannlonggtaoo.github.io/categories/Computer-Vision/">Computer Vision</category>
       
       
-      <category domain="https://tannlonggtaoo.github.io/tags/point-cloud/">point cloud</category>
-      
       <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/point-cloud/">point cloud</category>
       
       <category domain="https://tannlonggtaoo.github.io/tags/video/">video</category>
       
@@ -438,35 +467,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/08/23/DiffGeo1/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>注意arccos在loss中时对梯度的影响</title>
-      <link>https://tannlonggtaoo.github.io/2022/08/23/arccos-in-loss/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/08/23/arccos-in-loss/</guid>
-      <pubDate>Tue, 23 Aug 2022 14:41:49 GMT</pubDate>
-      
-      <description>&lt;p&gt;arccos函数在定义域边界上梯度为无穷，因此会迅速导致梯度爆炸。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Optimization/">Optimization</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/machine-learning/">machine learning</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/loss/">loss</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/gradient-decent/">gradient decent</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/pose-estimation/">pose estimation</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/warning/">warning</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/08/23/arccos-in-loss/#disqus_thread</comments>
       
     </item>
     
