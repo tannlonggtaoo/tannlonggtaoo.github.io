@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sun, 11 Sep 2022 12:20:26 GMT</pubDate>
+    <pubDate>Mon, 12 Sep 2022 14:00:33 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>实用抽代2</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/11/Algebra2/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/11/Algebra2/</guid>
+      <pubDate>Sun, 11 Sep 2022 12:22:20 GMT</pubDate>
+      
+      <description>&lt;p&gt;介绍范畴相关内容，包含原书第一章第3节内容。增补了关于NBG公理体系的内容。部分内容和名词翻译参考了&lt;a href=&quot;https://zhuanlan.zhihu.com/p/364284965%E7%B3%BB%E5%88%97%E4%B8%93%E6%A0%8F%E3%80%82&quot;&gt;https://zhuanlan.zhihu.com/p/364284965系列专栏。&lt;/a&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Algebra/">Algebra</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/11/Algebra2/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>push出现连接失败的可能解决方法</title>
@@ -446,27 +467,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo2/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>实用微分几何1</title>
-      <link>https://tannlonggtaoo.github.io/2022/08/23/DiffGeo1/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/08/23/DiffGeo1/</guid>
-      <pubDate>Tue, 23 Aug 2022 15:32:47 GMT</pubDate>
-      
-      <description>&lt;p&gt;拓扑空间，开子集，通常拓扑，连续，同胚&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Differential-Geometry/">Differential Geometry</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/08/23/DiffGeo1/#disqus_thread</comments>
       
     </item>
     
