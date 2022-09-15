@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Mon, 12 Sep 2022 14:00:33 GMT</pubDate>
+    <pubDate>Thu, 15 Sep 2022 14:07:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>第二章：控制系统的数学模型</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/15/Cybernetics2/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/15/Cybernetics2/</guid>
+      <pubDate>Thu, 15 Sep 2022 14:02:25 GMT</pubDate>
+      
+      <description>&lt;p&gt;本系列为课程笔记。此篇介绍了控制系统的数学模型，重点回顾了微分方程和频域代数表示（传递函数）两类方法。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Cybernetics/">Cybernetics</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/15/Cybernetics2/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>实用抽代2</title>
@@ -446,27 +467,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo3/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>实用微分几何2</title>
-      <link>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo2/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo2/</guid>
-      <pubDate>Wed, 24 Aug 2022 07:24:32 GMT</pubDate>
-      
-      <description>&lt;p&gt;微分流形、坐标系（图）、图册（微分结构）、r阶连续、函数（标量场）、联通、弧连通&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Differential-Geometry/">Differential Geometry</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo2/#disqus_thread</comments>
       
     </item>
     
