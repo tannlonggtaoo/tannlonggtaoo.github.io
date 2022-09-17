@@ -15,8 +15,58 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Thu, 15 Sep 2022 14:07:04 GMT</pubDate>
+    <pubDate>Fri, 16 Sep 2022 15:51:18 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>最优位姿估计中的梅山（Umeyama）算法</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/16/umeyama/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/16/umeyama/</guid>
+      <pubDate>Fri, 16 Sep 2022 11:49:05 GMT</pubDate>
+      
+      <description>&lt;p&gt;介绍在已知刚体运动+尺度变换前后模型的对应点后，如何得到最优的刚体运动（和尺度变换）估计。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Optimization/">Optimization</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/pose-estimation/">pose estimation</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/SVD/">SVD</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/16/umeyama/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>位姿估计感想、NOCS简介</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/16/NOCS/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/16/NOCS/</guid>
+      <pubDate>Fri, 16 Sep 2022 11:48:32 GMT</pubDate>
+      
+      <description>&lt;p&gt;介绍类别层次（category level）上进行位姿（pose）和尺度估计的经典方法NOCS，重点分析NOCS原理和其数据增强方法CAMERA。&lt;/p&gt;
+&lt;p&gt;这篇blog也夹带笔者希望记录的其他内容。&lt;/p&gt;
+&lt;p&gt;论文：&lt;a href=&quot;https://arxiv.org/abs/1901.02970&quot;&gt;https://arxiv.org/abs/1901.02970&lt;/a&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Computer-Vision/">Computer Vision</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/point-cloud/">point cloud</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/pose-estimation/">pose estimation</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/16/NOCS/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>第二章：控制系统的数学模型</title>
@@ -419,54 +469,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo5/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>实用微分几何4</title>
-      <link>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo4/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo4/</guid>
-      <pubDate>Thu, 25 Aug 2022 05:39:08 GMT</pubDate>
-      
-      <description>&lt;p&gt;经典曲面论基本概念&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Differential-Geometry/">Differential Geometry</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/classical-surface-theory/">classical surface theory</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo4/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>实用微分几何3</title>
-      <link>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo3/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo3/</guid>
-      <pubDate>Wed, 24 Aug 2022 09:49:09 GMT</pubDate>
-      
-      <description>&lt;p&gt;此前已经从现代的角度介绍了微分几何的基本概念。以下将介绍古典微分几何——曲线曲面论。本篇包含其第一章：曲线论的部分内容。&lt;/p&gt;
-&lt;p&gt;参考：《Differential Geometry of Curves &amp;amp; Surfaces》，Do Carmo，2nd ed。这本书写得相当简明易懂又不过分繁复，非常推荐。&lt;/p&gt;
-&lt;p&gt;注意：本书中的”可微“都指”光滑（任意阶可微）“&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Differential-Geometry/">Differential Geometry</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/classical-curve-theory/">classical curve theory</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/08/24/DiffGeo3/#disqus_thread</comments>
       
     </item>
     

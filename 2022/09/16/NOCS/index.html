@@ -22,19 +22,25 @@
     var CONFIG = {"hostname":"tannlonggtaoo.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="第一则博客，使用GithubPage+Hexo完成。 计划收集整理技术研究，课程笔记，琐事及杂项等内容，兼有帮助他人与存档备份之效。">
+  <meta name="description" content="介绍类别层次（category level）上进行位姿（pose）和尺度估计的经典方法NOCS，重点分析NOCS原理和其数据增强方法CAMERA。 这篇blog也夹带笔者希望记录的其他内容。 论文：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1901.02970">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第一则&#x2F;First Blog">
-<meta property="og:url" content="https://tannlonggtaoo.github.io/2022/08/18/FirstBlog/index.html">
+<meta property="og:title" content="位姿估计感想、NOCS简介">
+<meta property="og:url" content="https://tannlonggtaoo.github.io/2022/09/16/NOCS/index.html">
 <meta property="og:site_name" content="第三视点">
-<meta property="og:description" content="第一则博客，使用GithubPage+Hexo完成。 计划收集整理技术研究，课程笔记，琐事及杂项等内容，兼有帮助他人与存档备份之效。">
+<meta property="og:description" content="介绍类别层次（category level）上进行位姿（pose）和尺度估计的经典方法NOCS，重点分析NOCS原理和其数据增强方法CAMERA。 这篇blog也夹带笔者希望记录的其他内容。 论文：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1901.02970">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-18T14:06:08.000Z">
-<meta property="article:modified_time" content="2022-08-18T17:25:51.214Z">
+<meta property="og:image" content="https://tannlonggtaoo.github.io/2022/09/16/NOCS/image-20220917142434169.png">
+<meta property="og:image" content="https://tannlonggtaoo.github.io/2022/09/16/NOCS/image-20220917152345297.png">
+<meta property="article:published_time" content="2022-09-16T11:48:32.000Z">
+<meta property="article:modified_time" content="2022-09-17T07:32:38.734Z">
 <meta property="article:author" content="tannlonggtaoo">
+<meta property="article:tag" content="papers">
+<meta property="article:tag" content="point cloud">
+<meta property="article:tag" content="pose estimation">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tannlonggtaoo.github.io/2022/09/16/NOCS/image-20220917142434169.png">
 
-<link rel="canonical" href="https://tannlonggtaoo.github.io/2022/08/18/FirstBlog/">
+<link rel="canonical" href="https://tannlonggtaoo.github.io/2022/09/16/NOCS/">
 
 
 <script id="page-configurations">
@@ -47,7 +53,7 @@
   };
 </script>
 
-  <title>第一则/First Blog | 第三视点</title>
+  <title>位姿估计感想、NOCS简介 | 第三视点</title>
   
 
 
@@ -204,7 +210,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://tannlonggtaoo.github.io/2022/08/18/FirstBlog/">
+    <link itemprop="mainEntityOfPage" href="https://tannlonggtaoo.github.io/2022/09/16/NOCS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/trueman.png">
@@ -217,7 +223,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          第一则/First Blog
+          位姿估计感想、NOCS简介
         </h1>
 
         <div class="post-meta">
@@ -227,14 +233,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-08-18 22:06:08" itemprop="dateCreated datePublished" datetime="2022-08-18T22:06:08+08:00">2022-08-18</time>
+              <time title="创建时间：2022-09-16 19:48:32" itemprop="dateCreated datePublished" datetime="2022-09-16T19:48:32+08:00">2022-09-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-19 01:25:51" itemprop="dateModified" datetime="2022-08-19T01:25:51+08:00">2022-08-19</time>
+                <time title="修改时间：2022-09-17 15:32:38" itemprop="dateModified" datetime="2022-09-17T15:32:38+08:00">2022-09-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,7 +248,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+                  <a href="/categories/Computer-Vision/" itemprop="url" rel="index"><span itemprop="name">Computer Vision</span></a>
                 </span>
             </span>
 
@@ -257,8 +263,50 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>第一则博客，使用GithubPage+Hexo完成。</p>
-<p>计划收集整理<strong>技术研究</strong>，<strong>课程笔记</strong>，<strong>琐事及杂项</strong>等内容，兼有帮助他人与存档备份之效。</p>
+        <p>介绍类别层次（category level）上进行位姿（pose）和尺度估计的经典方法NOCS，重点分析NOCS原理和其数据增强方法CAMERA。</p>
+<p>这篇blog也夹带笔者希望记录的其他内容。</p>
+<p>论文：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1901.02970">https://arxiv.org/abs/1901.02970</a></p>
+<span id="more"></span>
+<h3 id="pose-estimation-with-ml-methods"><a class="markdownIt-Anchor" href="#pose-estimation-with-ml-methods"></a> Pose Estimation （with ml methods）</h3>
+<p>一种对（基于ml的）位姿估计方法的分类是将其分为“直接法”和“间接法”。</p>
+<p><strong>直接法</strong>：即把点云（或图片等其他能反映位姿信息的数据）输入模型，模型直接得到位姿（和尺寸）参数的估计（当然，都是相对canonical frame的运动参数）。最直观的示例如：先用Pointnet之类的结构提取点云特征，随后通过FC获取参数。</p>
+<p>在个人的探索过程中发现，这种方法需要注意</p>
+<ol>
+<li>
+<p><strong>旋转的表示</strong>（可以参考往期blog），尽量选择四元数、6D表示等性质较好的表示方法，以利于优化。</p>
+</li>
+<li>
+<p><strong>损失函数</strong>。建议在损失函数中谨慎使用角轴式（Angle-axis）的“角”。因为其计算过程会出现梯度为无穷的情况，即使使用一些方法调整也可能带来过大的梯度（具体参考往期blog）。</p>
+<p>简洁且有效的损失函数又有shape aware和shape agnostic之分。最简单的shape agnostic损失——直接看旋转矩阵预测值和真实值之差的范数即可有最基线的效果。（这部分可能之后再写）</p>
+</li>
+<li>
+<p>网络结构可以适度多加点shortcut。</p>
+</li>
+</ol>
+<p><strong>间接法</strong>：先用某种方式估计点与点的匹配关系，然后使用梅山方法解决问题。对位姿估计而言，估计点与点的匹配关系就是估计<strong>给定点云的各点与canonical frame中的哪个点匹配</strong>。可见，canonical frame中的点云完全可以是隐式的，直接由给定的输入点云回归出一个canonical frame空间中的点即可。</p>
+<p>由于给定的图片/点云通常都有遮挡，输入点云不全，因此没法找所有点之间的匹配。同时考虑计算效率，因此通常只会找一些<strong>特征点</strong>之间的匹配关系。这个特征点可以选择bounding box的8个顶点（当然，顶点之间要用序号之类区别开）、用FPS采样得到点等等。NOCS这篇工作中用了一种<strong>很妙</strong>的方式选择了特征点。</p>
+<p>个人观点认为，由于直接法的旋转表示（在使用经典的神经网络构架时）往往存在一些固有的拓扑问题，因此或许间接法是在要使用learning时更加合理的方法。</p>
+<h3 id="nocs"><a class="markdownIt-Anchor" href="#nocs"></a> NOCS</h3>
+<p>NOCS（Normalized Object Coordinate Space）的作用和canonical space等同。但和通常（用于单物体位姿检测的）canonical space又有所区别：它通过放缩把模型限制在单位正方体中（或者说，模型的tight bounding box边长为1）。</p>
+<p>这样做有什么意义呢？</p>
+<p>其实NOCS是希望解决一个Category-level的位姿估计问题，因此需要一种新的表示方法。此前的一些位姿估计方法属于Instance-level的范畴（即训练出来的模型就只对一个物体有效），且canonical space中物体的点云属于已知量。此时当然可以不对canonical space做更多的处理（当然如果做一些中心化和缩放，可能对训练过程还是有利的）。</p>
+<p>但Category-level的位姿估计所训练出的模型必须对<strong>一类物体</strong>有效，例如不同型号的相机虽然结构相似，但并不完全相同（见下，图源原paper）。Category-level的模型应该对各个信号相机的位姿估计都有效。</p>
+<img src="/2022/09/16/NOCS/image-20220917142434169.png" alt="image-20220917142434169" style="zoom: 67%;">
+<p>由于我们要求要对一类物体有效，而“一类物体”是没有办法穷举的（训练时，一类物体也只有有限的数个实例有canonical space中的点云数据）。因此必须考虑在没有canonical space中的点云，只知道一些同类物体在canonical space中的点云的情况下定义“位姿”并进行预测。</p>
+<p>因此我们要定义“位姿”和“尺寸”，我们可以令一类物体中已知的数个实例的模型都有合理的一致朝向（例如上图中的所有相机的镜头都指向左下方（指纸面上投影）），这样这类中的所有物体就都有一个合理的指向了。另外，由于一类物体的尺寸可以千差万别，为了使同一类物体在canonical space中能尽量“重合”（以有利于不受尺度的影响，有助于训练等），则应该进行某种归一化。这样，用<strong>一致朝向+归一化</strong>就概括出了对Category level位姿估计的canonical space的要求。这就是NOCS的基本特征。</p>
+<p>那么有无已经存在类别信息且已经做好归一化、调整好朝向的点云数据集呢？论文使用的ShapeNetCore恰好满足这样的要求。</p>
+<h3 id="nocs-map"><a class="markdownIt-Anchor" href="#nocs-map"></a> NOCS map</h3>
+<p>下一步就是选择特征点求匹配了。NOCS面对的是RGBD图像（即RGB图像+逐像素的深度信息）。经典的方法会先在RGBD上做目标检测，把对应的物体的区域用mask指出来，然后利用相机外参、内参和深度信息把每个mask区域都折算（lifting）成世界坐标系中的一个点云（当然，由于遮挡等因素，这个点云通常都不完整），随后在这个点云和canonical space中的点云找点与点的配对关系。</p>
+<p>在这篇论文中使用了一种新方法。首先，特征点不需要进行额外的选取，<strong>直接将mask盖住的点（即物体可见部分）都当做需要找匹配的特征点</strong>。其次，<strong>直接在二维图像和NOCS之间找匹配</strong>，而非先lift后在点云之间找匹配。第三，NOCS中不显式地给出点云，<strong>二维像素究竟和NOCS中哪个点匹配是直接用网络回归出来的</strong>（这就是NOCS map）。</p>
+<p>这样做既简洁，又大大加速计算（在二维图像上卷积比在lifting后的点云做运算更快更便捷），还能利用二维视觉中的预训练权重。唯一潜在的问题是深度信息不参与点匹配的估计可能会导致匹配准确性下降，但取舍后果然还是这篇论文的方法更方便。</p>
+<p>因此这篇论文的流程如下：先用maskRCNN在RGB图像上把各个ROI和mask搞出来，然后从ROI处做一个分支，在每个ROI的每个像素上回归出一个NOCS中的点。最后结合mask把各个物体的点云lift出来，用RANSAC改造的梅山方法估计位姿和尺寸即可。（见下，图源原论文，<strong>红圈表示maskRCNN的内容</strong>（我自己加的））</p>
+<p><img src="/2022/09/16/NOCS/image-20220917152345297.png" alt="image-20220917152345297"></p>
+<h3 id="data-generationcamera"><a class="markdownIt-Anchor" href="#data-generationcamera"></a> Data Generation:CAMERA</h3>
+<p>最后简要提一下论文生成数据的方法：首先准备一系列（带桌面之类大平面的）真实背景图，并把这种大平面的范围检测出来，然后将物体点云进行旋转等操作，并在加上合适的点光源后进行渲染，最后把渲染后的物体“放”在平面上。</p>
+<p>这种方法照顾了场景信息（根据论文所述，应该主要指桌面），因此被作者起名为Context-Aware MixEd ReAlity (CAMERA)。</p>
+<blockquote>
+<p>顺带一提，现在一些新数据集（如Hoi4D等）已经有更充足的可用于Category level位姿估计的数据，但这种“考虑上下文”的造数据方法还是值得参考的。</p>
+</blockquote>
 
     </div>
 
@@ -286,16 +334,24 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/papers/" rel="tag"># papers</a>
+              <a href="/tags/point-cloud/" rel="tag"># point cloud</a>
+              <a href="/tags/pose-estimation/" rel="tag"># pose estimation</a>
+          </div>
 
         
 
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2022/08/18/Second%20Blog/" rel="next" title="第二则/Second Blog">
-      第二则/Second Blog <i class="fa fa-chevron-right"></i>
+    <a href="/2022/09/15/Cybernetics2/" rel="prev" title="第二章：控制系统的数学模型">
+      <i class="fa fa-chevron-left"></i> 第二章：控制系统的数学模型
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/09/16/umeyama/" rel="next" title="最优位姿估计中的梅山（Umeyama）算法">
+      最优位姿估计中的梅山（Umeyama）算法 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -355,6 +411,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#pose-estimation-with-ml-methods"><span class="nav-number">1.</span> <span class="nav-text"> Pose Estimation （with ml methods）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nocs"><span class="nav-number">2.</span> <span class="nav-text"> NOCS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nocs-map"><span class="nav-number">3.</span> <span class="nav-text"> NOCS map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#data-generationcamera"><span class="nav-number">4.</span> <span class="nav-text"> Data Generation:CAMERA</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
