@@ -15,8 +15,34 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Fri, 16 Sep 2022 15:51:18 GMT</pubDate>
+    <pubDate>Mon, 19 Sep 2022 17:57:42 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>ANCSH简介</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/18/ANCSH/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/18/ANCSH/</guid>
+      <pubDate>Sun, 18 Sep 2022 15:09:37 GMT</pubDate>
+      
+      <description>&lt;p&gt;NOCS的超级加强版，可以针对一整类的铰接物体（articulated objects）估计各部分的尺寸和位姿（当然对变形有一些限制）。&lt;/p&gt;
+&lt;p&gt;原论文：&lt;a href=&quot;https://arxiv.org/abs/1912.11913&quot;&gt;https://arxiv.org/abs/1912.11913&lt;/a&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Computer-Vision/">Computer Vision</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/pose-estimation/">pose estimation</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/part/">part</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/18/ANCSH/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>最优位姿估计中的梅山（Umeyama）算法</title>
@@ -448,27 +474,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/08/26/DiffGeo6/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>实用微分几何5</title>
-      <link>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo5/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo5/</guid>
-      <pubDate>Thu, 25 Aug 2022 12:15:20 GMT</pubDate>
-      
-      <description>&lt;p&gt;在曲面基本概念的基础上的进一步探讨。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Differential-Geometry/">Differential Geometry</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/08/25/DiffGeo5/#disqus_thread</comments>
       
     </item>
     
