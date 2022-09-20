@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Mon, 19 Sep 2022 17:57:42 GMT</pubDate>
+    <pubDate>Tue, 20 Sep 2022 14:08:27 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>第三章：控制系统的时域分析</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/20/Cybernetics3/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/20/Cybernetics3/</guid>
+      <pubDate>Tue, 20 Sep 2022 14:00:25 GMT</pubDate>
+      
+      <description>&lt;p&gt;介绍系统时域分析的办法。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Cybernetics/">Cybernetics</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/20/Cybernetics3/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>ANCSH简介</title>
@@ -452,28 +473,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/08/30/Rusinkiewiczs-method/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>实用微分几何6</title>
-      <link>https://tannlonggtaoo.github.io/2022/08/26/DiffGeo6/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/08/26/DiffGeo6/</guid>
-      <pubDate>Fri, 26 Aug 2022 02:22:28 GMT</pubDate>
-      
-      <description>&lt;p&gt;在曲面基本概念的基础上讨论曲率相关问题，对应原书第三章，并参考了Wiki等外部资料。&lt;/p&gt;
-&lt;p&gt;注意：未加声明，以下均只考虑正则曲面。由于不同地方对这些概念的定义有一定差异，因此这里给出的其实只是一种相容的说法。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Differential-Geometry/">Differential Geometry</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/08/26/DiffGeo6/#disqus_thread</comments>
       
     </item>
     
