@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/Tcon180.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Tcon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Tcon16.ico">
+  <link rel="mask-icon" href="/images/Tcon.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tannlonggtaoo.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="介绍位姿追踪问题，并简要列出几种（至少能在Category-level以上解决追踪问题的）解决方法。 论文： 6-PACK（ICRA2020）：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1910.10750 CAPTRA（ICCV2021）：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2104.03437 BundleTrack（IROS2021）：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="位姿追踪（pose tracking）的典型方法">
+<meta property="og:url" content="https://tannlonggtaoo.github.io/2022/09/24/tracking/index.html">
+<meta property="og:site_name" content="第三视点">
+<meta property="og:description" content="介绍位姿追踪问题，并简要列出几种（至少能在Category-level以上解决追踪问题的）解决方法。 论文： 6-PACK（ICRA2020）：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1910.10750 CAPTRA（ICCV2021）：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2104.03437 BundleTrack（IROS2021）：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tannlonggtaoo.github.io/2022/09/24/tracking/image-20220924223230905.png">
+<meta property="og:image" content="https://tannlonggtaoo.github.io/2022/09/24/tracking/image-20220924225815485.png">
+<meta property="og:image" content="https://tannlonggtaoo.github.io/2022/09/24/tracking/image-20220925101134345.png">
+<meta property="article:published_time" content="2022-09-24T13:03:41.000Z">
+<meta property="article:modified_time" content="2022-09-25T04:43:34.988Z">
+<meta property="article:author" content="tannlonggtaoo">
+<meta property="article:tag" content="papers">
+<meta property="article:tag" content="pose estimation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tannlonggtaoo.github.io/2022/09/24/tracking/image-20220924223230905.png">
+
+<link rel="canonical" href="https://tannlonggtaoo.github.io/2022/09/24/tracking/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>位姿追踪（pose tracking）的典型方法 | 第三视点</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="第三视点" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">第三视点</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">所见的所有东西</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">30</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/tannlonggtaoo" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tannlonggtaoo.github.io/2022/09/24/tracking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/trueman.png">
+      <meta itemprop="name" content="tannlonggtaoo">
+      <meta itemprop="description" content="天国在何方？<br>就在那片青空中<br>就在你的身旁…">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="第三视点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          位姿追踪（pose tracking）的典型方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-09-24 21:03:41" itemprop="dateCreated datePublished" datetime="2022-09-24T21:03:41+08:00">2022-09-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-25 12:43:34" itemprop="dateModified" datetime="2022-09-25T12:43:34+08:00">2022-09-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Vision/" itemprop="url" rel="index"><span itemprop="name">Computer Vision</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>介绍位姿追踪问题，并简要列出几种（至少能在Category-level以上解决追踪问题的）解决方法。</p>
+<p>论文：</p>
+<p>6-PACK（ICRA2020）：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1910.10750">https://arxiv.org/abs/1910.10750</a></p>
+<p>CAPTRA（ICCV2021）：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2104.03437">https://arxiv.org/abs/2104.03437</a></p>
+<p>BundleTrack（IROS2021）：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2108.00516">https://arxiv.org/abs/2108.00516</a></p>
+<span id="more"></span>
+<h3 id="definition"><a class="markdownIt-Anchor" href="#definition"></a> Definition</h3>
+<p>在可以对单帧点云（或等效地，RGBD图像等）中的某个物体作Category-level的位姿估计后，我们期望能够对连续的多帧点云（即点云视频，或者4d视频等等）中的某物体在Category-level上做逐帧的位姿估计，即进行位姿追踪。</p>
+<p>因此，问题可以形式化为（这里引用6-PACK中的说法）：</p>
+<p><strong>输入</strong>：点云信息、类别标签。</p>
+<p><strong>输出</strong>：第一帧后各帧相对前一帧位姿的变化量。</p>
+<p>最基本的追踪算法就是逐帧使用单帧的位姿估计算法。这样做由于未考虑到相邻帧之间的信息，因此通常效果不佳（但在一些情况下（例如有时会“跟丢”物体）也有其优势）。这则博文只讨论三种利用了帧间信息关联的方法：6-PACK，CAPTRA，BundleTrack。</p>
+<p>当然，上述只是一种基本的框架，可根据实情进行变化：</p>
+<ul>
+<li>为处理铰接物体（articulated object），要求输入部件（part）数、部件初始位姿等。（CAPTRA）</li>
+<li>为了约束输入，假定只输入刚体。（6-PACK，BundleTrack）</li>
+<li>“位姿”可以改为“位姿和尺度”。（CAPTRA）</li>
+<li>实用中通常希望能够在线（online）完成预测，即预测某帧时不能利用其后的数据。（CAPTRA，BundleTrack；6-PACK没有明说，但也是在线的）</li>
+<li>不要求物体的mask（CAPTRA，通过CoodinateNet估计得到mask），或要求输入第一帧的mask（BundleTrack，后续帧的mask由模型自行解决）</li>
+</ul>
+<blockquote>
+<p>6-PACK较为特别：它要求输入物体的尺寸（长宽高），在进行当前帧的位姿估计前会先利用之前的信息对当前帧位姿作一个粗估，这和物体尺寸结合就可以把物体点云从原始数据中割出来。</p>
+</blockquote>
+<ul>
+<li>要求要输入第一帧的位姿（6-PACK，CAPTRA，此时输出等价于直接给出各帧的位姿），或不强制要求这一点（BundleTrack）</li>
+<li>不要求类别标签（BundleTrack，<strong>因此BundleTrack是Category-agnostic的，比其他两种Category-level方法更一般化</strong>。）</li>
+</ul>
+<blockquote>
+<p>按：个人以为BundleTrack的假设是最协调合理的。CAPTRA要求的部件信息和6-PACK要求的尺寸信息（隐式地要求对物体本身的了解，amodel）在应用中可能不易得到。</p>
+</blockquote>
+<h3 id="6-pack"><a class="markdownIt-Anchor" href="#6-pack"></a> 6-PACK</h3>
+<p><img src="/2022/09/24/tracking/image-20220924223230905.png" alt="image-20220924223230905"></p>
+<p>（图源原文）</p>
+<h4 id="predicted-pose-hatp"><a class="markdownIt-Anchor" href="#predicted-pose-hatp"></a> predicted pose <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>P</mi><mo>^</mo></mover></mrow><annotation encoding="application/x-tex">\hat{P}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9467699999999999em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9467699999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.16666em;"><span class="mord">^</span></span></span></span></span></span></span></span></span></span></h4>
+<p>这个问题文章没在方法部分讲明白，只是在“实验”部分提了一下。作者定义了两种获取所谓“predicted pose”的方法：</p>
+<ul>
+<li>不包含时间信息的估计（without temporal prediction），即当前帧的predicted pose直接用上一帧的“absolute pose”（即<strong>预测的最终被输出的结果</strong>，predicted pose并不是最终的预测结果，它只是上文所提到的“粗估”）</li>
+<li>包含时间信息的估计，即用“上一帧的absolute pose”和“上上帧到上一帧的位姿变化”进行外推。文中提到“匀速模型”，那么想必是用线性插值外推。（有待查看代码验证）</li>
+</ul>
+<h4 id="workflowbottom-right"><a class="markdownIt-Anchor" href="#workflowbottom-right"></a> workflow（bottom right）</h4>
+<p>将当前帧<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">I_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>（RGBD）和当前帧的predicted pose<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>P</mi><mo>^</mo></mover></mrow><annotation encoding="application/x-tex">\hat{P}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9467699999999999em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9467699999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.16666em;"><span class="mord">^</span></span></span></span></span></span></span></span></span></span>输入到关键点模型中（粉色），最后输出（带顺序的，不像点云一样无序的）一组关键点（数量由超参指定），与前一帧的关键点直接按顺序匹配，最后用梅山算法解出位姿（absolute pose）。</p>
+<h4 id="anchor-based-keypoint-generation"><a class="markdownIt-Anchor" href="#anchor-based-keypoint-generation"></a> anchor-based keypoint generation</h4>
+<p>首先，6-PACK的物体尺寸（这里指长宽高）是已知量，则根据当前帧的predicted pose可以（近似地）裁剪出和物体相关的点云，随后又按照predicted pose转回canonical frame并单位化（变成近似的NOCS）。</p>
+<p>同时，裁出的点云通过Dense Fusion模型获取逐点特征（具体结构略）。</p>
+<p>然后，栅格式地取<strong>anchor</strong>，将各点的特征按由距离确定的权加和汇聚到anchor上。</p>
+<p>此后，将逐anchor的特征过attention net（其实就是2层mlp），选出attention最大的anchor的特征。这里在训练时将物体重心的attention设为最大。</p>
+<p>最后，将该特征经过FC获得特征点。这里综合应用了多种损失来调整生成的特征点的特点。</p>
+<h3 id="captra"><a class="markdownIt-Anchor" href="#captra"></a> CAPTRA</h3>
+<p><img src="/2022/09/24/tracking/image-20220924225815485.png" alt="image-20220924225815485"></p>
+<p>（图源原文）</p>
+<h4 id="per-part-pose-canonicalization"><a class="markdownIt-Anchor" href="#per-part-pose-canonicalization"></a> per-part pose canonicalization</h4>
+<p>用上一帧的位姿和尺寸把当前帧各部件转入NPCS（各个部件的NOCS，参考ANCSH）中。当然，这就是一种近似的转换，和真实的NPCS有一定区别。后续部分就将利用这个区别进行位姿估计。</p>
+<h4 id="rotation-net"><a class="markdownIt-Anchor" href="#rotation-net"></a> rotation net</h4>
+<p>输入各个部件的（近似）NPCS，直接用Pointnet++回归出旋转增量<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mover accent="true"><mi>R</mi><mo>^</mo></mover><mi>t</mi><mrow><mo stretchy="false">(</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msubsup></mrow><annotation encoding="application/x-tex">\hat{R}_t^{(j)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2905559999999998em;vertical-align:-0.24575599999999992em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9467699999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.16666em;"><span class="mord">^</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.454244em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span><span style="top:-3.2197999999999998em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24575599999999992em;"><span></span></span></span></span></span></span></span></span></span>，其中<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span>代表部件的序号。随后当前帧的旋转矩阵为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow><mrow><mo stretchy="false">(</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msubsup><mo>=</mo><msubsup><mi>R</mi><mi>t</mi><mrow><mo stretchy="false">(</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msubsup><msubsup><mover accent="true"><mi>R</mi><mo>^</mo></mover><mi>t</mi><mrow><mo stretchy="false">(</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msubsup></mrow><annotation encoding="application/x-tex">R^{(j)}_{t+1}=R^{(j)}_{t}\hat{R}_t^{(j)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3694389999999999em;vertical-align:-0.3246389999999999em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.433692em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3246389999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.2905559999999998em;vertical-align:-0.24575599999999992em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.454244em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span style="top:-3.2197999999999998em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24575599999999992em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9467699999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.16666em;"><span class="mord">^</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.454244em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span><span style="top:-3.2197999999999998em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24575599999999992em;"><span></span></span></span></span></span></span></span></span></span>。（当然，还需要结合后面CoordinateNet的mask）</p>
+<blockquote>
+<p>通常而言（例如对单帧的pose estimation而言），直接回归旋转矩阵不是一个好的主意，根本上是因为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>O</mi><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">SO(3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">3</span><span class="mclose">)</span></span></span></span>的拓扑和欧氏空间有一定差异，因此使用点匹配+梅山算法或许有更好的效果。但这里的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mover accent="true"><mi>R</mi><mo>^</mo></mover><mi>t</mi><mrow><mo stretchy="false">(</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></msubsup></mrow><annotation encoding="application/x-tex">\hat{R}_t^{(j)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2905559999999998em;vertical-align:-0.24575599999999992em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9467699999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.16666em;"><span class="mord">^</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.454244em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span><span style="top:-3.2197999999999998em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24575599999999992em;"><span></span></span></span></span></span></span></span></span></span>（根据运动的连续性）通常只在<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span></span></span></span>附近一个很小的邻域以内，因此直接回归也是合理的选择。这里作者使用旋转的6D表示（参考往期blog）。</p>
+</blockquote>
+<p>对对称物体有额外的处理方式（略）。</p>
+<h4 id="coordinatenet"><a class="markdownIt-Anchor" href="#coordinatenet"></a> CoordinateNet</h4>
+<p>还是基于Pointnet++，输入各个部件的（近似）NPCS，一头出mask，一头出各点对应到真实NPCS的坐标，随后用梅山算法得到尺度和平动向量。</p>
+<blockquote>
+<p>特点在于端到端，没有RANSAC之类的不可微环节。</p>
+<p>为什么尺度和位移不和旋转一样直接回归？主要原因还是<strong>这是试出来的</strong>。</p>
+</blockquote>
+<h3 id="bundletrack"><a class="markdownIt-Anchor" href="#bundletrack"></a> BundleTrack</h3>
+<p>BundleTrack最大的几个特点：</p>
+<ol>
+<li>
+<p>并不只是Category-level的位姿追踪，而是<strong>Category-Agnostic</strong>级别的通用追踪方法。整个模型的训练不需要使用任何3D点云（包括实例级别和类别级别的）。</p>
+<blockquote>
+<p>当然，这个模型需要训练mask传播网络（transductive-VOS，通过Davis-2017和Youtube-VOS数据集训练）和category-agnostic的特征点提取网络（LF-Net，在ScanNet上训练）。</p>
+</blockquote>
+</li>
+<li>
+<p>使用多种优化手段（内存池、手撸CUDA）加速模型运行。</p>
+<blockquote>
+<p>为了搞明白CUDA，目前学习OS中……</p>
+</blockquote>
+</li>
+<li>
+<p>SOTA</p>
+</li>
+<li>
+<p>（自己加的）后半部分使用的是传统方法，又快又可解释。</p>
+</li>
+</ol>
+<p><img src="/2022/09/24/tracking/image-20220925101134345.png" alt="image-20220925101134345"></p>
+<p>（图源原论文）</p>
+<h4 id="propagating-object-segmentation"><a class="markdownIt-Anchor" href="#propagating-object-segmentation"></a> Propagating Object Segmentation</h4>
+<p>这篇文章指出以前的位姿追踪通常使用maskRCNN之类的工具单帧地计算mask，这不仅慢而且没利用时间信息。</p>
+<p>事实上，考虑时间信息的mask追踪技术（即逐帧进行传递（Propagating））早已出现。这里直接用现成的transductive-VOS网络。不过这一步只要能把mask搞出来，用任何一种技术都无所谓。</p>
+<h4 id="keypoint-detectionmatchinglocal-registration"><a class="markdownIt-Anchor" href="#keypoint-detectionmatchinglocal-registration"></a> Keypoint Detection,Matching,Local Registration</h4>
+<p>使用LF-Net即可完成。LF-Net输入两张包含相同场景且视角已知的2D图像（不需要其他的标注，因此方便使用），输出特征点以及匹配关系。</p>
+<blockquote>
+<p>按：LF-Net的训练也非常拉风。虽然包含了不可微环节，但通过使用两个LF-Net拼接得到两个分支，交替优化即可。</p>
+<p>参考：Siamese network（孪生网络）（但注意LF-Net并不是孪生网络，只不过参数复制的过程有相似之处）</p>
+</blockquote>
+<p>然后用结合RANSAC的梅山方法得到粗估的位姿<strong>变化量</strong>。</p>
+<h4 id="keyframe-selection"><a class="markdownIt-Anchor" href="#keyframe-selection"></a> Keyframe Selection</h4>
+<p>BundleTrack会始终维护一个内存池，用以存放一堆<strong>关键帧</strong>（Keyframe）（bundle或许就是指这个内存池）。这些关键帧都是从当前帧以前的帧中选择出来的，且位姿较为多样。</p>
+<p>关键帧选择（Keyframe Selection）就是说，在得到粗估的位姿变化量进而得到粗估的位姿后，我们再从关键帧内存池中取出特定数量的关键帧。</p>
+<p>选择的标准是：取出的关键帧位姿的集合中加入当前帧的粗估位姿后，位姿两两之间测地距离（geodensic distance）之和最小。</p>
+<blockquote>
+<p>位姿之间的测地距离其实就是指两个位姿之间的刚体运动的旋转表示为角轴式后的转角（即<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>arccos</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\arccos</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mop">arccos</span></span></span></span>那个因子）。这其实就是要求<strong>取出的关键帧组是最接近当前帧的一组关键帧</strong>，也正因如此他们才适合用来优化当前帧的位姿。</p>
+</blockquote>
+<h4 id="online-pose-graph-optimization"><a class="markdownIt-Anchor" href="#online-pose-graph-optimization"></a> Online Pose Graph Optimization</h4>
+<p>随后用选出的关键帧位姿和当前帧位姿组成一张图。这一步的优化目标就是最小化这张图上的一个能量函数。这个能量函数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi></mrow><annotation encoding="application/x-tex">E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span>是各边能量函数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false">(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">E(i,j)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">)</span></span></span></span>的总和，而各边的能量函数又可以分成两部分的线性组合<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mn>1</mn></msub><msub><mi>E</mi><mi>f</mi></msub><mo stretchy="false">(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>λ</mi><mn>2</mn></msub><msub><mi>E</mi><mi>g</mi></msub><mo stretchy="false">(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lambda_1E_f(i,j)+\lambda_2E_g(i,j)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">g</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">)</span></span></span></span>（组合系数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>λ</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\lambda_1,\lambda_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>对各边都相同）</p>
+<ul>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mi>f</mi></msub><mo stretchy="false">(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">E_f(i,j)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">)</span></span></span></span>指将两帧的<strong>关键点</strong>按照各自位姿反变换回NOCS后的差距。这个差距用Huber Loss计算。两帧之间关键点的匹配关系如果之前已经算过就用之前已经缓存的数据，否则（这里的两帧未必是连续的前后两帧）通过LF-Net立即计算。</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mi>g</mi></msub><mo stretchy="false">(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">E_g(i,j)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">g</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">)</span></span></span></span>是一个比较拉风的重投影损失。它是指把两帧中某一帧（比如取<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">I_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>帧）的<strong>全部点</strong>先用对应的姿态反变换回NOCS，再用另一帧的姿态变换到世界坐标系中，再投影到相机的成像平面，再按照另一帧的RGBD中的D重新lift出3D点云，再用另一帧姿态反变换回NOCS，再用当前帧的姿态变换到世界坐标系得到一个点云。</p>
+<p>这个点云就包含了两帧位姿之间的相符程度（协调程度）。用这个点云（点点对应地）减掉<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">I_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>帧初始的点云再求范数，就可以得到相符程度的一个度量。再用Huber loss即可算出该重投影损失（能量）。</p>
+</li>
+</ul>
+<p>这样损失函数就搭建好了，需要优化<strong>这组关键帧和当前帧的全部位姿</strong>。</p>
+<blockquote>
+<p>虽然关键帧都是过去的帧，其位姿预测已经输出过了，但是这些关键帧还可能参加后续帧的图优化环节，因此对关键帧的位姿也要进行优化。</p>
+</blockquote>
+<p>优化方式使用<strong>带权的</strong>Gauss-Newton方法（权通过能量函数值确定，每轮迭代都会更新）。同时这里的姿态表示也不使用通常的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>E</mi><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">SE(3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mopen">(</span><span class="mord">3</span><span class="mclose">)</span></span></span></span>的表示方法，而是使用其李代数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="script">s</mi><mi mathvariant="script">e</mi></mrow><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathscr{se}(3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="mord mathnormal">e</span></span><span class="mopen">(</span><span class="mord">3</span><span class="mclose">)</span></span></span></span>表示（当然，还是6D的），优化完了再转换回<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>E</mi><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">SE(3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mopen">(</span><span class="mord">3</span><span class="mclose">)</span></span></span></span>中去。</p>
+<h4 id="augmenting-the-keyframe-memory-pool"><a class="markdownIt-Anchor" href="#augmenting-the-keyframe-memory-pool"></a> Augmenting the Keyframe Memory Pool</h4>
+<p>经过以上步骤，当前帧的最终姿态便已估计完成，可以输出了。</p>
+<p>但此后还需要考虑是否要把当前帧加入到内存池中去。如果当前帧和内存池中已有的帧差距都足够大（差距用旋转的测地距离度量，论文根据实验确定了一个阈值），则为了使内存池中位姿较为多样化（以便对各种位姿都能进行很好的图优化）就可以把当前帧加入内存池。</p>
+<p>这里其实就是一种自学习的过程。</p>
+<blockquote>
+<p>是否要考虑内存池会满，所以需要定时删去一些关键帧呢？其实在有“差距足够大”的限制后，关键帧的数量是有上限的。一开始给出足够大的内存就不用管删除的事了。</p>
+</blockquote>
+<h3 id="conclusion"><a class="markdownIt-Anchor" href="#conclusion"></a> Conclusion</h3>
+<p>值得借鉴的地方有：</p>
+<ol>
+<li>NOCS的思想。</li>
+<li>借用其他领域的好算法。</li>
+<li>粗估+进一步优化的结构。</li>
+<li>用多种手段加速模型。</li>
+<li>注意到单帧位姿和tracking的差异（尤其是估计旋转矩阵的差别）</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/rss2.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/papers/" rel="tag"># papers</a>
+              <a href="/tags/pose-estimation/" rel="tag"># pose estimation</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/09/20/Cybernetics3/" rel="prev" title="第三章：控制系统的时域分析">
+      <i class="fa fa-chevron-left"></i> 第三章：控制系统的时域分析
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#definition"><span class="nav-number">1.</span> <span class="nav-text"> Definition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-pack"><span class="nav-number">2.</span> <span class="nav-text"> 6-PACK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#predicted-pose-hatp"><span class="nav-number">2.1.</span> <span class="nav-text"> predicted pose P^\hat{P}P^</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#workflowbottom-right"><span class="nav-number">2.2.</span> <span class="nav-text"> workflow（bottom right）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anchor-based-keypoint-generation"><span class="nav-number">2.3.</span> <span class="nav-text"> anchor-based keypoint generation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#captra"><span class="nav-number">3.</span> <span class="nav-text"> CAPTRA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#per-part-pose-canonicalization"><span class="nav-number">3.1.</span> <span class="nav-text"> per-part pose canonicalization</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rotation-net"><span class="nav-number">3.2.</span> <span class="nav-text"> rotation net</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#coordinatenet"><span class="nav-number">3.3.</span> <span class="nav-text"> CoordinateNet</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bundletrack"><span class="nav-number">4.</span> <span class="nav-text"> BundleTrack</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#propagating-object-segmentation"><span class="nav-number">4.1.</span> <span class="nav-text"> Propagating Object Segmentation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#keypoint-detectionmatchinglocal-registration"><span class="nav-number">4.2.</span> <span class="nav-text"> Keypoint Detection,Matching,Local Registration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#keyframe-selection"><span class="nav-number">4.3.</span> <span class="nav-text"> Keyframe Selection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#online-pose-graph-optimization"><span class="nav-number">4.4.</span> <span class="nav-text"> Online Pose Graph Optimization</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#augmenting-the-keyframe-memory-pool"><span class="nav-number">4.5.</span> <span class="nav-text"> Augmenting the Keyframe Memory Pool</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conclusion"><span class="nav-number">5.</span> <span class="nav-text"> Conclusion</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="tannlonggtaoo"
+      src="/images/trueman.png">
+  <p class="site-author-name" itemprop="name">tannlonggtaoo</p>
+  <div class="site-description" itemprop="description">天国在何方？<br>就在那片青空中<br>就在你的身旁…</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tannlonggtaoo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tannlonggtaoo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tannlonggtaoo@sina.cn" title="E-Mail → mailto:tannlonggtaoo@sina.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tannlonggtaoo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+  <script src="//cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.css">
+
+
+  
+
+</body>
+</html>

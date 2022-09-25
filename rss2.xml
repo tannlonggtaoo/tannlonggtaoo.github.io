@@ -15,8 +15,35 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Tue, 20 Sep 2022 14:08:27 GMT</pubDate>
+    <pubDate>Sun, 25 Sep 2022 04:43:34 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>位姿追踪（pose tracking）的典型方法</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/24/tracking/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/24/tracking/</guid>
+      <pubDate>Sat, 24 Sep 2022 13:03:41 GMT</pubDate>
+      
+      <description>&lt;p&gt;介绍位姿追踪问题，并简要列出几种（至少能在Category-level以上解决追踪问题的）解决方法。&lt;/p&gt;
+&lt;p&gt;论文：&lt;/p&gt;
+&lt;p&gt;6-PACK（ICRA2020）：&lt;a href=&quot;https://arxiv.org/abs/1910.10750&quot;&gt;https://arxiv.org/abs/1910.10750&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CAPTRA（ICCV2021）：&lt;a href=&quot;https://arxiv.org/abs/2104.03437&quot;&gt;https://arxiv.org/abs/2104.03437&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;BundleTrack（IROS2021）：&lt;a href=&quot;https://arxiv.org/abs/2108.00516&quot;&gt;https://arxiv.org/abs/2108.00516&lt;/a&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Computer-Vision/">Computer Vision</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/pose-estimation/">pose estimation</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/24/tracking/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>第三章：控制系统的时域分析</title>
@@ -451,28 +478,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/08/30/Sampling-points/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>估计曲率的Rusinkiewicz法</title>
-      <link>https://tannlonggtaoo.github.io/2022/08/30/Rusinkiewiczs-method/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/08/30/Rusinkiewiczs-method/</guid>
-      <pubDate>Tue, 30 Aug 2022 11:40:52 GMT</pubDate>
-      
-      <description>&lt;p&gt;对各顶点已经有法向量信息的点云或mesh，可以使用该方法估计一个区域附近的Shape Operator，进而得到主曲率等二阶信息。&lt;/p&gt;
-&lt;p&gt;下面以三角mesh中求Shape Operator为例，简要介绍这种方法。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Numerical-Methods/">Numerical Methods</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/curvature/">curvature</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/08/30/Rusinkiewiczs-method/#disqus_thread</comments>
       
     </item>
     
