@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sun, 25 Sep 2022 04:43:34 GMT</pubDate>
+    <pubDate>Thu, 29 Sep 2022 15:54:27 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>近期位姿估计方法</title>
+      <link>https://tannlonggtaoo.github.io/2022/09/28/PoseEstim/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/09/28/PoseEstim/</guid>
+      <pubDate>Wed, 28 Sep 2022 10:38:19 GMT</pubDate>
+      
+      <description>&lt;p&gt;简介近期若干种基于单帧RGBD输入在Category-level进行位姿估计的方法。（论文链接与引用说明略）&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Pose-Estimation/">Pose Estimation</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/09/28/PoseEstim/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>位姿追踪（pose tracking）的典型方法</title>
@@ -455,29 +476,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/08/31/Estimating-normals/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>对顶点采样</title>
-      <link>https://tannlonggtaoo.github.io/2022/08/30/Sampling-points/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/08/30/Sampling-points/</guid>
-      <pubDate>Tue, 30 Aug 2022 15:12:17 GMT</pubDate>
-      
-      <description>&lt;p&gt;简单介绍几种获取点云的采样方法&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Algorithm/">Algorithm</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/point-cloud/">point cloud</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/probability/">probability</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/08/30/Sampling-points/#disqus_thread</comments>
       
     </item>
     
