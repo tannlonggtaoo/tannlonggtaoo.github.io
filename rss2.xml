@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Thu, 29 Sep 2022 15:54:27 GMT</pubDate>
+    <pubDate>Sat, 01 Oct 2022 14:53:18 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>第四章：频率响应法</title>
+      <link>https://tannlonggtaoo.github.io/2022/10/01/Cybernetics4/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/10/01/Cybernetics4/</guid>
+      <pubDate>Sat, 01 Oct 2022 14:36:01 GMT</pubDate>
+      
+      <description>&lt;p&gt;介绍频率响应、Bode图、Nyquist图、Nyquist稳定性判据等内容。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Cybernetics/">Cybernetics</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/10/01/Cybernetics4/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>近期位姿估计方法</title>
@@ -453,29 +474,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/08/31/Rotation-representation/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>基于顶点的法向量估计</title>
-      <link>https://tannlonggtaoo.github.io/2022/08/31/Estimating-normals/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/08/31/Estimating-normals/</guid>
-      <pubDate>Wed, 31 Aug 2022 07:59:03 GMT</pubDate>
-      
-      <description>&lt;p&gt;简单介绍通过某点附近的点估计该点法向量的方法，并介绍通过RANSAC进行优化的方法。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Numerical-Methods/">Numerical Methods</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/normal/">normal</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/RANSAC/">RANSAC</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/08/31/Estimating-normals/#disqus_thread</comments>
       
     </item>
     
