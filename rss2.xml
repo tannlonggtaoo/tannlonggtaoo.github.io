@@ -15,8 +15,53 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Fri, 07 Oct 2022 16:29:06 GMT</pubDate>
+    <pubDate>Wed, 19 Oct 2022 16:30:29 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>MATLAB mex找不到C编译器的解决方案</title>
+      <link>https://tannlonggtaoo.github.io/2022/10/20/gccpathformatlab/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/10/20/gccpathformatlab/</guid>
+      <pubDate>Wed, 19 Oct 2022 16:03:34 GMT</pubDate>
+      
+      <description>&lt;p&gt;针对MATLAB&lt;code&gt;错误使用 mex未找到支持的编译器或 SDK&lt;/code&gt;问题的可能解决方案。&lt;/p&gt;
+&lt;p&gt;在MATLAB R2019a下解决问题。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/A/">A</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/B/">B</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/C/">C</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/10/20/gccpathformatlab/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>第六章：校正</title>
+      <link>https://tannlonggtaoo.github.io/2022/10/18/Cybernetics6/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/10/18/Cybernetics6/</guid>
+      <pubDate>Tue, 18 Oct 2022 08:05:09 GMT</pubDate>
+      
+      <description>&lt;p&gt;主要介绍单位负反馈系统的串联校正方法：超前校正、滞后校正、超前-滞后校正。不涉及反馈校正。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Cybernetics/">Cybernetics</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/10/18/Cybernetics6/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>第五章：根轨迹法</title>
@@ -429,51 +474,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/09/05/PSTNet/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>全景分割（Panoptic Segmetation）概述</title>
-      <link>https://tannlonggtaoo.github.io/2022/09/04/Panoptic-segmentation/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/09/04/Panoptic-segmentation/</guid>
-      <pubDate>Sun, 04 Sep 2022 08:28:30 GMT</pubDate>
-      
-      <description>&lt;p&gt;根据个人理解，简要介绍全景分割任务的设定，重点讨论其设立的评价指标。&lt;/p&gt;
-&lt;p&gt;论文：&lt;a href=&quot;https://arxiv.org/pdf/1801.00868.pdf&quot;&gt;https://arxiv.org/pdf/1801.00868.pdf&lt;/a&gt;&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Computer-Vision/">Computer Vision</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/tasks/">tasks</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/09/04/Panoptic-segmentation/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>实用微分几何7（计算）</title>
-      <link>https://tannlonggtaoo.github.io/2022/09/04/DiffGeo7/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/09/04/DiffGeo7/</guid>
-      <pubDate>Sun, 04 Sep 2022 00:50:49 GMT</pubDate>
-      
-      <description>&lt;p&gt;介绍微分几何基本量的解析公式和（没有曲面解析式时的）数值估计或替代方法。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Differential-Geometry/">Differential Geometry</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/09/04/DiffGeo7/#disqus_thread</comments>
       
     </item>
     
