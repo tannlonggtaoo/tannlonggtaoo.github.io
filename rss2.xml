@@ -15,8 +15,30 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Thu, 24 Nov 2022 07:47:18 GMT</pubDate>
+    <pubDate>Mon, 28 Nov 2022 16:35:45 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>实用抽代3</title>
+      <link>https://tannlonggtaoo.github.io/2022/11/29/Algebra3/</link>
+      <guid>https://tannlonggtaoo.github.io/2022/11/29/Algebra3/</guid>
+      <pubDate>Mon, 28 Nov 2022 16:03:27 GMT</pubDate>
+      
+      <description>&lt;p&gt;再次介绍同构、单态射、满态射等概念。需要小心一般范畴上和集合范畴上各个概念的区别（一般范畴上的对象通常是类，没有“元素”）。&lt;/p&gt;
+&lt;p&gt;对应原书第一章第四节。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Algebra/">Algebra</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2022/11/29/Algebra3/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>现代第二章：状态方程的解</title>
@@ -444,27 +466,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/09/06/Topology4/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>实用点集拓扑3</title>
-      <link>https://tannlonggtaoo.github.io/2022/09/06/Topology3/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/09/06/Topology3/</guid>
-      <pubDate>Tue, 06 Sep 2022 02:03:37 GMT</pubDate>
-      
-      <description>&lt;p&gt;继续介绍紧致性。对应尤书第二章的一部分。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Topology/">Topology</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/09/06/Topology3/#disqus_thread</comments>
       
     </item>
     
