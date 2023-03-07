@@ -15,8 +15,36 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sat, 17 Dec 2022 14:49:20 GMT</pubDate>
+    <pubDate>Tue, 07 Mar 2023 12:55:32 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>注意换行</title>
+      <link>https://tannlonggtaoo.github.io/2023/03/07/win2linux/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/03/07/win2linux/</guid>
+      <pubDate>Tue, 07 Mar 2023 12:49:43 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+&lt;p&gt;众所周知Linux和windows的换行不同，在使用wsl时若在windows下编写脚本，就会因换行问题出错：&lt;code&gt;-bash: ./example：/bin/sh^M：解释器错误:</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/%E6%9D%82%E9%A1%B9/">杂项</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/linux/">linux</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/03/07/win2linux/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>现代第三章(2)：结构分解、标准形、实现问题</title>
@@ -445,27 +473,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/09/11/FlushDNStoPush/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>实用抽代1</title>
-      <link>https://tannlonggtaoo.github.io/2022/09/09/Algebra1/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/09/09/Algebra1/</guid>
-      <pubDate>Fri, 09 Sep 2022 09:41:08 GMT</pubDate>
-      
-      <description>&lt;p&gt;参考：Paolo Aluffi, Algebra Chapter 0。以下内容对应原书第一章的前两小节，包含集合论、函数两方面内容。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Algebra/">Algebra</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/09/09/Algebra1/#disqus_thread</comments>
       
     </item>
     

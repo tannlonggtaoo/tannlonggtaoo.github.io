@@ -4814,4 +4814,18 @@ b_1-a_1 b_0
         <tag>lecture notes</tag>
       </tags>
   </entry>
+  <entry>
+    <title>注意换行</title>
+    <url>/2023/03/07/win2linux/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>众所周知Linux和windows的换行不同，在使用wsl时若在windows下编写脚本，就会因换行问题出错：<code>-bash: ./example：/bin/sh^M：解释器错误: 没有那个文件或目录</code></p>
+<p>可以通过<code>cat -A [file]</code>查看换行符情况，然后在vim中使用<code>set ff=unix</code>即可。</p>
+]]></content>
+      <categories>
+        <category>杂项</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
 </search>
