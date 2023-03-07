@@ -607,6 +607,7 @@ b^{\prime} &amp;=\tau n
 <li>Win+R，cmd呼出terminal</li>
 <li>执行ipconfig /flushdns</li>
 </ol>
+<p><em>附注：部分地址解析网站会给出错误的ip，十分抽象。想通过改host直连时需要小心。</em></p>
 ]]></content>
       <categories>
         <category>杂项</category>
