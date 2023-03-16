@@ -15,8 +15,33 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Tue, 07 Mar 2023 12:55:32 GMT</pubDate>
+    <pubDate>Thu, 16 Mar 2023 15:35:05 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>MPI并行计算——使用篇</title>
+      <link>https://tannlonggtaoo.github.io/2023/03/16/HPC-MPI/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/03/16/HPC-MPI/</guid>
+      <pubDate>Thu, 16 Mar 2023 15:31:52 GMT</pubDate>
+      
+      <description>&lt;p&gt;从用户（使用者）的角度介绍消息传递模型代表——MPI。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/High-Performance-Computing/">High Performance Computing</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/mpi/">mpi</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/parallel-computing/">parallel computing</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/03/16/HPC-MPI/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>注意换行</title>
@@ -444,35 +469,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/09/11/Algebra2/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>push出现连接失败的可能解决方法</title>
-      <link>https://tannlonggtaoo.github.io/2022/09/11/FlushDNStoPush/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/09/11/FlushDNStoPush/</guid>
-      <pubDate>Sun, 11 Sep 2022 12:11:36 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;p&gt;git push环节有时会出现以下报错：&lt;/p&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/%E6%9D%82%E9%A1%B9/">杂项</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/git/">git</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/09/11/FlushDNStoPush/#disqus_thread</comments>
       
     </item>
     

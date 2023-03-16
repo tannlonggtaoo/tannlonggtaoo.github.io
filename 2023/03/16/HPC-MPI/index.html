@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/Tcon180.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Tcon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Tcon16.ico">
+  <link rel="mask-icon" href="/images/Tcon.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tannlonggtaoo.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="从用户（使用者）的角度介绍消息传递模型代表——MPI。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MPI并行计算——使用篇">
+<meta property="og:url" content="https://tannlonggtaoo.github.io/2023/03/16/HPC-MPI/index.html">
+<meta property="og:site_name" content="第三视点">
+<meta property="og:description" content="从用户（使用者）的角度介绍消息传递模型代表——MPI。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cvw.cac.cornell.edu/mpicc/images/AlltoAll2.gif">
+<meta property="article:published_time" content="2023-03-16T15:31:52.000Z">
+<meta property="article:modified_time" content="2023-03-16T15:35:05.402Z">
+<meta property="article:author" content="tannlonggtaoo">
+<meta property="article:tag" content="lecture notes">
+<meta property="article:tag" content="mpi">
+<meta property="article:tag" content="parallel computing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cvw.cac.cornell.edu/mpicc/images/AlltoAll2.gif">
+
+<link rel="canonical" href="https://tannlonggtaoo.github.io/2023/03/16/HPC-MPI/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MPI并行计算——使用篇 | 第三视点</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="第三视点" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">第三视点</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">所见的所有东西</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/tannlonggtaoo" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tannlonggtaoo.github.io/2023/03/16/HPC-MPI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/trueman.png">
+      <meta itemprop="name" content="tannlonggtaoo">
+      <meta itemprop="description" content="天国在何方？<br>就在那片青空中<br>就在你的身旁…">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="第三视点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MPI并行计算——使用篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-16 23:31:52 / 修改时间：23:35:05" itemprop="dateCreated datePublished" datetime="2023-03-16T23:31:52+08:00">2023-03-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/High-Performance-Computing/" itemprop="url" rel="index"><span itemprop="name">High Performance Computing</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>从用户（使用者）的角度介绍消息传递模型代表——MPI。</p>
+<span id="more"></span>
+<h2 id="spmd编程风格"><a class="markdownIt-Anchor" href="#spmd编程风格"></a> SPMD编程风格</h2>
+<ul>
+<li>SPMD（Single Program Multiple Data）即单程序多数据，允许任务分支执行用户指定的程序片段。这已经成为分布式编程的通用范式。</li>
+<li>例如：进程号为0的进程完成A部分代码，为1的进程执行B部分代码，……，但各部分代码写在同一份程序源文件中。</li>
+<li><em>注意和SIMD区别：SIMD主要是描述指令集和硬件体系结构的。</em></li>
+</ul>
+<h2 id="mpi基础"><a class="markdownIt-Anchor" href="#mpi基础"></a> MPI基础</h2>
+<ul>
+<li>典型的MPI程序结构</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;mpi.h&quot;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// do sth (serial)</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Initialize MPI environment</span></span><br><span class="line">    <span class="comment">// should be called before any other MPI functions (except MPI_INITALIZED(flag))</span></span><br><span class="line">	MPI_Init(&amp;argc, &amp;argv);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// parallel computing with MPI functions</span></span><br><span class="line">    <span class="type">int</span> rc = MPI_Xxx(args);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Finalize MPI environment</span></span><br><span class="line">    MPI_Finalize();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// do sth (serial)</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>注意</strong>：这是十分典型的SPMD。各进程中的变量即使有相同的名称（例如上面的<code>a</code>），也是完全不相干的。其中一个进程中的<code>a</code>变量变化不会影响其他进程。</li>
+<li>初始化也可以写成<code>MPI_Init(NULL,NULL)</code>;</li>
+<li>通常在<code>MPI_Init()</code>后都要获取进程数和当前进程ID（MPI接口中称为rank）
+<ul>
+<li>其中的<code>MPI_COMM_WORLD</code>是MPI预先为所有进程定义的<strong>通信域</strong>（Communicator），详细解释见后。</li>
+<li>在同一个<strong>组</strong>中的进程的rank范围为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><mi>N</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0,1,...,N-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，其中<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span>是该组的大小（注意组和通信域是不相同的两个概念）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> rank, size;</span><br><span class="line">MPI_Init(&amp;argc, &amp;argv);</span><br><span class="line">MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank); <span class="comment">// process ID</span></span><br><span class="line">MPI_Comm_size(MPI_COMM_WORLD, &amp;size); <span class="comment">// #process</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>一定要有<code>MPI_Finalize</code>，否则结果是不可预知的。一种可能是某个进程错误退出：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--------------------------------------------------------------------------</span><br><span class="line">mpirun has exited due to process rank 0 with PID 0 on node LAPTOP-XXX exiting improperly. There are three reasons this could occur:</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<ul>
+<li>MPI也有C/C++/Fortran多种版本</li>
+<li>进程数控制：不在程序中指定，而是通过命令行参数设置。
+<ul>
+<li>直接调用，指定进程数为4：<code>$ mpirun -n 4 ./example</code></li>
+<li>使用<code>SLURM</code>调度系统时则可以用类似方式指定：<code>$ srun -n 4 ./example</code></li>
+<li>因此，MPI程序不能预设特定进程数，而必须假定能在任何进程数下完成计算。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意：在默认情况下OpenMPI的slots数和计算机cpu的核心数相同。例如笔者的笔记本为4核，则<code>mpirun -n 4</code>可运行，进程数超过4则会报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----------------------------------------------------------------------</span><br><span class="line">There are not enough slots available in the system to satisfy the 6 slots that were requested by the application:</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>如果希望设定更高进程数，可以在<code>mpirun</code>后加<code>--oversubscribe</code>项。但<strong>除非有充分的理由和实验证据，并行单元的数量不要超过系统的物理核心数</strong>。可能的原因有：oversubscribe后缓存不命中概率上升、上下文切换浪费资源等。</p>
+</blockquote>
+<h2 id="mpi通信"><a class="markdownIt-Anchor" href="#mpi通信"></a> MPI通信</h2>
+<ul>
+<li>主要有两种方式：点对点通信、集合通信</li>
+</ul>
+<h3 id="点对点通信"><a class="markdownIt-Anchor" href="#点对点通信"></a> 点对点通信</h3>
+<h4 id="阻塞式"><a class="markdownIt-Anchor" href="#阻塞式"></a> 阻塞式</h4>
+<ul>
+<li><code>MPI_Send(buffer,count,type,dest,tag,comm)</code>
+<ul>
+<li>待发送的数据存放在<code>buffer</code>指向的空间中，长度为<code>count</code>，类型为<code>type</code></li>
+<li>关于<code>type</code>：MPI预定义了一堆类型（如<code>MPI_INT</code>，<code>MPI_LONG</code>，…），建议使用这个类型而非C的原生类型</li>
+<li><code>dest</code>就是接受进程在<code>comm</code>通信域中的rank（进程ID），<code>comm</code>默认为<code>MPI_COMM_WORLD</code></li>
+<li><code>tag</code>：便于区分多个消息</li>
+</ul>
+</li>
+<li><code>MPI_Recv(buffer,count,type,sorce,tag,comm,status)</code>
+<ul>
+<li>接收量（<code>count</code>参数，其实就是<code>buffer</code>的大小）可以大于等于发送的量，但小于时就会溢出报错。<code>count</code>可以是0。</li>
+<li><code>status</code>包含消息大小之类的信息。</li>
+</ul>
+</li>
+<li>通配符：
+<ul>
+<li><code>source</code>：<code>MPI_ANY_SOURCE</code></li>
+<li><code>tag</code>：<code>MPI_ANY_TAG</code></li>
+<li>注意发送时必须指定<code>dest</code>，没有通配符。</li>
+</ul>
+</li>
+<li>小心死锁</li>
+</ul>
+<h4 id="非阻塞式"><a class="markdownIt-Anchor" href="#非阻塞式"></a> 非阻塞式</h4>
+<ul>
+<li>
+<p><code>MPI_Isend</code>,<code>MPI_Irecv</code></p>
+<ul>
+<li><code>MPI_Isend</code>返回时不保证消息一定成功发送了，只表示消息可以被发送。</li>
+<li><code>MPI_Irecv</code>返回时不保证已经接收相应消息，只表示符合条件的消息可被接收。</li>
+<li>相比阻塞通信能提高使用效率（<strong>计算通信重叠</strong>），实际提升情况和实现有关。</li>
+<li>参数：多出一个<code>request</code>，返回一个句柄，不表示发送成功，之后可以通过检视该句柄<code>MPI_Wait(request,status)</code>来确定是否对面收到。</li>
+</ul>
+</li>
+<li>
+<p><code>MPI_Wait</code></p>
+<ul>
+<li>一直等待非阻塞通信句柄<code>request</code>对应的非阻塞通信完成后返回。</li>
+<li>其实<code>MPI_Send = MPI_Isend + MPI_Wait</code></li>
+</ul>
+</li>
+<li>
+<p><code>MPI_Waitall</code></p>
+<ul>
+<li>等待给定非阻塞通信句柄表中所有通信完成后才返回。</li>
+</ul>
+</li>
+</ul>
+<h4 id="案例梯形法算数值积分"><a class="markdownIt-Anchor" href="#案例梯形法算数值积分"></a> 案例：梯形法算数值积分</h4>
+<ul>
+<li>并行化策略：
+<ul>
+<li>任务划分到进程——每个进程计算若干梯形的面积</li>
+<li>汇总结果——0号进程<code>MPI_Recv</code>收取并累加其他进程的结果</li>
+</ul>
+</li>
+<li><em>可以自己去写一写PPT的示例代码</em></li>
+<li>这个案例就是经典的Map reduce</li>
+<li>用集合通信能做更简洁的实现</li>
+</ul>
+<h3 id="集合通信"><a class="markdownIt-Anchor" href="#集合通信"></a> 集合通信</h3>
+<ul>
+<li>
+<p>Map reduce的一种实现</p>
+</li>
+<li>
+<p>很多集合通信API内部也是用点对点实现的</p>
+</li>
+<li>
+<p>All前缀：数据转发到所有进程</p>
+</li>
+<li>
+<p>v后缀：每个进程处理的数据量可以不同</p>
+</li>
+<li>
+<p><code>MPI_Bcast</code>：</p>
+<ul>
+<li>把buffer处count个数据从root向组内其他进程中的同名变量发送（或称同步）</li>
+<li>如每个进程各有一个<code>value</code>，则buffer处填<code>&amp;value</code>即可同步所有进程<code>value</code>变量的值。</li>
+</ul>
+</li>
+<li>
+<p><code>MPI_Reduce</code>：归约，将结果汇总到同一进程中</p>
+<ul>
+<li>op：操作（<code>MPI_XX</code>格式，如<code>MPI_SUM</code>等，也可自定义）</li>
+<li>非dest进程就不用专门alloc一块recvbuf了，只有rank=dest的进程需要真地为recvbuf分配内存空间。</li>
+</ul>
+</li>
+<li>
+<p><code>MPI_Scan</code>：前缀归约</p>
+<ul>
+<li>按照rank顺序逐个执行操作（即前缀归约）</li>
+<li>这时候各进程都要alloc一个recvbuf了</li>
+</ul>
+</li>
+<li>
+<p><code>MPI_scatter</code></p>
+<ul>
+<li>类似split，一整段数据切分为几段，每个进程分配一段</li>
+</ul>
+</li>
+<li>
+<p><code>MPI_Gather</code>：scatter的反向操作</p>
+</li>
+<li>
+<p><code>MPI_Allgather</code>：gather后再bcast（因此没有dest）</p>
+</li>
+<li>
+<p><code>MPI_Allreduce</code>：reduce后再bcast</p>
+</li>
+<li>
+<p><code>MPI_Alltoall</code>：相当于n次gather：</p>
+</li>
+<li>
+<p><img src="https://cvw.cac.cornell.edu/mpicc/images/AlltoAll2.gif" alt="Cornell Virtual Workshop: All to All"></p>
+</li>
+<li>
+<p><code>MPI_Barrier(comm)</code>：同步，阻塞到组内所有进程都执行到相同的barrier为止</p>
+</li>
+<li>
+<p>通信域（comm参数）</p>
+<ul>
+<li>和组关联（不过这两个概念不同），只能域内进程相互通信</li>
+<li>通常直接所有进程公用一个通信域即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="mpi-io"><a class="markdownIt-Anchor" href="#mpi-io"></a> MPI-IO</h2>
+<ul>
+<li>不用<code>fopen</code>而用<code>MPI_File_open()</code>，如果要充分利用并行文件系统（当然课程中无所谓）</li>
+<li>和文件系统配合，合并打开文件的请求，则文件只会开一次，共享句柄。各进程可以同时读写。</li>
+<li>独立I/O：和普通读写类似，各进程单独请求，适合大文件IO</li>
+<li>协调I/O
+<ul>
+<li>机制和上面讲的一样，MPI内部会有一个buffer</li>
+<li>接口后缀<code>_all</code></li>
+<li>可以利用并行文件系统优化，适合小文件IO</li>
+</ul>
+</li>
+<li>有专门的<code>MPI_File</code>类</li>
+</ul>
+<h2 id="mpi编译"><a class="markdownIt-Anchor" href="#mpi编译"></a> MPI编译</h2>
+<ul>
+<li>
+<p>安装（Ubuntu，OpenMPI）：<code>sudo apt install openmpi-bin openmpi-doc libopenmpi-dev</code>，如果没装全是没法编译的（doc除外）。</p>
+</li>
+<li>
+<p>编译：<code>mpicc/mpicxx ...</code>（其实是<code>gcc/g++</code>的wrapper）</p>
+</li>
+<li>
+<p>也可以用IntelMPI，但二者不能混用</p>
+</li>
+</ul>
+<h2 id="多种实现"><a class="markdownIt-Anchor" href="#多种实现"></a> 多种实现</h2>
+<ul>
+<li>MPICH：官方版本，但性能差一点</li>
+<li>Intel MPI之类：基本上都是基于MPICH开发</li>
+<li>OpenMPI：性能也不错，用得多</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/rss2.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/lecture-notes/" rel="tag"># lecture notes</a>
+              <a href="/tags/mpi/" rel="tag"># mpi</a>
+              <a href="/tags/parallel-computing/" rel="tag"># parallel computing</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/07/win2linux/" rel="prev" title="注意换行">
+      <i class="fa fa-chevron-left"></i> 注意换行
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#spmd%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC"><span class="nav-number">1.</span> <span class="nav-text"> SPMD编程风格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mpi%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text"> MPI基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mpi%E9%80%9A%E4%BF%A1"><span class="nav-number">3.</span> <span class="nav-text"> MPI通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E5%AF%B9%E7%82%B9%E9%80%9A%E4%BF%A1"><span class="nav-number">3.1.</span> <span class="nav-text"> 点对点通信</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E%E5%BC%8F"><span class="nav-number">3.1.1.</span> <span class="nav-text"> 阻塞式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E9%98%BB%E5%A1%9E%E5%BC%8F"><span class="nav-number">3.1.2.</span> <span class="nav-text"> 非阻塞式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%E6%A2%AF%E5%BD%A2%E6%B3%95%E7%AE%97%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86"><span class="nav-number">3.1.3.</span> <span class="nav-text"> 案例：梯形法算数值积分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E9%80%9A%E4%BF%A1"><span class="nav-number">3.2.</span> <span class="nav-text"> 集合通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mpi-io"><span class="nav-number">4.</span> <span class="nav-text"> MPI-IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mpi%E7%BC%96%E8%AF%91"><span class="nav-number">5.</span> <span class="nav-text"> MPI编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%A7%8D%E5%AE%9E%E7%8E%B0"><span class="nav-number">6.</span> <span class="nav-text"> 多种实现</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="tannlonggtaoo"
+      src="/images/trueman.png">
+  <p class="site-author-name" itemprop="name">tannlonggtaoo</p>
+  <div class="site-description" itemprop="description">天国在何方？<br>就在那片青空中<br>就在你的身旁…</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tannlonggtaoo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tannlonggtaoo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tannlonggtaoo@sina.cn" title="E-Mail → mailto:tannlonggtaoo@sina.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tannlonggtaoo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+  <script src="//cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.css">
+
+
+  
+
+</body>
+</html>
