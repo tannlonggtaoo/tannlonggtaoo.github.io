@@ -5051,4 +5051,23 @@ b_1-a_1 b_0
         <tag>parallel computing</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Pushing to a non-bare Git repository</title>
+    <url>/2023/03/18/GitBare/</url>
+    <content><![CDATA[<span id="more"></span>
+<blockquote>
+<p>Reference</p>
+<p><a href="https://stackoverflow.com/questions/12265729/what-are-the-consequences-of-using-receive-denycurrentbranch-in-git">https://stackoverflow.com/questions/12265729/what-are-the-consequences-of-using-receive-denycurrentbranch-in-git</a></p>
+<p><a href="https://www.gloomycorner.com/pushing-to-a-non-bare-git-repository/">https://www.gloomycorner.com/pushing-to-a-non-bare-git-repository/</a></p>
+</blockquote>
+<p>当<code>git push</code>时遇到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">remote: error: refusing to update checked out branch: refs/heads/master</span><br><span class="line"> remote: error: By default, updating the current branch in a non-bare repository</span><br><span class="line"> remote: error: is denied, because it will make the index and work tree inconsistent</span><br><span class="line"> remote: error: with what you pushed, and will require &#x27;git reset --hard&#x27; to match</span><br><span class="line"> remote: error: the work tree to HEAD.</span><br><span class="line"> remote: error:</span><br><span class="line"> remote: error: You can set &#x27;receive.denyCurrentBranch&#x27; configuration variable to</span><br><span class="line"></span><br><span class="line"> remote: error: &#x27;ignore&#x27; or &#x27;warn&#x27; in the remote repository to allow pushing into</span><br><span class="line"></span><br><span class="line"> remote: error: its current branch; however, this is not recommended unless you</span><br><span class="line"> remote: error: arranged to update its work tree to match what you pushed in some</span><br><span class="line"></span><br><span class="line"> remote: error: other way.</span><br><span class="line"> remote: error:</span><br><span class="line"> remote: error: To squelch this message and still keep the default behaviour, set</span><br><span class="line"></span><br><span class="line"> remote: error: &#x27;receive.denyCurrentBranch&#x27; configuration variable to &#x27;refuse&#x27;.</span><br></pre></td></tr></table></figure>
+<p>则这是由于本地和远程都使用<code>git init</code>默认方式创建仓库，于是都会默认地设置成<code>non-bare</code>（具体含义参见第一则reference，即正常有提交记录的仓库），git默认禁止<code>non-bare</code>之间<code>push</code>（原因第一则reference也讲得很清楚了）。</p>
+<p>简单解决方法：远程<code>git config receive.denyCurrentBranch updateInstead</code>（也可以设置成别的，参见第二则reference）；</p>
+<p>根本解决方法：<code>git clone --bare</code></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
 </search>
