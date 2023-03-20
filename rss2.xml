@@ -15,8 +15,31 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sat, 18 Mar 2023 13:13:42 GMT</pubDate>
+    <pubDate>Mon, 20 Mar 2023 15:44:27 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>计算理论1</title>
+      <link>https://tannlonggtaoo.github.io/2023/03/20/computation-theory1/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/03/20/computation-theory1/</guid>
+      <pubDate>Mon, 20 Mar 2023 15:28:51 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要介绍两种有限自动机，并给出一些例子和有趣的性质。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Computation-Theory/">Computation Theory</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/Finite-Automata/">Finite Automata</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/03/20/computation-theory1/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Pushing to a non-bare Git repository</title>
@@ -455,27 +478,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/09/16/NOCS/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>第二章：控制系统的数学模型</title>
-      <link>https://tannlonggtaoo.github.io/2022/09/15/Cybernetics2/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/09/15/Cybernetics2/</guid>
-      <pubDate>Thu, 15 Sep 2022 14:02:25 GMT</pubDate>
-      
-      <description>&lt;p&gt;本系列为课程笔记。此篇介绍了控制系统的数学模型，重点回顾了微分方程和频域代数表示（传递函数）两类方法。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Cybernetics/">Cybernetics</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/09/15/Cybernetics2/#disqus_thread</comments>
       
     </item>
     
