@@ -15,8 +15,31 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Mon, 20 Mar 2023 15:44:27 GMT</pubDate>
+    <pubDate>Thu, 23 Mar 2023 08:42:37 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>计算理论2</title>
+      <link>https://tannlonggtaoo.github.io/2023/03/23/computation-theory2/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/03/23/computation-theory2/</guid>
+      <pubDate>Thu, 23 Mar 2023 08:38:59 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要介绍正则表达式。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Computation-Theory/">Computation Theory</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/regular-expression/">regular expression</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/03/23/computation-theory2/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>计算理论1</title>
@@ -451,33 +474,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/09/16/umeyama/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>位姿估计感想、NOCS简介</title>
-      <link>https://tannlonggtaoo.github.io/2022/09/16/NOCS/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/09/16/NOCS/</guid>
-      <pubDate>Fri, 16 Sep 2022 11:48:32 GMT</pubDate>
-      
-      <description>&lt;p&gt;介绍类别层次（category level）上进行位姿（pose）和尺度估计的经典方法NOCS，重点分析NOCS原理和其数据增强方法CAMERA。&lt;/p&gt;
-&lt;p&gt;这篇blog也夹带笔者希望记录的其他内容。&lt;/p&gt;
-&lt;p&gt;论文：&lt;a href=&quot;https://arxiv.org/abs/1901.02970&quot;&gt;https://arxiv.org/abs/1901.02970&lt;/a&gt;&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Computer-Vision/">Computer Vision</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/point-cloud/">point cloud</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/pose-estimation/">pose estimation</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/09/16/NOCS/#disqus_thread</comments>
       
     </item>
     
