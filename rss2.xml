@@ -15,8 +15,37 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Fri, 24 Mar 2023 09:26:22 GMT</pubDate>
+    <pubDate>Thu, 30 Mar 2023 08:57:13 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>WSL报错0x80040326</title>
+      <link>https://tannlonggtaoo.github.io/2023/03/30/WSL-crash/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/03/30/WSL-crash/</guid>
+      <pubDate>Thu, 30 Mar 2023 08:52:17 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+&lt;p&gt;今天打开WSL发现直接报错：&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Linux/">Linux</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/WSL/">WSL</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/03/30/WSL-crash/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>计算理论2</title>
@@ -451,29 +480,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/09/18/ANCSH/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>最优位姿估计中的梅山（Umeyama）算法</title>
-      <link>https://tannlonggtaoo.github.io/2022/09/16/umeyama/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/09/16/umeyama/</guid>
-      <pubDate>Fri, 16 Sep 2022 11:49:05 GMT</pubDate>
-      
-      <description>&lt;p&gt;介绍在已知刚体运动+尺度变换前后模型的对应点后，如何得到最优的刚体运动（和尺度变换）估计。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Optimization/">Optimization</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/pose-estimation/">pose estimation</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/SVD/">SVD</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/09/16/umeyama/#disqus_thread</comments>
       
     </item>
     

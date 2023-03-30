@@ -5475,4 +5475,21 @@ b_1-a_1 b_0
         <tag>regular expression</tag>
       </tags>
   </entry>
+  <entry>
+    <title>WSL报错0x80040326</title>
+    <url>/2023/03/30/WSL-crash/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>今天打开WSL发现直接报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt;wsl</span><br><span class="line">Error: 0x80040326</span><br><span class="line">Error code: Wsl/Service/0x80040326</span><br></pre></td></tr></table></figure>
+<p>随后迅速Google此错误代码，发现这和Windows10更新有关，在Windows10更新后需要手动更新WSL才能正常运行。因此执行<code>wsl --update</code>，不久会弹出：</p>
+<p><img src="/2023/03/30/WSL-crash/image-20230330165334041.png" alt="image-20230330165334041"></p>
+<p>随后即可正常启动WSL。</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>WSL</tag>
+      </tags>
+  </entry>
 </search>
