@@ -15,8 +15,33 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Thu, 30 Mar 2023 08:57:13 GMT</pubDate>
+    <pubDate>Sat, 01 Apr 2023 13:05:09 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>MPI并行计算——原理篇</title>
+      <link>https://tannlonggtaoo.github.io/2023/04/01/HPC-MPI2/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/04/01/HPC-MPI2/</guid>
+      <pubDate>Sat, 01 Apr 2023 11:23:24 GMT</pubDate>
+      
+      <description>&lt;p&gt;从原理角度介绍MPI。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/High-Performance-Computing/">High Performance Computing</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/mpi/">mpi</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/parallel-computing/">parallel computing</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/04/01/HPC-MPI2/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>WSL报错0x80040326</title>
@@ -454,32 +479,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/09/20/Cybernetics3/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>ANCSH简介</title>
-      <link>https://tannlonggtaoo.github.io/2022/09/18/ANCSH/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/09/18/ANCSH/</guid>
-      <pubDate>Sun, 18 Sep 2022 15:09:37 GMT</pubDate>
-      
-      <description>&lt;p&gt;NOCS的超级加强版，可以针对一整类的铰接物体（articulated objects）估计各部分的尺寸和位姿（当然对变形有一些限制）。&lt;/p&gt;
-&lt;p&gt;原论文：&lt;a href=&quot;https://arxiv.org/abs/1912.11913&quot;&gt;https://arxiv.org/abs/1912.11913&lt;/a&gt;&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Computer-Vision/">Computer Vision</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/pose-estimation/">pose estimation</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/part/">part</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/09/18/ANCSH/#disqus_thread</comments>
       
     </item>
     
