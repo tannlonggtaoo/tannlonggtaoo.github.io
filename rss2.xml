@@ -15,8 +15,33 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sat, 01 Apr 2023 13:05:09 GMT</pubDate>
+    <pubDate>Sun, 16 Apr 2023 09:34:45 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>计算理论4</title>
+      <link>https://tannlonggtaoo.github.io/2023/04/16/computation-theory4/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/04/16/computation-theory4/</guid>
+      <pubDate>Sun, 16 Apr 2023 09:32:20 GMT</pubDate>
+      
+      <description>&lt;p&gt;简介上下文无关文法和上下文无关语言。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Computation-Theory/">Computation Theory</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/context-free-grammar/">context free grammar</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/context-free-language/">context free language</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/04/16/computation-theory4/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>MPI并行计算——原理篇</title>
@@ -458,27 +483,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/09/24/tracking/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>第三章：控制系统的时域分析</title>
-      <link>https://tannlonggtaoo.github.io/2022/09/20/Cybernetics3/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/09/20/Cybernetics3/</guid>
-      <pubDate>Tue, 20 Sep 2022 14:00:25 GMT</pubDate>
-      
-      <description>&lt;p&gt;介绍系统时域分析的办法。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Cybernetics/">Cybernetics</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/09/20/Cybernetics3/#disqus_thread</comments>
       
     </item>
     
