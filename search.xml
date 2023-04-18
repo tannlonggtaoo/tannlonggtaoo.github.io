@@ -5769,4 +5769,248 @@ b_1-a_1 b_0
         <tag>context free language</tag>
       </tags>
   </entry>
+  <entry>
+    <title>CUDA程序——优化篇</title>
+    <url>/2023/04/18/CUDA2/</url>
+    <content><![CDATA[<p>介绍关于Cuda程序优化的知识。</p>
+<span id="more"></span>
+<h2 id="cpu执行模型"><a class="markdownIt-Anchor" href="#cpu执行模型"></a> CPU执行模型</h2>
+<ul>
+<li>
+<p>硬件组织层次：GPU——SM——warp——core</p>
+</li>
+<li>
+<p>软件概念层次：Grid——线程块——线程束——线程</p>
+<ul>
+<li>GPU = SMs + global memory + constant memory + L2 cache</li>
+<li>SM = warps + （shared memory + L1 cache）
+<ul>
+<li><em>有的GPU可以控制shared memory和L1 cache的比例，但总容量是固定的。</em></li>
+</ul>
+</li>
+<li>warp = cores + registers</li>
+</ul>
+</li>
+<li>
+<p>CUDA程序 = Host程序 + Device程序 （通过<strong>函数修饰符</strong>区分）。考虑函数嵌套（父子）和运行位置的组合一共有三种组合：</p>
+<ul>
+<li><code>__global__</code>：被CPU上运行的函数调用，在GPU执行的函数。
+<ul>
+<li>即通常说的内核函数（kernel）。</li>
+<li>只能修饰<code>void</code>类型的函数。</li>
+<li>调用时使用最特殊的<code>&lt;&lt;&lt; &gt;&gt;&gt;</code>标志。</li>
+</ul>
+</li>
+<li><code>__device__</code>：被GPU上运行的函数调用，在GPU执行的函数。</li>
+<li><code>__host__</code>：被CPU上运行的函数调用，在CPU执行的函数。<strong>不加修饰符默认为<code>__host__</code>类型</strong></li>
+</ul>
+<blockquote>
+<p>此外，也可以使用<code>__host__ __device__</code>表示同时生成两个版本的代码。但二者均不能和<code>__device__</code>混用。</p>
+<p>注意不能由GPU调度CPU做某事，故为3种而非4种组合。</p>
+<p>有时CUDA编译器会对<code>__device__</code>作自动内联。可以通过<code>__noinline__</code>或<code>__forceinline__</code>手动指定是否内联。</p>
+</blockquote>
+</li>
+<li>
+<p>注意：若硬件资源够，则一个SM可以同时执行多个线程块</p>
+</li>
+</ul>
+<h3 id="warp"><a class="markdownIt-Anchor" href="#warp"></a> warp</h3>
+<ul>
+<li>SM上调度的最小单元。一个warp包括32个线程。</li>
+<li>SIMD（32个线程必然是相同指令）</li>
+<li>SM上有warp scheduler（硬件单元）
+<ul>
+<li>当一个进程束的下一条指令操作数就序时即有被调度执行之资格，因此线程束执行顺序是不可预期的</li>
+<li>当出现内存等待（如cache miss）时，对应进程束被换出</li>
+</ul>
+</li>
+<li>线程块的维度只是逻辑概念，实际调度时就是拉直后32个一组调入warp
+<ul>
+<li>示例：<code>dim3 blockSize (40,2);</code>，则实际的warp分配情况如下图：</li>
+<li><img src="/2023/04/18/CUDA2/image-20230418204355618.png" alt="image-20230418204355618"></li>
+</ul>
+</li>
+</ul>
+<h3 id="warp发散warp-divergence"><a class="markdownIt-Anchor" href="#warp发散warp-divergence"></a> warp发散（warp divergence）</h3>
+<ul>
+<li><strong>同一个warp</strong>内<strong>不同线程</strong>执行<strong>不同分支</strong>就是线程发散，该warp必须执行多次（每次解决一个分支，其余线程废弃），效率<strong>严重</strong>下降</li>
+<li>不同warp之间的分支没影响</li>
+<li>**是否在同一个warp中需要根据拉直后32个一组的方式判断！**不能看线程块维度（因为这只是逻辑概念，例如前面的例子中，按照<code>threadIdx.y</code>的值分支还是会触发warp发散！）</li>
+<li>解决：以warp size作为分支粒度（可使用宏<code>warp_size</code>等）</li>
+</ul>
+<h2 id="gpu存储层次"><a class="markdownIt-Anchor" href="#gpu存储层次"></a> GPU存储层次</h2>
+<blockquote>
+<p>以下列出的只是容量的典型值，不同GPU有一定差异。</p>
+</blockquote>
+<ul>
+<li>
+<p>寄存器——线程，256KB/SM，平均每线程在KB级左右，且寄存器个数也有上限（如255个）</p>
+</li>
+<li>
+<p>共享内存——线程块，共享内存和L1 cache一共128KB/SM</p>
+<ul>
+<li>
+<p>不能跨SM（线程块）复用数据</p>
+</li>
+<li>
+<p>定义方式：使用<code>__shared__</code>变量修饰符</p>
+<ul>
+<li>
+<p>静态定义：显式指定空间大小（普通变量、定长数组等），如：</p>
+<p><code>__shared__ float smem[32];</code></p>
+</li>
+<li>
+<p>动态定义：调用kernel的<code>&lt;&lt;&lt; &gt;&gt;&gt;</code>中指定大小，如：</p>
+<p><code>extern __shared__ float smem[];</code></p>
+</li>
+<li>
+<p>注意动态定义给的地址是相同的，因此如果想定义多个内存共享空间时可以手动偏移：</p>
+<p><code>extern __shared__ float* smem_1;</code></p>
+<p><code>extern __shared__ float* smem_2 + shared_size_a;</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>全局内存——核心，16~32GB等（就是平时说的<strong>显存</strong>）</p>
+<ul>
+<li>有L2 cache，为6MB</li>
+<li>在host端通过<code>cudaMalloc</code> <code>cudaMemcpy</code> <code>cudaFree</code>之类控制。</li>
+</ul>
+</li>
+<li>
+<p>本地内存——分配到线程，但位置在全局内存，性能差</p>
+<ul>
+<li>仅当编译阶段发现寄存器容量不够时（“寄存器溢出”），才不得不把多的数据搬到本地内存。</li>
+<li>尽可能控制每个线程的空间使用量，不要被迫使用本地内存。</li>
+</ul>
+</li>
+<li>
+<p>常量内存——核心，仅可读，位置同全局内存</p>
+</li>
+</ul>
+<h3 id="sector"><a class="markdownIt-Anchor" href="#sector"></a> Sector</h3>
+<ul>
+<li>在全局内存（DRAM）、L2 cache、L1 cache之间传输数据的最小单元</li>
+<li>通常是32Bytes（和架构相关）</li>
+<li>访问一次sector称为一个transaction，transaction个数直接决定访存性能</li>
+<li>1个cache line则是4个sector</li>
+</ul>
+<h2 id="常见优化"><a class="markdownIt-Anchor" href="#常见优化"></a> 常见优化</h2>
+<ul>
+<li>通信次数与通信量、缓存与数据重用、预取以重叠计算访存</li>
+<li>GPU占用率 = SM运行线程数 / SM最大支持线程数
+<ul>
+<li>有nvprof之类工具查看</li>
+</ul>
+</li>
+<li>矛盾：线程数
+<ul>
+<li>太少：占用率低，硬件利用率小，……</li>
+<li>太多：寄存器、共享内存等资源有限，不希望溢出到本地内存。</li>
+</ul>
+</li>
+<li>其他：
+<ul>
+<li>循环展开：减少分支。可以<code>#pragma unroll 4</code>之类自动展开</li>
+<li>原子操作：GPU有预定义的原子操作，性能比普通操作有下降</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据传输"><a class="markdownIt-Anchor" href="#数据传输"></a> 数据传输</h3>
+<ul>
+<li>重点优化Host和Device之间的数据传输
+<ul>
+<li>传输数据量尽可能小</li>
+<li>多次小传输合并成单次大传输</li>
+<li>异步，计算通信时间重叠</li>
+<li>page-lock等</li>
+</ul>
+</li>
+<li>固定内存
+<ul>
+<li>把主存一个页面直接映射到GPU，系统会自动cudaMemcpy，用的时候如同在使用主存。性能有所下降，但有时会比手动copy快（有的CPU架构会对此做特殊优化）</li>
+<li>接口：<code>cudaHostAlloc</code> <code>cudaHostGetDevicePointer</code>等</li>
+<li>但数据可重用时海慧寺尽可能用全局内存/共享内存</li>
+</ul>
+</li>
+<li>异步
+<ul>
+<li><code>cudaMemcpy</code>等是同步的，传输完才能返回
+<ul>
+<li>有专门的async版本函数。此函数在host端是异步的，即不待传输完毕就返回。（但device端应该还是需要等待传输完成的）</li>
+</ul>
+</li>
+<li>kernel函数则本来就是异步的，CPU端在GPU启动运行后，不等GPU端执行完毕就返回了</li>
+</ul>
+</li>
+<li>Stream
+<ul>
+<li>对应kernel调用<code>&lt;&lt;&lt; &gt;&gt;&gt;</code>的Sid参数</li>
+<li>相当于并行执行不同的kernel函数，执行顺序不固定。</li>
+<li>可以配合<code>cudaMemcpyAsync</code>之类使用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="全局内存"><a class="markdownIt-Anchor" href="#全局内存"></a> 全局内存</h3>
+<ul>
+<li>
+<p>合并访存</p>
+<ul>
+<li>
+<p>如：硬件会自动判断一个warp的load指令的目标地址是否连续，若是则自动合并。故尽可能让数据满足这一要求。</p>
+</li>
+<li>
+<p>AoS，SoA：互为转置</p>
+<ul>
+<li>array of structure（AoS）</li>
+<li>structure of array（SoA），通常这种更优（例如我们都想访问structure中的第一个位置，则SoA才是连续地址，可以合并访存）</li>
+</ul>
+</li>
+<li>
+<p>手动合并访存：直接先存在共享内存中（共享内存没有连续问题），攒满了再统一放到GPU去</p>
+</li>
+</ul>
+</li>
+<li>
+<p>访存对齐：最小访问粒度为sector（32bytes），因此要对齐32bytes的格位（不然就可能会多访问一个sector）</p>
+</li>
+<li>
+<p>示例：矩阵乘</p>
+<ul>
+<li>注意CGMA指标（计算访存比compute to global memory access），要把CGMA提高到计算和访存性能差异的倍数上才能充分发挥性能</li>
+<li>由于shared memory不够大，则用分块算法</li>
+<li>CGMA也未必越大越好</li>
+</ul>
+</li>
+</ul>
+<h3 id="共享内存"><a class="markdownIt-Anchor" href="#共享内存"></a> 共享内存</h3>
+<ul>
+<li>需要用户手动管理，变量标识符<code>__shared__</code></li>
+<li>组织形式：<strong>bank</strong>，一个bank为32bit（4Byte），每隔128Byte为bank共用（电路层面决定）的周期</li>
+<li><img src="/2023/04/18/CUDA2/image-20230418222211202.png" alt="image-20230418222211202"></li>
+<li>bank conflict
+<ul>
+<li><strong>同一访存周期内，每个bank只能服务1个请求</strong>。故<strong>同一个warp</strong>内访问处于同一bank对应的地址时，则访问请求会自动变为串行的，性能大大降低，这就是bank conflict
+<ul>
+<li>注意：不同warp的访存是独立调度的，因此不会出现bank conflict</li>
+<li>可以使用profile等工具检查</li>
+</ul>
+</li>
+<li>解决：共享内存扩充，如下两图对比：</li>
+<li><img src="/2023/04/18/CUDA2/image-20230418222708422.png" alt="image-20230418222708422"></li>
+<li><img src="/2023/04/18/CUDA2/image-20230418222717034.png" alt="image-20230418222717034"></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>High Performance Computing</category>
+      </categories>
+      <tags>
+        <tag>lecture notes</tag>
+        <tag>cuda</tag>
+      </tags>
+  </entry>
 </search>

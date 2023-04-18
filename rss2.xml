@@ -15,8 +15,31 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sun, 16 Apr 2023 09:34:45 GMT</pubDate>
+    <pubDate>Tue, 18 Apr 2023 14:30:52 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>CUDA程序——优化篇</title>
+      <link>https://tannlonggtaoo.github.io/2023/04/18/CUDA2/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/04/18/CUDA2/</guid>
+      <pubDate>Tue, 18 Apr 2023 14:28:30 GMT</pubDate>
+      
+      <description>&lt;p&gt;介绍关于Cuda程序优化的知识。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/High-Performance-Computing/">High Performance Computing</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/cuda/">cuda</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/04/18/CUDA2/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>计算理论4</title>
@@ -456,33 +479,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/09/28/PoseEstim/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>位姿追踪（pose tracking）的典型方法</title>
-      <link>https://tannlonggtaoo.github.io/2022/09/24/tracking/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/09/24/tracking/</guid>
-      <pubDate>Sat, 24 Sep 2022 13:03:41 GMT</pubDate>
-      
-      <description>&lt;p&gt;介绍位姿追踪问题，并简要列出几种（至少能在Category-level以上解决追踪问题的）解决方法。&lt;/p&gt;
-&lt;p&gt;论文：&lt;/p&gt;
-&lt;p&gt;6-PACK（ICRA2020）：&lt;a href=&quot;https://arxiv.org/abs/1910.10750&quot;&gt;https://arxiv.org/abs/1910.10750&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;CAPTRA（ICCV2021）：&lt;a href=&quot;https://arxiv.org/abs/2104.03437&quot;&gt;https://arxiv.org/abs/2104.03437&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;BundleTrack（IROS2021）：&lt;a href=&quot;https://arxiv.org/abs/2108.00516&quot;&gt;https://arxiv.org/abs/2108.00516&lt;/a&gt;&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Computer-Vision/">Computer Vision</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/pose-estimation/">pose estimation</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/09/24/tracking/#disqus_thread</comments>
       
     </item>
     

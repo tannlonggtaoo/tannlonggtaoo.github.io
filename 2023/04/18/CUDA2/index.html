@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/Tcon180.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Tcon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Tcon16.ico">
+  <link rel="mask-icon" href="/images/Tcon.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tannlonggtaoo.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="介绍关于Cuda程序优化的知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CUDA程序——优化篇">
+<meta property="og:url" content="https://tannlonggtaoo.github.io/2023/04/18/CUDA2/index.html">
+<meta property="og:site_name" content="第三视点">
+<meta property="og:description" content="介绍关于Cuda程序优化的知识。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tannlonggtaoo.github.io/2023/04/18/CUDA2/image-20230418204355618.png">
+<meta property="og:image" content="https://tannlonggtaoo.github.io/2023/04/18/CUDA2/image-20230418222211202.png">
+<meta property="og:image" content="https://tannlonggtaoo.github.io/2023/04/18/CUDA2/image-20230418222708422.png">
+<meta property="og:image" content="https://tannlonggtaoo.github.io/2023/04/18/CUDA2/image-20230418222717034.png">
+<meta property="article:published_time" content="2023-04-18T14:28:30.000Z">
+<meta property="article:modified_time" content="2023-04-18T14:30:52.719Z">
+<meta property="article:author" content="tannlonggtaoo">
+<meta property="article:tag" content="lecture notes">
+<meta property="article:tag" content="cuda">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tannlonggtaoo.github.io/2023/04/18/CUDA2/image-20230418204355618.png">
+
+<link rel="canonical" href="https://tannlonggtaoo.github.io/2023/04/18/CUDA2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CUDA程序——优化篇 | 第三视点</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/rss2.xml" title="第三视点" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">第三视点</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">所见的所有东西</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">50</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">32</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/tannlonggtaoo" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tannlonggtaoo.github.io/2023/04/18/CUDA2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/trueman.png">
+      <meta itemprop="name" content="tannlonggtaoo">
+      <meta itemprop="description" content="天国在何方？<br>就在那片青空中<br>就在你的身旁…">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="第三视点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CUDA程序——优化篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-18 22:28:30 / 修改时间：22:30:52" itemprop="dateCreated datePublished" datetime="2023-04-18T22:28:30+08:00">2023-04-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/High-Performance-Computing/" itemprop="url" rel="index"><span itemprop="name">High Performance Computing</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>介绍关于Cuda程序优化的知识。</p>
+<span id="more"></span>
+<h2 id="cpu执行模型"><a class="markdownIt-Anchor" href="#cpu执行模型"></a> CPU执行模型</h2>
+<ul>
+<li>
+<p>硬件组织层次：GPU——SM——warp——core</p>
+</li>
+<li>
+<p>软件概念层次：Grid——线程块——线程束——线程</p>
+<ul>
+<li>GPU = SMs + global memory + constant memory + L2 cache</li>
+<li>SM = warps + （shared memory + L1 cache）
+<ul>
+<li><em>有的GPU可以控制shared memory和L1 cache的比例，但总容量是固定的。</em></li>
+</ul>
+</li>
+<li>warp = cores + registers</li>
+</ul>
+</li>
+<li>
+<p>CUDA程序 = Host程序 + Device程序 （通过<strong>函数修饰符</strong>区分）。考虑函数嵌套（父子）和运行位置的组合一共有三种组合：</p>
+<ul>
+<li><code>__global__</code>：被CPU上运行的函数调用，在GPU执行的函数。
+<ul>
+<li>即通常说的内核函数（kernel）。</li>
+<li>只能修饰<code>void</code>类型的函数。</li>
+<li>调用时使用最特殊的<code>&lt;&lt;&lt; &gt;&gt;&gt;</code>标志。</li>
+</ul>
+</li>
+<li><code>__device__</code>：被GPU上运行的函数调用，在GPU执行的函数。</li>
+<li><code>__host__</code>：被CPU上运行的函数调用，在CPU执行的函数。<strong>不加修饰符默认为<code>__host__</code>类型</strong></li>
+</ul>
+<blockquote>
+<p>此外，也可以使用<code>__host__ __device__</code>表示同时生成两个版本的代码。但二者均不能和<code>__device__</code>混用。</p>
+<p>注意不能由GPU调度CPU做某事，故为3种而非4种组合。</p>
+<p>有时CUDA编译器会对<code>__device__</code>作自动内联。可以通过<code>__noinline__</code>或<code>__forceinline__</code>手动指定是否内联。</p>
+</blockquote>
+</li>
+<li>
+<p>注意：若硬件资源够，则一个SM可以同时执行多个线程块</p>
+</li>
+</ul>
+<h3 id="warp"><a class="markdownIt-Anchor" href="#warp"></a> warp</h3>
+<ul>
+<li>SM上调度的最小单元。一个warp包括32个线程。</li>
+<li>SIMD（32个线程必然是相同指令）</li>
+<li>SM上有warp scheduler（硬件单元）
+<ul>
+<li>当一个进程束的下一条指令操作数就序时即有被调度执行之资格，因此线程束执行顺序是不可预期的</li>
+<li>当出现内存等待（如cache miss）时，对应进程束被换出</li>
+</ul>
+</li>
+<li>线程块的维度只是逻辑概念，实际调度时就是拉直后32个一组调入warp
+<ul>
+<li>示例：<code>dim3 blockSize (40,2);</code>，则实际的warp分配情况如下图：</li>
+<li><img src="/2023/04/18/CUDA2/image-20230418204355618.png" alt="image-20230418204355618"></li>
+</ul>
+</li>
+</ul>
+<h3 id="warp发散warp-divergence"><a class="markdownIt-Anchor" href="#warp发散warp-divergence"></a> warp发散（warp divergence）</h3>
+<ul>
+<li><strong>同一个warp</strong>内<strong>不同线程</strong>执行<strong>不同分支</strong>就是线程发散，该warp必须执行多次（每次解决一个分支，其余线程废弃），效率<strong>严重</strong>下降</li>
+<li>不同warp之间的分支没影响</li>
+<li>**是否在同一个warp中需要根据拉直后32个一组的方式判断！**不能看线程块维度（因为这只是逻辑概念，例如前面的例子中，按照<code>threadIdx.y</code>的值分支还是会触发warp发散！）</li>
+<li>解决：以warp size作为分支粒度（可使用宏<code>warp_size</code>等）</li>
+</ul>
+<h2 id="gpu存储层次"><a class="markdownIt-Anchor" href="#gpu存储层次"></a> GPU存储层次</h2>
+<blockquote>
+<p>以下列出的只是容量的典型值，不同GPU有一定差异。</p>
+</blockquote>
+<ul>
+<li>
+<p>寄存器——线程，256KB/SM，平均每线程在KB级左右，且寄存器个数也有上限（如255个）</p>
+</li>
+<li>
+<p>共享内存——线程块，共享内存和L1 cache一共128KB/SM</p>
+<ul>
+<li>
+<p>不能跨SM（线程块）复用数据</p>
+</li>
+<li>
+<p>定义方式：使用<code>__shared__</code>变量修饰符</p>
+<ul>
+<li>
+<p>静态定义：显式指定空间大小（普通变量、定长数组等），如：</p>
+<p><code>__shared__ float smem[32];</code></p>
+</li>
+<li>
+<p>动态定义：调用kernel的<code>&lt;&lt;&lt; &gt;&gt;&gt;</code>中指定大小，如：</p>
+<p><code>extern __shared__ float smem[];</code></p>
+</li>
+<li>
+<p>注意动态定义给的地址是相同的，因此如果想定义多个内存共享空间时可以手动偏移：</p>
+<p><code>extern __shared__ float* smem_1;</code></p>
+<p><code>extern __shared__ float* smem_2 + shared_size_a;</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>全局内存——核心，16~32GB等（就是平时说的<strong>显存</strong>）</p>
+<ul>
+<li>有L2 cache，为6MB</li>
+<li>在host端通过<code>cudaMalloc</code> <code>cudaMemcpy</code> <code>cudaFree</code>之类控制。</li>
+</ul>
+</li>
+<li>
+<p>本地内存——分配到线程，但位置在全局内存，性能差</p>
+<ul>
+<li>仅当编译阶段发现寄存器容量不够时（“寄存器溢出”），才不得不把多的数据搬到本地内存。</li>
+<li>尽可能控制每个线程的空间使用量，不要被迫使用本地内存。</li>
+</ul>
+</li>
+<li>
+<p>常量内存——核心，仅可读，位置同全局内存</p>
+</li>
+</ul>
+<h3 id="sector"><a class="markdownIt-Anchor" href="#sector"></a> Sector</h3>
+<ul>
+<li>在全局内存（DRAM）、L2 cache、L1 cache之间传输数据的最小单元</li>
+<li>通常是32Bytes（和架构相关）</li>
+<li>访问一次sector称为一个transaction，transaction个数直接决定访存性能</li>
+<li>1个cache line则是4个sector</li>
+</ul>
+<h2 id="常见优化"><a class="markdownIt-Anchor" href="#常见优化"></a> 常见优化</h2>
+<ul>
+<li>通信次数与通信量、缓存与数据重用、预取以重叠计算访存</li>
+<li>GPU占用率 = SM运行线程数 / SM最大支持线程数
+<ul>
+<li>有nvprof之类工具查看</li>
+</ul>
+</li>
+<li>矛盾：线程数
+<ul>
+<li>太少：占用率低，硬件利用率小，……</li>
+<li>太多：寄存器、共享内存等资源有限，不希望溢出到本地内存。</li>
+</ul>
+</li>
+<li>其他：
+<ul>
+<li>循环展开：减少分支。可以<code>#pragma unroll 4</code>之类自动展开</li>
+<li>原子操作：GPU有预定义的原子操作，性能比普通操作有下降</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据传输"><a class="markdownIt-Anchor" href="#数据传输"></a> 数据传输</h3>
+<ul>
+<li>重点优化Host和Device之间的数据传输
+<ul>
+<li>传输数据量尽可能小</li>
+<li>多次小传输合并成单次大传输</li>
+<li>异步，计算通信时间重叠</li>
+<li>page-lock等</li>
+</ul>
+</li>
+<li>固定内存
+<ul>
+<li>把主存一个页面直接映射到GPU，系统会自动cudaMemcpy，用的时候如同在使用主存。性能有所下降，但有时会比手动copy快（有的CPU架构会对此做特殊优化）</li>
+<li>接口：<code>cudaHostAlloc</code> <code>cudaHostGetDevicePointer</code>等</li>
+<li>但数据可重用时海慧寺尽可能用全局内存/共享内存</li>
+</ul>
+</li>
+<li>异步
+<ul>
+<li><code>cudaMemcpy</code>等是同步的，传输完才能返回
+<ul>
+<li>有专门的async版本函数。此函数在host端是异步的，即不待传输完毕就返回。（但device端应该还是需要等待传输完成的）</li>
+</ul>
+</li>
+<li>kernel函数则本来就是异步的，CPU端在GPU启动运行后，不等GPU端执行完毕就返回了</li>
+</ul>
+</li>
+<li>Stream
+<ul>
+<li>对应kernel调用<code>&lt;&lt;&lt; &gt;&gt;&gt;</code>的Sid参数</li>
+<li>相当于并行执行不同的kernel函数，执行顺序不固定。</li>
+<li>可以配合<code>cudaMemcpyAsync</code>之类使用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="全局内存"><a class="markdownIt-Anchor" href="#全局内存"></a> 全局内存</h3>
+<ul>
+<li>
+<p>合并访存</p>
+<ul>
+<li>
+<p>如：硬件会自动判断一个warp的load指令的目标地址是否连续，若是则自动合并。故尽可能让数据满足这一要求。</p>
+</li>
+<li>
+<p>AoS，SoA：互为转置</p>
+<ul>
+<li>array of structure（AoS）</li>
+<li>structure of array（SoA），通常这种更优（例如我们都想访问structure中的第一个位置，则SoA才是连续地址，可以合并访存）</li>
+</ul>
+</li>
+<li>
+<p>手动合并访存：直接先存在共享内存中（共享内存没有连续问题），攒满了再统一放到GPU去</p>
+</li>
+</ul>
+</li>
+<li>
+<p>访存对齐：最小访问粒度为sector（32bytes），因此要对齐32bytes的格位（不然就可能会多访问一个sector）</p>
+</li>
+<li>
+<p>示例：矩阵乘</p>
+<ul>
+<li>注意CGMA指标（计算访存比compute to global memory access），要把CGMA提高到计算和访存性能差异的倍数上才能充分发挥性能</li>
+<li>由于shared memory不够大，则用分块算法</li>
+<li>CGMA也未必越大越好</li>
+</ul>
+</li>
+</ul>
+<h3 id="共享内存"><a class="markdownIt-Anchor" href="#共享内存"></a> 共享内存</h3>
+<ul>
+<li>需要用户手动管理，变量标识符<code>__shared__</code></li>
+<li>组织形式：<strong>bank</strong>，一个bank为32bit（4Byte），每隔128Byte为bank共用（电路层面决定）的周期</li>
+<li><img src="/2023/04/18/CUDA2/image-20230418222211202.png" alt="image-20230418222211202"></li>
+<li>bank conflict
+<ul>
+<li><strong>同一访存周期内，每个bank只能服务1个请求</strong>。故<strong>同一个warp</strong>内访问处于同一bank对应的地址时，则访问请求会自动变为串行的，性能大大降低，这就是bank conflict
+<ul>
+<li>注意：不同warp的访存是独立调度的，因此不会出现bank conflict</li>
+<li>可以使用profile等工具检查</li>
+</ul>
+</li>
+<li>解决：共享内存扩充，如下两图对比：</li>
+<li><img src="/2023/04/18/CUDA2/image-20230418222708422.png" alt="image-20230418222708422"></li>
+<li><img src="/2023/04/18/CUDA2/image-20230418222717034.png" alt="image-20230418222717034"></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/rss2.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/lecture-notes/" rel="tag"># lecture notes</a>
+              <a href="/tags/cuda/" rel="tag"># cuda</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/16/computation-theory4/" rel="prev" title="计算理论4">
+      <i class="fa fa-chevron-left"></i> 计算理论4
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cpu%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text"> CPU执行模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#warp"><span class="nav-number">1.1.</span> <span class="nav-text"> warp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#warp%E5%8F%91%E6%95%A3warp-divergence"><span class="nav-number">1.2.</span> <span class="nav-text"> warp发散（warp divergence）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gpu%E5%AD%98%E5%82%A8%E5%B1%82%E6%AC%A1"><span class="nav-number">2.</span> <span class="nav-text"> GPU存储层次</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sector"><span class="nav-number">2.1.</span> <span class="nav-text"> Sector</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E4%BC%98%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text"> 常见优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="nav-number">3.1.</span> <span class="nav-text"> 数据传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%86%85%E5%AD%98"><span class="nav-number">3.2.</span> <span class="nav-text"> 全局内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98"><span class="nav-number">3.3.</span> <span class="nav-text"> 共享内存</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="tannlonggtaoo"
+      src="/images/trueman.png">
+  <p class="site-author-name" itemprop="name">tannlonggtaoo</p>
+  <div class="site-description" itemprop="description">天国在何方？<br>就在那片青空中<br>就在你的身旁…</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tannlonggtaoo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tannlonggtaoo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tannlonggtaoo@sina.cn" title="E-Mail → mailto:tannlonggtaoo@sina.cn" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tannlonggtaoo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+  <script src="//cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.css">
+
+
+  
+
+</body>
+</html>
