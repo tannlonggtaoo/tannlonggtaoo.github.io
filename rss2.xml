@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Fri, 26 May 2023 13:47:35 GMT</pubDate>
+    <pubDate>Fri, 02 Jun 2023 14:41:18 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>计算理论9</title>
+      <link>https://tannlonggtaoo.github.io/2023/06/02/computation-theory9/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/06/02/computation-theory9/</guid>
+      <pubDate>Fri, 02 Jun 2023 14:34:25 GMT</pubDate>
+      
+      <description>&lt;p&gt;介绍一堆经典的NPC问题，以及证明其为NPC的简要思路。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/Computation-Theory/">Computation Theory</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/NPC/">NPC</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/06/02/computation-theory9/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>计算理论8</title>
@@ -491,27 +512,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/11/18/Cybernetics8/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>第七章：非线性系统分析</title>
-      <link>https://tannlonggtaoo.github.io/2022/11/02/Cybernetics7/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/11/02/Cybernetics7/</guid>
-      <pubDate>Wed, 02 Nov 2022 09:31:38 GMT</pubDate>
-      
-      <description>&lt;p&gt;介绍非线性系统分析的两种经典方法：描述函数法和相平面法。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Cybernetics/">Cybernetics</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/11/02/Cybernetics7/#disqus_thread</comments>
       
     </item>
     
