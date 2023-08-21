@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Fri, 02 Jun 2023 14:41:18 GMT</pubDate>
+    <pubDate>Mon, 21 Aug 2023 09:39:02 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>链接库</title>
+      <link>https://tannlonggtaoo.github.io/2023/08/21/lderror/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/08/21/lderror/</guid>
+      <pubDate>Mon, 21 Aug 2023 08:50:27 GMT</pubDate>
+      
+      <description>&lt;p&gt;关于make链接时找不到文件的问题。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/linux/">linux</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/ld/">ld</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/08/21/lderror/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>计算理论9</title>
@@ -491,27 +512,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/11/24/Cybernetics9/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>现代第一章：状态空间表达式</title>
-      <link>https://tannlonggtaoo.github.io/2022/11/18/Cybernetics8/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/11/18/Cybernetics8/</guid>
-      <pubDate>Fri, 18 Nov 2022 14:10:40 GMT</pubDate>
-      
-      <description>&lt;p&gt;介绍现代控制理论基本概念：状态、状态空间、状态空间表达式等。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Cybernetics/">Cybernetics</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/11/18/Cybernetics8/#disqus_thread</comments>
       
     </item>
     
