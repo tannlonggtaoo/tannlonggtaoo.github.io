@@ -15,8 +15,50 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Mon, 21 Aug 2023 09:39:02 GMT</pubDate>
+    <pubDate>Wed, 13 Sep 2023 11:58:19 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>傅里叶光学3</title>
+      <link>https://tannlonggtaoo.github.io/2023/09/13/optics3/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/09/13/optics3/</guid>
+      <pubDate>Wed, 13 Sep 2023 07:30:01 GMT</pubDate>
+      
+      <description>&lt;p&gt;对应第三章&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/optics/">optics</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/intro/">intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/09/13/optics3/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>傅里叶光学1&amp;2</title>
+      <link>https://tannlonggtaoo.github.io/2023/09/12/optics1&amp;2/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/09/12/optics1&amp;2/</guid>
+      <pubDate>Tue, 12 Sep 2023 01:29:15 GMT</pubDate>
+      
+      <description>&lt;p&gt;对傅里叶光学知识的简介。对应《傅里叶光学导论》（古德曼，第三版）第一、二章，以下略。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/optics/">optics</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/intro/">intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/09/12/optics1&amp;2/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>链接库</title>
@@ -469,49 +511,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/11/29/Cybernetics10/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>实用抽代3</title>
-      <link>https://tannlonggtaoo.github.io/2022/11/29/Algebra3/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/11/29/Algebra3/</guid>
-      <pubDate>Mon, 28 Nov 2022 16:03:27 GMT</pubDate>
-      
-      <description>&lt;p&gt;再次介绍同构、单态射、满态射等概念。需要小心一般范畴上和集合范畴上各个概念的区别（一般范畴上的对象通常是类，没有“元素”）。&lt;/p&gt;
-&lt;p&gt;对应原书第一章第四节。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Algebra/">Algebra</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/math-intro/">math intro</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/11/29/Algebra3/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>现代第二章：状态方程的解</title>
-      <link>https://tannlonggtaoo.github.io/2022/11/24/Cybernetics9/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/11/24/Cybernetics9/</guid>
-      <pubDate>Thu, 24 Nov 2022 05:55:46 GMT</pubDate>
-      
-      <description>&lt;p&gt;介绍如何解状态方程，以及状态转移矩阵的特点。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Cybernetics/">Cybernetics</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/11/24/Cybernetics9/#disqus_thread</comments>
       
     </item>
     
