@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Wed, 13 Sep 2023 11:58:19 GMT</pubDate>
+    <pubDate>Thu, 14 Sep 2023 12:33:53 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>傅里叶光学4</title>
+      <link>https://tannlonggtaoo.github.io/2023/09/14/optics4/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/09/14/optics4/</guid>
+      <pubDate>Thu, 14 Sep 2023 11:26:06 GMT</pubDate>
+      
+      <description>&lt;p&gt;对应第四章&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/optics/">optics</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/intro/">intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/09/14/optics4/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>傅里叶光学3</title>
@@ -490,27 +511,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2022/12/14/Cybernetics11/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>现代第三章(1)：能控能观性与对偶性原理</title>
-      <link>https://tannlonggtaoo.github.io/2022/11/29/Cybernetics10/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/11/29/Cybernetics10/</guid>
-      <pubDate>Tue, 29 Nov 2022 14:22:28 GMT</pubDate>
-      
-      <description>&lt;p&gt;简介能控能观性含义、判据与联系二者的对偶性原理。这是现代控制理论关于能控能观性的第一部分。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Cybernetics/">Cybernetics</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/11/29/Cybernetics10/#disqus_thread</comments>
       
     </item>
     
