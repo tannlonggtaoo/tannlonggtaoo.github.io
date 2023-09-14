@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Thu, 14 Sep 2023 12:33:53 GMT</pubDate>
+    <pubDate>Thu, 14 Sep 2023 13:50:21 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>傅里叶光学5</title>
+      <link>https://tannlonggtaoo.github.io/2023/09/14/optics5/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/09/14/optics5/</guid>
+      <pubDate>Thu, 14 Sep 2023 12:40:37 GMT</pubDate>
+      
+      <description>&lt;p&gt;对应第五章&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/optics/">optics</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/intro/">intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/09/14/optics5/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>傅里叶光学4</title>
@@ -490,27 +511,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/03/07/win2linux/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>现代第三章(2)：结构分解、标准形、实现问题</title>
-      <link>https://tannlonggtaoo.github.io/2022/12/14/Cybernetics11/</link>
-      <guid>https://tannlonggtaoo.github.io/2022/12/14/Cybernetics11/</guid>
-      <pubDate>Wed, 14 Dec 2022 07:40:37 GMT</pubDate>
-      
-      <description>&lt;p&gt;简介能观能控分解、Kalman分解、能控/能观标准形、最小实现和结构不确定性等概念，是能控能观性的第二部分。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Cybernetics/">Cybernetics</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2022/12/14/Cybernetics11/#disqus_thread</comments>
       
     </item>
     
