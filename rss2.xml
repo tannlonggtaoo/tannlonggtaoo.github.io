@@ -15,8 +15,52 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Thu, 14 Sep 2023 13:50:21 GMT</pubDate>
+    <pubDate>Sun, 12 May 2024 07:04:30 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>cachedecorator</title>
+      <link>https://tannlonggtaoo.github.io/2024/05/12/cachedecorator/</link>
+      <guid>https://tannlonggtaoo.github.io/2024/05/12/cachedecorator/</guid>
+      <pubDate>Sun, 12 May 2024 06:57:47 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要介绍python的decorator：cache&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/programming/">programming</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/python/">python</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/decorator/">decorator</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2024/05/12/cachedecorator/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>傅里叶光学6</title>
+      <link>https://tannlonggtaoo.github.io/2023/09/15/optics6/</link>
+      <guid>https://tannlonggtaoo.github.io/2023/09/15/optics6/</guid>
+      <pubDate>Fri, 15 Sep 2023 07:14:25 GMT</pubDate>
+      
+      <description>&lt;p&gt;对应第六章&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/optics/">optics</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/intro/">intro</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2023/09/15/optics6/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>傅里叶光学5</title>
@@ -458,59 +502,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/03/18/GitBare/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>MPI并行计算——使用篇</title>
-      <link>https://tannlonggtaoo.github.io/2023/03/16/HPC-MPI/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/03/16/HPC-MPI/</guid>
-      <pubDate>Thu, 16 Mar 2023 15:31:52 GMT</pubDate>
-      
-      <description>&lt;p&gt;从用户（使用者）的角度介绍消息传递模型代表——MPI。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/High-Performance-Computing/">High Performance Computing</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/mpi/">mpi</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/parallel-computing/">parallel computing</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/03/16/HPC-MPI/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>注意换行</title>
-      <link>https://tannlonggtaoo.github.io/2023/03/07/win2linux/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/03/07/win2linux/</guid>
-      <pubDate>Tue, 07 Mar 2023 12:49:43 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;p&gt;众所周知Linux和windows的换行不同，在使用wsl时若在windows下编写脚本，就会因换行问题出错：&lt;code&gt;-bash: ./example：/bin/sh^M：解释器错误:</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/%E6%9D%82%E9%A1%B9/">杂项</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/linux/">linux</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/03/07/win2linux/#disqus_thread</comments>
       
     </item>
     
