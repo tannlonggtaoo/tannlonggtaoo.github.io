@@ -15,7 +15,7 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sat, 21 Jun 2025 17:02:07 GMT</pubDate>
+    <pubDate>Sat, 21 Jun 2025 17:23:41 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -24,13 +24,7 @@
       <guid>https://tannlonggtaoo.github.io/2025/06/22/ICL/</guid>
       <pubDate>Sat, 21 Jun 2025 16:11:45 GMT</pubDate>
       
-      <description>&lt;p&gt;简要说明in-context learning是怎么一回事。主要参考&lt;a href=&quot;https://arxiv.org/abs/2301.00234&quot;&gt;ACL’24&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;in-context learning就是直接向LLM提供一些（类似）自然语言书写的样例后，LLM可以在不更新参数的情况下（i.e.直接inference的过程中）学习这些样例（注意template是生成或人构造examples时使用，并不输入LLM；&lt;a href=&quot;https://proceedings.neurips.cc/paper_files/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf&quot;&gt;NIPS 2020&lt;/a&gt;有更公允的定义）。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/2025/06/22/ICL/image-20250622005658741.png&quot; alt=&quot;image-20250622005658741&quot;&gt;&lt;/p&gt;
-&lt;p&gt;ICL和prompt learning的区别是，ICL不需要prompt中的那种template，或者可以把输入的自然语言当成prompt，从而认为ICL是prompt learning的一种。ICL和few-shot learning的区别是，ICL不需要更新任何参数。&lt;/p&gt;
-&lt;p&gt;ICL的效果可能与训练目标有关。一般性的warmup和ICL关系不太大，但一些专门为ICL设计的warmup是有效的，并且给的样例过多会有边际递减。当然，ICL也和demonstration的处理有关。&lt;/p&gt;
-&lt;p&gt;在multi-model或其他的生成式模型中也有类似ICL的现象。例如Diffusion中也有ICL&lt;a href=&quot;https://arxiv.org/abs/2301.00234&quot;&gt;ACL’24&lt;/a&gt;：&lt;/p&gt;
-&lt;img src=&quot;/2025/06/22/ICL/image-20250622004032500.png&quot; alt=&quot;image-20250622004032500&quot; style=&quot;zoom:50%;&quot;&gt;</description>
+      <description>&lt;p&gt;简要说明in-context learning是怎么一回事。主要参考&lt;a href=&quot;https://arxiv.org/abs/2301.00234&quot;&gt;ACL’24&lt;/a&gt;&lt;/p&gt;</description>
       
       
       

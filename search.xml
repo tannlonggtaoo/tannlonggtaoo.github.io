@@ -8260,13 +8260,13 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
     <title>ICL（in-context learning）简析</title>
     <url>/2025/06/22/ICL/</url>
     <content><![CDATA[<p>简要说明in-context learning是怎么一回事。主要参考<a href="https://arxiv.org/abs/2301.00234">ACL’24</a></p>
+<span id="more"></span>
 <p>in-context learning就是直接向LLM提供一些（类似）自然语言书写的样例后，LLM可以在不更新参数的情况下（i.e.直接inference的过程中）学习这些样例（注意template是生成或人构造examples时使用，并不输入LLM；<a href="https://proceedings.neurips.cc/paper_files/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf">NIPS 2020</a>有更公允的定义）。</p>
 <p><img src="/2025/06/22/ICL/image-20250622005658741.png" alt="image-20250622005658741"></p>
 <p>ICL和prompt learning的区别是，ICL不需要prompt中的那种template，或者可以把输入的自然语言当成prompt，从而认为ICL是prompt learning的一种。ICL和few-shot learning的区别是，ICL不需要更新任何参数。</p>
 <p>ICL的效果可能与训练目标有关。一般性的warmup和ICL关系不太大，但一些专门为ICL设计的warmup是有效的，并且给的样例过多会有边际递减。当然，ICL也和demonstration的处理有关。</p>
 <p>在multi-model或其他的生成式模型中也有类似ICL的现象。例如Diffusion中也有ICL<a href="https://arxiv.org/abs/2301.00234">ACL’24</a>：</p>
 <img src="/2025/06/22/ICL/image-20250622004032500.png" alt="image-20250622004032500" style="zoom:50%;">
-<span id="more"></span>
 ]]></content>
       <categories>
         <category>LLM</category>
