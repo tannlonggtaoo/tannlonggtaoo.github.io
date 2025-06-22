@@ -8296,4 +8296,29 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>inference</tag>
       </tags>
   </entry>
+  <entry>
+    <title>RoPE简析</title>
+    <url>/2025/06/22/RoPE/</url>
+    <content><![CDATA[<p>简要介绍rota<strong>ry</strong> positional encoding （RoPE）的原理，主要参考<a href="https://arxiv.org/pdf/2104.09864">RoFormer</a></p>
+<span id="more"></span>
+<p>经典的（用sinusoidal的）positional encoding直接把positional encoding向量加到输入x上，然后再分别乘各自权重变成qkv。这是一种绝对位置编码，后来也有人将其魔改为相对位置编码（即qk点积的值只和相对距离有关（即paper中的m-n））。</p>
+<p>但RoPE直接从“相对位置”这条约束出发，构造了一个只与相对距离有关的变换方式</p>
+<img src="/2025/06/22/RoPE/image-20250622205525645.png" alt="image-20250622205525645" style="zoom:40%;">
+<p>当然这个地方的推导只针对<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>m</mi></msub><mo separator="true">,</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">x_m,x_n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>都是2d向量（“二元”的普通复数）的情形，对于高维输入直接两两分组，分别使用旋转矩阵即可，因此完整矩阵形式中的R就是一个分块对角矩阵。如果高维输入是奇数，可以直接抛弃某一维（指这一维只乘1，相当于旋转0度）</p>
+<p>需要注意的细节：</p>
+<ul>
+<li>经典的positional encoding是加在输入x上的，而RoPE是乘在qkv上而非输入x上的</li>
+<li>不同2d子空间对应的转角是完全可以不同的，这个值可以自行选取，所以原作者直接借用了sinusoidal的方式。原则上当然也可以训练得到，但以sinusoidal形式定初值后训练中变化不大，因此就直接定为固定值了。</li>
+<li>分块对角矩阵太稀疏，实际实现时一定要优化成点积和的形式</li>
+</ul>
+<img src="/2025/06/22/RoPE/image-20250622210110279.png" alt="image-20250622210110279" style="zoom:50%;">
+<p>RoPE更详细的介绍可以直接参考<a href="https://kexue.fm/archives/8130">原作者的blog</a>。RoFormer文章前半段和blog的内容基本上是一样的。</p>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>positional encoding</tag>
+      </tags>
+  </entry>
 </search>
