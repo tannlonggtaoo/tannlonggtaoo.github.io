@@ -15,8 +15,31 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sat, 21 Jun 2025 17:23:41 GMT</pubDate>
+    <pubDate>Sun, 22 Jun 2025 07:01:36 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Chain-of-thought (CoT) 简析</title>
+      <link>https://tannlonggtaoo.github.io/2025/06/22/CoT/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/06/22/CoT/</guid>
+      <pubDate>Sun, 22 Jun 2025 06:49:32 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要说明CoT是怎么一回事，主要参考&lt;a href=&quot;https://dl.acm.org/doi/10.5555/3600270.3602070&quot;&gt;NIPS’22&lt;/a&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/prompt-engineering/">prompt engineering</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/inference/">inference</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/06/22/CoT/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>ICL（in-context learning）简析</title>
@@ -474,29 +497,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/03/23/computation-theory2/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>计算理论1</title>
-      <link>https://tannlonggtaoo.github.io/2023/03/20/computation-theory1/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/03/20/computation-theory1/</guid>
-      <pubDate>Mon, 20 Mar 2023 15:28:51 GMT</pubDate>
-      
-      <description>&lt;p&gt;简要介绍两种有限自动机，并给出一些例子和有趣的性质。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Computation-Theory/">Computation Theory</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/Finite-Automata/">Finite Automata</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/03/20/computation-theory1/#disqus_thread</comments>
       
     </item>
     

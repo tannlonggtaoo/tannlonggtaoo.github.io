@@ -8276,4 +8276,24 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>inference</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Chain-of-thought (CoT) 简析</title>
+    <url>/2025/06/22/CoT/</url>
+    <content><![CDATA[<p>简要说明CoT是怎么一回事，主要参考<a href="https://dl.acm.org/doi/10.5555/3600270.3602070">NIPS’22</a></p>
+<span id="more"></span>
+<p>CoT基本可以看成一种ICL，只不过给出的input中是与“逐步推理”相关的内容。</p>
+<p>即input既可以是一些推理示例，如：</p>
+<img src="/2025/06/22/CoT/image-20250622145538391.png" alt="image-20250622145538391" style="zoom:50%;">
+<p>也可以是直接提出逐步思考的指令，如<a href="https://dl.acm.org/doi/10.5555/3600270.3601883">NIPS’22</a>：</p>
+<p><img src="/2025/06/22/CoT/image-20250622145740701.png" alt="image-20250622145740701"></p>
+<p>根据测试，CoT在多数情况下相比常规的prompting能明显提升性能，且模型越大，CoT效果越好（参考<a href="https://dl.acm.org/doi/10.5555/3600270.3602070">NIPS’22</a>的Fig4）。不过值得注意的是在参数量太小的模型上CoT可能反而会更差。</p>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>prompt engineering</tag>
+        <tag>inference</tag>
+      </tags>
+  </entry>
 </search>
