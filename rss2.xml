@@ -15,8 +15,35 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sun, 22 Jun 2025 13:18:32 GMT</pubDate>
+    <pubDate>Sat, 12 Jul 2025 15:30:12 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>不同repeat机制分析</title>
+      <link>https://tannlonggtaoo.github.io/2025/07/12/repeat-api/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/07/12/repeat-api/</guid>
+      <pubDate>Sat, 12 Jul 2025 14:54:25 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要介绍不同repeat在存储方面的机制差异，重点分析用通常方法实现的GQA为什么只能减小kv cache，但不能降低显存开销。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/programming/">programming</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/memory/">memory</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/torch/">torch</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/numpy/">numpy</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/einops/">einops</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/07/12/repeat-api/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>RoPE简析</title>
@@ -466,35 +493,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/04/01/HPC-MPI2/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>WSL报错0x80040326</title>
-      <link>https://tannlonggtaoo.github.io/2023/03/30/WSL-crash/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/03/30/WSL-crash/</guid>
-      <pubDate>Thu, 30 Mar 2023 08:52:17 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
-&lt;p&gt;今天打开WSL发现直接报错：&lt;/p&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Linux/">Linux</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/WSL/">WSL</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/03/30/WSL-crash/#disqus_thread</comments>
       
     </item>
     
