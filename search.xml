@@ -8356,4 +8356,95 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>einops</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ReAct简析</title>
+    <url>/2025/09/07/react/</url>
+    <content><![CDATA[<p>简要介绍<a href="https://arxiv.org/pdf/2210.03629">ReAct</a></p>
+<span id="more"></span>
+<blockquote>
+<p>⚠️ <strong>This post is created with the help of an artificial intelligence</strong></p>
+</blockquote>
+<p>ReAct 是一种将LLM的<strong>推理</strong>（<strong>Re</strong>asoning）和<strong>行动</strong>（<strong>Act</strong>ing）能力交替结合的范式。</p>
+<p>模式：<strong>Question - (Thought - Act - Observation) * n</strong></p>
+<p>样例：</p>
+<p><img src="/2025/09/07/react/image-20250907170952098.png" alt="image-20250907170952098"></p>
+<p>这个图里1b和1c就是ReAct对比的两个baseline：只有CoT和只有Act（其实就是正常用prompt搞，但不加CoT）。</p>
+<p><strong>优势</strong></p>
+<ul>
+<li>Hallucination，相对CoT而言可以在Act时引入外界真实信息</li>
+<li>Error Propagation（这个选词有点confusing，注意不要和普通BP搞混了），也是相对CoT而言允许模型在每一步根据新的“观察”来纠正之前的错误</li>
+<li>泛化能力，相对CoT而言可以查外界资料，所以可以更好解决基座训练数据中不存在的问题或有时效性的问题</li>
+<li>规划能力，相对仅Act而言CoT能提升分解和规划效果</li>
+<li>在针对ReAct finetune后性能也超过其他方法（实事求是是好事，感慨ing）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>agent</tag>
+        <tag>CoT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>langchain简析</title>
+    <url>/2025/09/07/langchain/</url>
+    <content><![CDATA[<p>简要介绍langchain（其实是一个较为简单的包装）</p>
+<span id="more"></span>
+<blockquote>
+<p>⚠️ <strong>This post is created with the help of an artificial intelligence</strong></p>
+</blockquote>
+<h4 id="topics"><a class="markdownIt-Anchor" href="#topics"></a> <strong>Topics</strong></h4>
+<ol>
+<li>
+<p><strong>Models</strong>：</p>
+<ul>
+<li><strong>LLM</strong>：最原本的LLM，就只能完成正常的<strong>文本补全</strong>任务</li>
+<li><strong>Chat Models</strong>：较常用，经过微调，接受含 <code>system</code>, <code>user</code>, <code>ai</code> 等角色（这个是基座训练时就定好的，langchain提供抽象<code>SystemMessage</code>、<code>HumanMessage</code>、<code>AIMessage</code> 等）的文本list作为输入。</li>
+<li><strong>Embedding Models</strong>： text→embedding vectors，比如RAG里查询就要用</li>
+</ul>
+<blockquote>
+<p>注意：API也是有相应类型的，需要接到正确的models上</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Prompt Templates</strong>：</p>
+</li>
+</ol>
+<ul>
+<li><strong>作用</strong>：自动化、结构化地构建提示词，将静态文本与动态变量分离。</li>
+<li><strong>类型</strong>：<code>PromptTemplate</code> (用于 LLM) 和 <code>ChatPromptTemplate</code> (用于聊天模型)。</li>
+<li><strong>细节</strong>：<strong>参数名</strong>和**文档字符串（docstring）**会被模型解析，因此必须清晰、有意义。这个必须特别注意，很多其他库的参数名/函数def下方那段文档是不发挥任何作用的</li>
+</ul>
+<ol start="3">
+<li><strong>Chains</strong>：</li>
+</ol>
+<ul>
+<li><strong>作用</strong>：将多个模块（如模板、模型）串联成一个自动化工作流。</li>
+<li><strong>类型</strong>：
+<ul>
+<li><strong><code>LLMChain</code></strong>：最基础的链，将模板和模型组合，一次性完成提示词生成和模型调用。</li>
+<li><strong><code>SequentialChain</code></strong>：按顺序执行多个链，前链输出作为后链输入。</li>
+<li><strong><code>RouterChain</code></strong>：根据 LLM 的判断将请求动态路由到不同的子链上，用来搞MOE等。</li>
+<li><strong><code>RetrievalQA</code></strong>：<strong>实现 RAG</strong>。可以选chain_type</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li><strong>Agents</strong></li>
+</ol>
+<ul>
+<li>最简单的实现就是<code>initialize_agent</code>，然后type选ZERO_SHOT_REACT_DESCRIPTION之类</li>
+<li>自定义工具：@tool</li>
+<li>注意选较新的，基于agent finetune过的基座，太老的玩不转</li>
+</ul>
+<p>此外还有evaluation以及memory等模块，用的时候再慢慢看</p>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>coding</tag>
+      </tags>
+  </entry>
 </search>
