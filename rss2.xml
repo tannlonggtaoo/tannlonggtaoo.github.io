@@ -15,8 +15,31 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sun, 07 Sep 2025 09:18:00 GMT</pubDate>
+    <pubDate>Tue, 09 Sep 2025 09:49:49 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>SWE-agent关键洞察</title>
+      <link>https://tannlonggtaoo.github.io/2025/09/09/SWE-agent-key-ideas/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/09/09/SWE-agent-key-ideas/</guid>
+      <pubDate>Tue, 09 Sep 2025 08:03:58 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要列举&lt;a href=&quot;https://arxiv.org/pdf/2405.15793&quot;&gt;SWE-agent&lt;/a&gt;这篇文章的key observation&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/agent/">agent</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/software-engineering/">software engineering</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/09/09/SWE-agent-key-ideas/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>ReAct简析</title>
@@ -464,29 +487,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/04/22/computation-theory5/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>CUDA程序——优化篇</title>
-      <link>https://tannlonggtaoo.github.io/2023/04/18/CUDA2/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/04/18/CUDA2/</guid>
-      <pubDate>Tue, 18 Apr 2023 14:28:30 GMT</pubDate>
-      
-      <description>&lt;p&gt;介绍关于Cuda程序优化的知识。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/High-Performance-Computing/">High Performance Computing</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/cuda/">cuda</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/04/18/CUDA2/#disqus_thread</comments>
       
     </item>
     

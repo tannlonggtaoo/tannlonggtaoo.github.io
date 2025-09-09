@@ -8447,4 +8447,74 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>coding</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SWE-agent关键洞察</title>
+    <url>/2025/09/09/SWE-agent-key-ideas/</url>
+    <content><![CDATA[<p>简要列举<a href="https://arxiv.org/pdf/2405.15793">SWE-agent</a>这篇文章的key observation</p>
+<span id="more"></span>
+<ul>
+<li>SWE解决方案总体对比
+<ul>
+<li>有交互的方法将显著高于无交互的方法（比如直接搞一个简单的RAG）</li>
+<li>有合理设计的ACI将显著高于直接与为人类设计的接口（linux shell之类）交互的方法</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ACI=agent computer interface，和HCI相对，指根据LLM特点提供一系列对LLM更友好的交互指令，令其可以（相比于直接操作linux指令）更好完成SWE任务。</p>
+<p>这里涉及到的LLM特征有（当然是相对人而言的）：</p>
+<ul>
+<li>更弱的记忆能力</li>
+<li>本质上是无状态的</li>
+<li>更弱的规划、纠错能力</li>
+<li>……</li>
+</ul>
+<p>因此相应的新ACI接口做如下设计</p>
+<ul>
+<li>find/navigation直接用search+文件名，避免多次使用ls/cd之后陷入文件树错误的分支出不来。即使ls/cd能找到正确的文件，find也能省下很多token</li>
+<li>file viewer精确定位行，标注行号，方便LLM引用</li>
+<li>edit指令直接指定若干范围的行进行修改，比sed之类方便，比vim简洁</li>
+<li>edit执行完了会返回修改结果，便于LLM跟随code的最新状态</li>
+<li>viewer-edit-linter这部分设计使得LLM可以更稳定地进行多次试错</li>
+</ul>
+<p>（当然，也保留了LLM根据需要调用原始linux指令的能力）</p>
+<p>（另外，感觉这篇文章更像是实现了一个mini text版的IDE，linux经验不足的人来用这套系统说不定也能很舒服）</p>
+</blockquote>
+<ul>
+<li>editing
+<ul>
+<li>有linting更好</li>
+</ul>
+</li>
+<li>search
+<ul>
+<li>一次性给出结果最好，不要让模型去“翻下一条”</li>
+</ul>
+</li>
+<li>viewer
+<ul>
+<li>查看范围（行数）适中最好</li>
+</ul>
+</li>
+<li>context
+<ul>
+<li>只保留近期最好，完整历史反而不好</li>
+</ul>
+</li>
+<li>failure
+<ul>
+<li>成功的案例都不需要太多步数</li>
+<li>主要还是incorrect implementations</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>agent</tag>
+        <tag>software engineering</tag>
+      </tags>
+  </entry>
 </search>

@@ -22,17 +22,21 @@
     var CONFIG = {"hostname":"tannlonggtaoo.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="天国在何方？就在那片青空中就在你的身旁…">
-<meta property="og:type" content="website">
-<meta property="og:title" content="第三视点">
-<meta property="og:url" content="https://tannlonggtaoo.github.io/categories/Algorithm/index.html">
+  <meta name="description" content="简要列举SWE-agent这篇文章的key observation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SWE-agent关键洞察">
+<meta property="og:url" content="https://tannlonggtaoo.github.io/2025/09/09/SWE-agent-key-ideas/index.html">
 <meta property="og:site_name" content="第三视点">
-<meta property="og:description" content="天国在何方？就在那片青空中就在你的身旁…">
+<meta property="og:description" content="简要列举SWE-agent这篇文章的key observation">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-09T08:03:58.000Z">
+<meta property="article:modified_time" content="2025-09-09T09:49:49.158Z">
 <meta property="article:author" content="tannlonggtaoo">
+<meta property="article:tag" content="agent">
+<meta property="article:tag" content="software engineering">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://tannlonggtaoo.github.io/categories/Algorithm/">
+<link rel="canonical" href="https://tannlonggtaoo.github.io/2025/09/09/SWE-agent-key-ideas/">
 
 
 <script id="page-configurations">
@@ -40,12 +44,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>分类: Algorithm | 第三视点</title>
+  <title>SWE-agent关键洞察 | 第三视点</title>
   
 
 
@@ -195,51 +199,173 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Algorithm
-          <small>分类</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tannlonggtaoo.github.io/2025/09/09/SWE-agent-key-ideas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/trueman.png">
+      <meta itemprop="name" content="tannlonggtaoo">
+      <meta itemprop="description" content="天国在何方？<br>就在那片青空中<br>就在你的身旁…">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="第三视点">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SWE-agent关键洞察
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-09-09 16:03:58 / 修改时间：17:49:49" itemprop="dateCreated datePublished" datetime="2025-09-09T16:03:58+08:00">2025-09-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LLM/" itemprop="url" rel="index"><span itemprop="name">LLM</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+        <p>简要列举<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2405.15793">SWE-agent</a>这篇文章的key observation</p>
+<span id="more"></span>
+<ul>
+<li>SWE解决方案总体对比
+<ul>
+<li>有交互的方法将显著高于无交互的方法（比如直接搞一个简单的RAG）</li>
+<li>有合理设计的ACI将显著高于直接与为人类设计的接口（linux shell之类）交互的方法</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ACI=agent computer interface，和HCI相对，指根据LLM特点提供一系列对LLM更友好的交互指令，令其可以（相比于直接操作linux指令）更好完成SWE任务。</p>
+<p>这里涉及到的LLM特征有（当然是相对人而言的）：</p>
+<ul>
+<li>更弱的记忆能力</li>
+<li>本质上是无状态的</li>
+<li>更弱的规划、纠错能力</li>
+<li>……</li>
+</ul>
+<p>因此相应的新ACI接口做如下设计</p>
+<ul>
+<li>find/navigation直接用search+文件名，避免多次使用ls/cd之后陷入文件树错误的分支出不来。即使ls/cd能找到正确的文件，find也能省下很多token</li>
+<li>file viewer精确定位行，标注行号，方便LLM引用</li>
+<li>edit指令直接指定若干范围的行进行修改，比sed之类方便，比vim简洁</li>
+<li>edit执行完了会返回修改结果，便于LLM跟随code的最新状态</li>
+<li>viewer-edit-linter这部分设计使得LLM可以更稳定地进行多次试错</li>
+</ul>
+<p>（当然，也保留了LLM根据需要调用原始linux指令的能力）</p>
+<p>（另外，感觉这篇文章更像是实现了一个mini text版的IDE，linux经验不足的人来用这套系统说不定也能很舒服）</p>
+</blockquote>
+<ul>
+<li>editing
+<ul>
+<li>有linting更好</li>
+</ul>
+</li>
+<li>search
+<ul>
+<li>一次性给出结果最好，不要让模型去“翻下一条”</li>
+</ul>
+</li>
+<li>viewer
+<ul>
+<li>查看范围（行数）适中最好</li>
+</ul>
+</li>
+<li>context
+<ul>
+<li>只保留近期最好，完整历史反而不好</li>
+</ul>
+</li>
+<li>failure
+<ul>
+<li>成功的案例都不需要太多步数</li>
+<li>主要还是incorrect implementations</li>
+</ul>
+</li>
+</ul>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+        
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-08-30T23:12:17+08:00"
-              content="2022-08-30">
-          08-30
-        </time>
-      </div>
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/08/30/Sampling-points/" itemprop="url">
-            <span itemprop="name">对顶点采样</span>
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/rss2.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
           </a>
-      </div>
-
-    </header>
-  </article>
-
+        </div>
     </div>
   </div>
-  
-  
-  
 
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/agent/" rel="tag"># agent</a>
+              <a href="/tags/software-engineering/" rel="tag"># software engineering</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/09/07/react/" rel="prev" title="ReAct简析">
+      <i class="fa fa-chevron-left"></i> ReAct简析
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
