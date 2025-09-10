@@ -1296,7 +1296,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #7ecd06;
+  background: #57f7be;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2825,7 +2825,7 @@ ul.breadcrumb li + li:last-child {
   }
 }
 body {
-  background: url("/images/phone2.jpg");
+  background: url("/images/phone2_sr.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
