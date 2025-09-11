@@ -8517,4 +8517,33 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>linux</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LLM api聚合平台</title>
+    <url>/2025/09/12/openai-api/</url>
+    <content><![CDATA[<p>简单介绍LLM聚合平台</p>
+<span id="more"></span>
+<p>聚合平台原本的主要作用是方便在不同的LLM之间切换，而无需费心管理大量的api key。Openai关闭大陆充值渠道后，这也成为调api最方便的途径之一。</p>
+<p>这些聚合平台通常通过充值手续费、向LLM厂商分享使用数据或进行其他合作等盈利。需要特别注意隐私泄露、涉灰、提供虚低模型等问题，所以不要选择太便宜的平台。另外要仔细看清平台的使用规则。</p>
+<p>目前接触到的几个聚合平台：</p>
+<ul>
+<li>openrouter：广泛使用，之后计划转到这个平台
+<ul>
+<li>注意充值方式要勾选“Use one-time payment methods”，这样就能弹出支付宝/微信了</li>
+<li>注意梯子ip</li>
+</ul>
+</li>
+<li>AIHubMix：看起来挺正规，支持支付宝</li>
+<li>MetaChat：知乎有号打了不少广告，支持支付宝/微信，目前正在用</li>
+<li>DMXAPI、云雾api、sealos、closeai等等</li>
+<li>gptsapi：似乎是wildcard合作方，最近暂停充值</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>api</tag>
+        <tag>united platform</tag>
+      </tags>
+  </entry>
 </search>

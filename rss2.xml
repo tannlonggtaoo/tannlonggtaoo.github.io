@@ -15,8 +15,31 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Tue, 09 Sep 2025 09:49:49 GMT</pubDate>
+    <pubDate>Thu, 11 Sep 2025 17:00:36 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>LLM api聚合平台</title>
+      <link>https://tannlonggtaoo.github.io/2025/09/12/openai-api/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/09/12/openai-api/</guid>
+      <pubDate>Thu, 11 Sep 2025 16:26:14 GMT</pubDate>
+      
+      <description>&lt;p&gt;简单介绍LLM聚合平台&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/api/">api</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/united-platform/">united platform</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/09/12/openai-api/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>SWE-agent关键洞察</title>
@@ -456,37 +479,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/04/25/roofline/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>计算理论5</title>
-      <link>https://tannlonggtaoo.github.io/2023/04/22/computation-theory5/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/04/22/computation-theory5/</guid>
-      <pubDate>Sat, 22 Apr 2023 06:16:09 GMT</pubDate>
-      
-      <description>&lt;p&gt;简介下推自动机，其与上下文无关文法的关系，乔姆斯基范式，上下文无关文法的pumping lemma等内容。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Computation-Theory/">Computation Theory</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/context-free-grammar/">context free grammar</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/context-free-language/">context free language</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/pushdown-automata/">pushdown automata</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/pumping-lemma/">pumping lemma</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/Chomsky-normal-form/">Chomsky normal form</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/04/22/computation-theory5/#disqus_thread</comments>
       
     </item>
     
