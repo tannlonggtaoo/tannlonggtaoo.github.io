@@ -15,8 +15,52 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Thu, 11 Sep 2025 17:00:36 GMT</pubDate>
+    <pubDate>Mon, 15 Sep 2025 12:17:59 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Temperature</title>
+      <link>https://tannlonggtaoo.github.io/2025/09/15/temperature-LLM/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/09/15/temperature-LLM/</guid>
+      <pubDate>Mon, 15 Sep 2025 07:13:37 GMT</pubDate>
+      
+      <description>&lt;p&gt;简介temperature意义，并给出示例&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/temperature/">temperature</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/softmax/">softmax</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/09/15/temperature-LLM/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>MCP</title>
+      <link>https://tannlonggtaoo.github.io/2025/09/13/MCP/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/09/13/MCP/</guid>
+      <pubDate>Sat, 13 Sep 2025 07:49:42 GMT</pubDate>
+      
+      <description>&lt;p&gt;简介MCP（Model Context Protocol）&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/tools/">tools</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/09/13/MCP/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>LLM api聚合平台</title>
@@ -55,6 +99,8 @@
       <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
       
       
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
+      
       <category domain="https://tannlonggtaoo.github.io/tags/agent/">agent</category>
       
       <category domain="https://tannlonggtaoo.github.io/tags/software-engineering/">software engineering</category>
@@ -77,6 +123,8 @@
       
       <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
       
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
       
       <category domain="https://tannlonggtaoo.github.io/tags/agent/">agent</category>
       
@@ -149,6 +197,8 @@
       <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
       
       
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
+      
       <category domain="https://tannlonggtaoo.github.io/tags/positional-encoding/">positional encoding</category>
       
       
@@ -169,6 +219,8 @@
       
       <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
       
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
       
       <category domain="https://tannlonggtaoo.github.io/tags/prompt-engineering/">prompt engineering</category>
       
@@ -192,6 +244,8 @@
       
       <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
       
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
       
       <category domain="https://tannlonggtaoo.github.io/tags/prompt-engineering/">prompt engineering</category>
       
@@ -435,50 +489,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/05/11/computation-theory7/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>计算理论6</title>
-      <link>https://tannlonggtaoo.github.io/2023/04/27/computation-theory6/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/04/27/computation-theory6/</guid>
-      <pubDate>Thu, 27 Apr 2023 07:03:03 GMT</pubDate>
-      
-      <description>&lt;p&gt;结合几个例子介绍最通用的图灵机模型&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Computation-Theory/">Computation Theory</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/Turing-machine/">Turing machine</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/04/27/computation-theory6/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>性能上限模型roofline</title>
-      <link>https://tannlonggtaoo.github.io/2023/04/25/roofline/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/04/25/roofline/</guid>
-      <pubDate>Tue, 25 Apr 2023 13:29:01 GMT</pubDate>
-      
-      <description>&lt;p&gt;介绍一个简单但实用的性能上限估计模型roofline，它可以帮助我们估计给定程序优化的极限。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/High-Performance-Computing/">High Performance Computing</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/04/25/roofline/#disqus_thread</comments>
       
     </item>
     
