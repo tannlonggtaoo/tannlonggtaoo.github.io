@@ -15,8 +15,33 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Mon, 15 Sep 2025 12:17:59 GMT</pubDate>
+    <pubDate>Fri, 26 Sep 2025 13:46:23 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>当前LLM的tool use风格</title>
+      <link>https://tannlonggtaoo.github.io/2025/09/26/tooluseinllm/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/09/26/tooluseinllm/</guid>
+      <pubDate>Fri, 26 Sep 2025 13:12:52 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要说明目前的LLM使用tools的风格，目前tool selection基本完全不需要developer介入，和早期的风格有所差异。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/agent/">agent</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/api/">api</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/tools/">tools</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/09/26/tooluseinllm/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Temperature</title>
@@ -450,45 +475,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/05/26/computation-theory8/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>计算理论7</title>
-      <link>https://tannlonggtaoo.github.io/2023/05/11/computation-theory7/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/05/11/computation-theory7/</guid>
-      <pubDate>Thu, 11 May 2023 01:51:26 GMT</pubDate>
-      
-      <description>&lt;p&gt;介绍和图灵机计算能力以及相应的语言层次结构、可判定性等内容。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Computation-Theory/">Computation Theory</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/lecture-notes/">lecture notes</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/Turing-machine/">Turing machine</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/multi-tape-Turing-machine/">multi-tape Turing machine</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/two-stack-PDA/">two-stack PDA</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/recursively-enumerable-language/">recursively enumerable language</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/recursively-language/">recursively language</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/halting-problem/">halting problem</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/Rice-theorem/">Rice theorem</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/Post-s-correspondence-problem/">Post&#39;s correspondence problem</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/Skolem-problem/">Skolem problem</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/05/11/computation-theory7/#disqus_thread</comments>
       
     </item>
     
