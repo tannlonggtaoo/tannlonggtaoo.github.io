@@ -8636,4 +8636,58 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>tools</tag>
       </tags>
   </entry>
+  <entry>
+    <title>PEFT框架性指南</title>
+    <url>/2025/09/29/peft-framework/</url>
+    <content><![CDATA[<p>目前LLM微调基本就是指Parameter Efficient Finetuning（PEFT），其特点就是与传统概念的全量FT不同，只更新（添加）极少量的参数。PEFT方法非常多，这里给出一个整体框架。</p>
+<span id="more"></span>
+<ul>
+<li>
+<p>Additive Methods</p>
+<ul>
+<li>freeze原始参数，添加新的可训练模块</li>
+<li>Adapter
+<ul>
+<li>每一层插入一个Adapter（是<strong>插入</strong>data flow而非像LoRA一样添加旁支）</li>
+</ul>
+</li>
+<li>Soft Prompt-based FT
+<ul>
+<li>Prompt tuning：输入嵌入层前添参数</li>
+<li>……</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Reparameterization Methods</p>
+<ul>
+<li>LoRA、QLoRA、DLoRA, etc.
+<ul>
+<li>无需多言</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Selective Methods</p>
+<ul>
+<li>freeze一部分参数，训练另一部分</li>
+<li>Layer Freeze：经典方法，例如冻前N层训后M层</li>
+<li>Bias Term FT：只冻权重，训练bias</li>
+</ul>
+</li>
+<li>
+<p>最典型的做法：单用QLoRA，或者QLoRA+Prompt-based FT</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>PEFT</tag>
+        <tag>LoRA</tag>
+      </tags>
+  </entry>
 </search>

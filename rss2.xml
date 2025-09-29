@@ -15,8 +15,31 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Fri, 26 Sep 2025 13:46:23 GMT</pubDate>
+    <pubDate>Mon, 29 Sep 2025 09:37:35 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>PEFT框架性指南</title>
+      <link>https://tannlonggtaoo.github.io/2025/09/29/peft-framework/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/09/29/peft-framework/</guid>
+      <pubDate>Mon, 29 Sep 2025 09:16:53 GMT</pubDate>
+      
+      <description>&lt;p&gt;目前LLM微调基本就是指Parameter Efficient Finetuning（PEFT），其特点就是与传统概念的全量FT不同，只更新（添加）极少量的参数。PEFT方法非常多，这里给出一个整体框架。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/PEFT/">PEFT</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/LoRA/">LoRA</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/09/29/peft-framework/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>当前LLM的tool use风格</title>
@@ -448,33 +471,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/06/02/computation-theory9/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>计算理论8</title>
-      <link>https://tannlonggtaoo.github.io/2023/05/26/computation-theory8/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/05/26/computation-theory8/</guid>
-      <pubDate>Fri, 26 May 2023 02:27:38 GMT</pubDate>
-      
-      <description>&lt;p&gt;此前讨论的是可计算性，现在则进入有关计算复杂度的讨论。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/Computation-Theory/">Computation Theory</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/Cook-Levin-theorem/">Cook-Levin theorem</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/3SAT/">3SAT</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/SAT/">SAT</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/CLIQUE/">CLIQUE</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/05/26/computation-theory8/#disqus_thread</comments>
       
     </item>
     
