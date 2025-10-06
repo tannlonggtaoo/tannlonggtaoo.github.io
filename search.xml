@@ -8690,4 +8690,72 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>LoRA</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Scaling law</title>
+    <url>/2025/10/06/scaling-law/</url>
+    <content><![CDATA[<p>简单介绍Scaling law</p>
+<span id="more"></span>
+<h2 id="kaplan-et-al-2020"><a class="markdownIt-Anchor" href="#kaplan-et-al-2020"></a> <a href="https://arxiv.org/pdf/2001.08361">Kaplan et al. (2020)</a> （GPT3前）</h2>
+<p>作者想要像理想气体定律一样建立LLM的经验方程。通过实验拟合主要有以下结论：</p>
+<ul>
+<li>
+<p><strong>性能影响因子</strong>：特定条件下模型最终性能（以cross entropy（L）度量）主要由衡量模型scale的三个参数计算量C（FLOPs）、参数量N和数据量D（tokens）决定，与模型架构的一些参数关系很小</p>
+<ul>
+<li>注意要求在同一类架构下比较，例如lstm和transformer的性能就有较大差别；而都是transformer时，调整MHA参数之类对最终结果影响就较小。</li>
+</ul>
+</li>
+<li>
+<p><strong>幂律关系</strong>：当C、N、D中任意两个参数不是性能bottleneck（可以看成无穷），则剩下的一个参数和模型性能L在相当大的范围内成负指数幂律关系</p>
+<ul>
+<li>注意这只是一种粗糙的理解，实际上有很多前提条件（例如对batchsize的要求等）</li>
+<li>由此得到的结论就是全力增大C、N、D即可提升模型性能</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2025/10/06/scaling-law/image-20251006170247368.png" alt="image-20251006170247368"></p>
+<ul>
+<li><strong>参数规模优先</strong>：在总算力预算固定时，最好用更大的模型在较小的数据上训练，这样即使未完全收敛也比小模型大数据训到完全收敛的性能好，即在N和D之间选择优先增大N
+<ul>
+<li>当然这一点后来有更多讨论</li>
+</ul>
+</li>
+<li><strong>跨模态适用性</strong>：图像视频等任务中也有类似规律
+<ul>
+<li>Baidu很久以前也有过<a href="https://arxiv.org/pdf/1712.00409">类似的研究</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="hoffmann-et-al-2022"><a class="markdownIt-Anchor" href="#hoffmann-et-al-2022"></a> <a href="https://arxiv.org/pdf/2203.15556">Hoffmann et al. (2022)</a></h2>
+<p>这篇paper主要是针对“参数规模优先”进行的讨论，经实测发现：</p>
+<ul>
+<li>总算力C固定，则最优的N和D都近似∝<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mi>C</mi></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{C}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.11333499999999996em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9266650000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span><span style="top:-2.886665em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width="400em" height="1.08em" viewbox="0 0 400000 1080" preserveaspectratio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.11333499999999996em;"><span></span></span></span></span></span></span></span></span> （compute-optimal）</li>
+<li>因此，当C提升时，N和D应当同等重要地大致成比例提升</li>
+<li>基于此训出的Chinchilla（70B）比未充分训练（数据量偏少）的Gopher、GPT-3等性能更好</li>
+</ul>
+<h2 id="进一步讨论"><a class="markdownIt-Anchor" href="#进一步讨论"></a> 进一步讨论</h2>
+<ul>
+<li>即便D都是一样的，数据质量的影响仍然很大（PaLM，LLaMA，Qwen，etc）</li>
+<li>上下文长度会影响分配规律（Gemini 1.5，GPT4.1，etc）</li>
+<li>multi modal有自己的分配方式</li>
+<li>CoT、tool use之类的能力只在N足够大时才突然出现</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>papers</tag>
+      </tags>
+  </entry>
 </search>
