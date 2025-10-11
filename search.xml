@@ -8758,4 +8758,79 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>papers</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Papers-GPT3&amp;RLHF</title>
+    <url>/2025/10/07/key-topics/</url>
+    <content><![CDATA[<p>LLM关键的topic/milestone，整理思路。</p>
+<p>重新整理LLM关键的topic/milestone</p>
+<span id="more"></span>
+<h2 id="language-models-are-few-shot-learners-2020"><a class="markdownIt-Anchor" href="#language-models-are-few-shot-learners-2020"></a> <a href="https://arxiv.org/pdf/2005.14165">Language Models are Few-Shot Learners (2020)</a></h2>
+<ul>
+<li>GPT-3：175B</li>
+<li>风格化的<a href="https://dugas.ch/artificial_curiosity/GPT_architecture.html">结构简图</a></li>
+</ul>
+<p><img src="/2025/10/07/key-topics/fullarch.png" alt="img"></p>
+<ul>
+<li>ICL，重新定义了ICL语境下的zero-shot/few-shot（这些data (examples)都是在prompt里给的，没有param update）</li>
+<li>验证scaling law</li>
+</ul>
+<h2 id="training-language-models-to-follow-instructions-with-human-feedback-2022"><a class="markdownIt-Anchor" href="#training-language-models-to-follow-instructions-with-human-feedback-2022"></a> <a href="https://cdn.openai.com/papers/Training_language_models_to_follow_instructions_with_human_feedback.pdf">Training language models to follow instructions with human feedback (2022)</a></h2>
+<ul>
+<li>InstructGPT: make progress on aligning language models by training them to act in accordance with the user’s intention (<strong>follow a broad class of written instructions</strong>)</li>
+<li>RLHF: reinforcement learning from human feedback</li>
+</ul>
+<p><img src="/2025/10/07/key-topics/image-20251007210948238.png" alt="image-20251007210948238"></p>
+<ul>
+<li>RLHF其实应该分成两部分
+<ul>
+<li>SFT：在~13k人工指令-回答数据上微调
+<ul>
+<li>当时用的是全量微调，现在自然可以上LoRA</li>
+<li>考虑到PPO的收敛稳定性问题，这一步其实对回答进行了较强的约束（给了一个高质量的起点），否则直接RM+PPO搞不好根本训不出来（或者不稳定、效率低下）</li>
+</ul>
+</li>
+<li>RM + PPO
+<ul>
+<li>RM
+<ul>
+<li>一个LLM（推荐用6B之类小点的）把输出头改成标量输出</li>
+<li>标注员给一堆（4~9）SFT后的LLM生成的答案<strong>排序</strong>，然后这堆答案会生成若干带有人类偏好的答案对，与问题一起塞进RM即可输出标量分数</li>
+<li>训练RM时极大化分差即可（具体loss形式参见paper），最后加个bias中心化（也是为RL考虑）</li>
+</ul>
+</li>
+<li>PPO
+<ul>
+<li>首先明确：被训练的还是LLM的参数（当然这里也可以变成LoRA），文中给的objective其实相当于PPO的reward，后面怎么GAE-clipping纯粹是PPO的事，并不在那个objective公式的范围内</li>
+</ul>
+</li>
+<li>为什么不能只用SFT？
+<ul>
+<li>SFT用crossentropy更倾向于逐token与训练数据逼近，从宏观来看类似于逼近训练数据的平均行为，但平均行为不一定是最优的（e.g.符合人类偏好的回答很可能是以整句整句为单位分立的，把一堆好回答embedding完进行平均得到的回答未必是好回答）
+<ul>
+<li>VQVAE，VQGAN道理类似</li>
+</ul>
+</li>
+<li>SFT对数据质量要求较高，RL这部分排序速度快，对标注员要求也低一些</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>进一步讨论
+<ul>
+<li>RM-Free Methods，DPO（闭式loss，直接把RL部分去掉变成监督学习）等</li>
+<li>Automated Feedback，即不要人工标注，RLVR（可量化的reward，案例如GRPO，在RL部分使用新的优势估计GRAE）等</li>
+<li>……</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>papers</tag>
+      </tags>
+  </entry>
 </search>

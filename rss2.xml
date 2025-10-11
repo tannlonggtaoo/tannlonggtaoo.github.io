@@ -15,8 +15,30 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Mon, 06 Oct 2025 12:18:44 GMT</pubDate>
+    <pubDate>Sat, 11 Oct 2025 16:44:22 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Papers-GPT3&amp;RLHF</title>
+      <link>https://tannlonggtaoo.github.io/2025/10/07/key-topics/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/10/07/key-topics/</guid>
+      <pubDate>Tue, 07 Oct 2025 07:50:49 GMT</pubDate>
+      
+      <description>&lt;p&gt;LLM关键的topic/milestone，整理思路。&lt;/p&gt;
+&lt;p&gt;重新整理LLM关键的topic/milestone&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/10/07/key-topics/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Scaling law</title>
@@ -450,27 +472,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/09/12/optics1&amp;2/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>链接库</title>
-      <link>https://tannlonggtaoo.github.io/2023/08/21/lderror/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/08/21/lderror/</guid>
-      <pubDate>Mon, 21 Aug 2023 08:50:27 GMT</pubDate>
-      
-      <description>&lt;p&gt;关于make链接时找不到文件的问题。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/linux/">linux</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/ld/">ld</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/08/21/lderror/#disqus_thread</comments>
       
     </item>
     
