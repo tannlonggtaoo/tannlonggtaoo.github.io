@@ -8833,4 +8833,32 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>papers</tag>
       </tags>
   </entry>
+  <entry>
+    <title>QLoRA</title>
+    <url>/2025/10/12/qlora/</url>
+    <content><![CDATA[<p>简介<a href="https://arxiv.org/pdf/2305.14314">QLoRA</a>核心概念</p>
+<span id="more"></span>
+<p>QLoRA = NF4（4-bit NormalFloat Quantization）+DQ（Double Quantization ）+Paged Optimizers</p>
+<h2 id="nf4"><a class="markdownIt-Anchor" href="#nf4"></a> NF4</h2>
+<p>常规量化都是均匀量化，类似<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mi>u</mi><mi>a</mi><mi>n</mi><msub><mi>t</mi><mi>n</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>i</mi><mi>n</mi><mi>t</mi><mo stretchy="false">(</mo><mi>x</mi><mi mathvariant="normal">/</mi><msub><mi>x</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo stretchy="false">)</mo><mo>∗</mo><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">quant_n(x)=int(x/x_{max})*2^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mord mathnormal">u</span><span class="mord mathnormal">a</span><span class="mord mathnormal">n</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">i</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mord">/</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>，而NF4就是指<strong>按正态分布分位数</strong>（假设LLM权重参数值近似服从正态分布）进行量化，最终量化到4bit。这些分位数都可以提前算好，不会造成额外性能损失。</p>
+<p>注意QLoRA只对LLM的参数进行量化，LoRA的权重无需量化（16甚至32bit都行）。另外由于只有LoRA参数参与训练，LLM参数一直freeze，因此梯度流不会经过量化函数，不需要考虑STE之类的东西。</p>
+<h2 id="dq"><a class="markdownIt-Anchor" href="#dq"></a> DQ</h2>
+<p>由于LLM本身很大，因此各个参数block的zero-point &amp; scale总量也非常大，因此对这些量化相关参数再做一次<strong>普通均匀8bit</strong>量化。（当然这还是和LoRA的参数无关）</p>
+<h2 id="paged-optimizers"><a class="markdownIt-Anchor" href="#paged-optimizers"></a> Paged Optimizers</h2>
+<p>将Optimizer的数据视为数据块。当显存存即将耗尽或遇到尖峰时就自动转移到RAM去，要用时在调回来，即可避免OOM，实现小显存调大模型。</p>
+<h2 id="性能指标"><a class="markdownIt-Anchor" href="#性能指标"></a> 性能指标</h2>
+<ul>
+<li>和16bit LoRA大体持平</li>
+<li>和full FT相比下降大致在1%以内，差距很小</li>
+<li>显存需求大幅下降，例如LLaMA 65B从780G（这是16bit FT的显存，如果是更原始的微调方式显存占用可能要更高）降到48G以下</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>LoRA</tag>
+        <tag>quantization</tag>
+      </tags>
+  </entry>
 </search>

@@ -15,8 +15,31 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sat, 11 Oct 2025 16:44:22 GMT</pubDate>
+    <pubDate>Sun, 12 Oct 2025 09:52:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>QLoRA</title>
+      <link>https://tannlonggtaoo.github.io/2025/10/12/qlora/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/10/12/qlora/</guid>
+      <pubDate>Sun, 12 Oct 2025 07:29:32 GMT</pubDate>
+      
+      <description>&lt;p&gt;简介&lt;a href=&quot;https://arxiv.org/pdf/2305.14314&quot;&gt;QLoRA&lt;/a&gt;核心概念&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/LoRA/">LoRA</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/quantization/">quantization</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/10/12/qlora/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Papers-GPT3&amp;RLHF</title>
@@ -451,27 +474,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/09/13/optics3/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>傅里叶光学1&amp;2</title>
-      <link>https://tannlonggtaoo.github.io/2023/09/12/optics1&amp;2/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/09/12/optics1&amp;2/</guid>
-      <pubDate>Tue, 12 Sep 2023 01:29:15 GMT</pubDate>
-      
-      <description>&lt;p&gt;对傅里叶光学知识的简介。对应《傅里叶光学导论》（古德曼，第三版）第一、二章，以下略。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/optics/">optics</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/intro/">intro</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/09/12/optics1&amp;2/#disqus_thread</comments>
       
     </item>
     
