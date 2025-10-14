@@ -15,8 +15,35 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sun, 12 Oct 2025 15:36:51 GMT</pubDate>
+    <pubDate>Tue, 14 Oct 2025 17:11:12 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>papers-Qwen系列</title>
+      <link>https://tannlonggtaoo.github.io/2025/10/13/qwen/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/10/13/qwen/</guid>
+      <pubDate>Mon, 13 Oct 2025 14:32:18 GMT</pubDate>
+      
+      <description>&lt;p&gt;回顾Qwen系列&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/Qwen/">Qwen</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/VLM/">VLM</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/MoE/">MoE</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/10/13/qwen/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>papers-LLaMA系列</title>
@@ -31,6 +58,8 @@
       
       <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
       
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
       
       <category domain="https://tannlonggtaoo.github.io/tags/LLaMA/">LLaMA</category>
       
@@ -57,9 +86,9 @@
       <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
       
       
-      <category domain="https://tannlonggtaoo.github.io/tags/quantization/">quantization</category>
-      
       <category domain="https://tannlonggtaoo.github.io/tags/LoRA/">LoRA</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/quantization/">quantization</category>
       
       
       <comments>https://tannlonggtaoo.github.io/2025/10/12/qlora/#disqus_thread</comments>
@@ -123,9 +152,9 @@
       <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
       
       
-      <category domain="https://tannlonggtaoo.github.io/tags/LoRA/">LoRA</category>
-      
       <category domain="https://tannlonggtaoo.github.io/tags/PEFT/">PEFT</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/LoRA/">LoRA</category>
       
       
       <comments>https://tannlonggtaoo.github.io/2025/09/29/peft-framework/#disqus_thread</comments>
@@ -457,27 +486,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/09/14/optics5/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>傅里叶光学4</title>
-      <link>https://tannlonggtaoo.github.io/2023/09/14/optics4/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/09/14/optics4/</guid>
-      <pubDate>Thu, 14 Sep 2023 11:26:06 GMT</pubDate>
-      
-      <description>&lt;p&gt;对应第四章&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/optics/">optics</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/intro/">intro</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/09/14/optics4/#disqus_thread</comments>
       
     </item>
     
