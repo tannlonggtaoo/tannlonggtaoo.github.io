@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Tue, 14 Oct 2025 17:11:12 GMT</pubDate>
+    <pubDate>Mon, 20 Oct 2025 09:19:36 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>BGE-M3</title>
+      <link>https://tannlonggtaoo.github.io/2025/10/20/bge/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/10/20/bge/</guid>
+      <pubDate>Mon, 20 Oct 2025 07:54:42 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要介绍&lt;a href=&quot;https://arxiv.org/pdf/2402.03216&quot;&gt;BGE（BAAI General Embedding）-M3&lt;/a&gt;的技术方案&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/embedding/">embedding</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/10/20/bge/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>papers-Qwen系列</title>
@@ -465,27 +486,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2023/09/15/optics6/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>傅里叶光学5</title>
-      <link>https://tannlonggtaoo.github.io/2023/09/14/optics5/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/09/14/optics5/</guid>
-      <pubDate>Thu, 14 Sep 2023 12:40:37 GMT</pubDate>
-      
-      <description>&lt;p&gt;对应第五章&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/optics/">optics</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/intro/">intro</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/09/14/optics5/#disqus_thread</comments>
       
     </item>
     

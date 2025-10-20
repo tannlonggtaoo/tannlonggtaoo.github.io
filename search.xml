@@ -9059,4 +9059,58 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>pose estimation</tag>
       </tags>
   </entry>
+  <entry>
+    <title>BGE-M3</title>
+    <url>/2025/10/20/bge/</url>
+    <content><![CDATA[<p>简要介绍<a href="https://arxiv.org/pdf/2402.03216">BGE（BAAI General Embedding）-M3</a>的技术方案</p>
+<span id="more"></span>
+<h3 id="结构"><a class="markdownIt-Anchor" href="#结构"></a> 结构</h3>
+<ul>
+<li>
+<p>类BERT的encoder-only transformer，输出就是embedding而非文本</p>
+</li>
+<li>
+<p>encoder后面加了三种head</p>
+<ul>
+<li>
+<p>dense：把[CLS]的embedding提出来，归一化就得了</p>
+<blockquote>
+<p>[CLS]就是BERT里句首那个[CLS]，只不过这里没用来分类而已</p>
+</blockquote>
+</li>
+<li>
+<p>sparse：每个token（当然除[CLS]外）逐个线性映射到一维然后relu，然后整理成和词表长度一致的稀疏向量（如果有重复token就只取最大值），这个稀疏向量就是sparse的embedding（paper里写的相似度计算本质上和直接拿这个稀疏向量乘是一样的）</p>
+</li>
+<li>
+<p>multi-vector：先逐个token线性映射一次（维度相同），归一化后用ColBert的办法（每个query token和各个doc token的内积中的最大值能得到一个数，所有query token的这个数加起来就是相似度值）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>以上得到的三种相似度加权求和就是总的相似度</p>
+</li>
+</ul>
+<h3 id="训练"><a class="markdownIt-Anchor" href="#训练"></a> 训练</h3>
+<ul>
+<li>pretrain
+<ul>
+<li>RetroMAE，类似MLM，但有利于把语义压缩到[CLS]去（加了个小的decoder搞恢复，decoder上用一个较高的mask rate，然后让decoder搞重建）</li>
+<li>这步相当于只有dense部分参与训练</li>
+</ul>
+</li>
+<li>posttrain
+<ul>
+<li>针对检索部分进行优化，在单语语料（要用其他方式构造正负样本对）、检索对数据集、翻译对文本数据（多语言能力在这了）间搞对比训练</li>
+<li>自知识蒸馏</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>embedding</tag>
+      </tags>
+  </entry>
 </search>
