@@ -30,9 +30,11 @@
 <meta property="og:description" content="简要介绍rotary positional encoding （RoPE）的原理，主要参考RoFormer">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://tannlonggtaoo.github.io/2025/06/22/RoPE/image-20250622205525645.png">
+<meta property="og:image" content="https://tannlonggtaoo.github.io/2025/06/22/RoPE/image-20251021171842873.png">
+<meta property="og:image" content="https://tannlonggtaoo.github.io/2025/06/22/RoPE/image-20251021164114803.png">
 <meta property="og:image" content="https://tannlonggtaoo.github.io/2025/06/22/RoPE/image-20250622210110279.png">
 <meta property="article:published_time" content="2025-06-22T12:31:17.000Z">
-<meta property="article:modified_time" content="2025-09-13T07:51:41.480Z">
+<meta property="article:modified_time" content="2025-10-21T09:19:01.540Z">
 <meta property="article:author" content="tannlonggtaoo">
 <meta property="article:tag" content="papers">
 <meta property="article:tag" content="positional encoding">
@@ -143,12 +145,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">81</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">84</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">79</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">83</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -239,7 +241,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-09-13 15:51:41" itemprop="dateModified" datetime="2025-09-13T15:51:41+08:00">2025-09-13</time>
+                <time title="修改时间：2025-10-21 17:19:01" itemprop="dateModified" datetime="2025-10-21T17:19:01+08:00">2025-10-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,7 +277,28 @@
 <p>但RoPE直接从“相对位置”这条约束出发，构造了一个只与相对距离有关的变换方式</p>
 <img src="/2025/06/22/RoPE/image-20250622205525645.png" alt="image-20250622205525645" style="zoom:40%;">
 <p>当然这个地方的推导只针对<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>m</mi></msub><mo separator="true">,</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">x_m,x_n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>都是2d向量（“二元”的普通复数）的情形，对于高维输入直接两两分组，分别使用旋转矩阵即可，因此完整矩阵形式中的R就是一个分块对角矩阵。如果高维输入是奇数，可以直接抛弃某一维（指这一维只乘1，相当于旋转0度）</p>
-<p>需要注意的细节：</p>
+<h4 id="关于为什么theta会定为下面的形式"><a class="markdownIt-Anchor" href="#关于为什么theta会定为下面的形式"></a> 关于为什么theta会定为下面的形式</h4>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>θ</mi><mi>i</mi></msub><mo>=</mo><mn>1000</mn><msup><mn>0</mn><mrow><mo>−</mo><mn>2</mn><mi>i</mi><mi mathvariant="normal">/</mi><mi>d</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\theta_i = 10000^{-2i/d}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">2</span><span class="mord mathnormal mtight">i</span><span class="mord mtight">/</span><span class="mord mathnormal mtight">d</span></span></span></span></span></span></span></span></span></span></span></span>，其中<strong>i是embedding方向的index</strong>，d是embedding的维度，注意这个公式中<strong>不包含序列（token）维度的任何信息</strong>，这个式子其实是Sinusoidal位置编码就在用了，RoPE只是借过来继续用</p>
+<ul>
+<li>
+<p>编入序列（token）方向信息的方式是给这个角度乘n（n代表序列中的位置）</p>
+</li>
+<li>
+<p>也就是说<strong>在embedding方向</strong>，index小一些的维度转得快，index大的维度转得慢</p>
+</li>
+<li>
+<p>关于长程衰减性：长程衰减指的就是在<strong>token方向</strong>上离得越远（即下图中的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>−</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m-n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span>越大），内积结果就更有可能偏小。<a target="_blank" rel="noopener" href="https://kexue.fm/archives/8265">下图</a>中的m和n都是<strong>token方向</strong>的index（其实直观感觉不一定非要像苏这样推，但暂时没想到更合适的方法）</p>
+<p><img src="/2025/06/22/RoPE/image-20251021171842873.png" alt="image-20251021171842873"></p>
+</li>
+<li>
+<p>为什么可以直接规定index小的维度就是转得快，大的维度转的慢？为什么把转速绑定到特定的embedding方向的维度上是可行的，不会导致特定维度只能提取出与相应转速适配的信息而丢失其他的信息么？（注：面试题）</p>
+<ul>
+<li>注意：RoPE是在<strong>QK proj之后</strong>的（参考下图），proj过程中不同embedding维度方向的信息就已经相互接触过了，训练时会自适应地调整的，因此无需担心这个问题</li>
+<li><img src="/2025/06/22/RoPE/image-20251021164114803.png" alt="image-20251021164114803"></li>
+</ul>
+</li>
+</ul>
+<h4 id="需要注意的细节"><a class="markdownIt-Anchor" href="#需要注意的细节"></a> 需要注意的细节：</h4>
 <ul>
 <li>经典的positional encoding是加在输入x上的，而RoPE是乘在qkv上而非输入x上的</li>
 <li>不同2d子空间对应的转角是完全可以不同的，这个值可以自行选取，所以原作者直接借用了sinusoidal的方式。原则上当然也可以训练得到，但以sinusoidal形式定初值后训练中变化不大，因此就直接定为固定值了。</li>
@@ -386,6 +409,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%BA%E4%BB%80%E4%B9%88theta%E4%BC%9A%E5%AE%9A%E4%B8%BA%E4%B8%8B%E9%9D%A2%E7%9A%84%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text"> 关于为什么theta会定为下面的形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%BB%86%E8%8A%82"><span class="nav-number">2.</span> <span class="nav-text"> 需要注意的细节：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -401,7 +425,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">84</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -414,7 +438,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">79</span>
+        <span class="site-state-item-count">83</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -449,7 +473,7 @@
 <div class="copyright">
   
   &copy; 2022 – 
-  <span itemprop="copyrightYear">2025</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

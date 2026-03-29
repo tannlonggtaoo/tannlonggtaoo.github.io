@@ -15,8 +15,75 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Mon, 20 Oct 2025 09:19:36 GMT</pubDate>
+    <pubDate>Sun, 29 Mar 2026 06:37:30 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>VSC_Claude_in_CN</title>
+      <link>https://tannlonggtaoo.github.io/2026/03/29/VSC-Claude-in-CN/</link>
+      <guid>https://tannlonggtaoo.github.io/2026/03/29/VSC-Claude-in-CN/</guid>
+      <pubDate>Sun, 29 Mar 2026 06:12:00 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要介绍发文时间点上中国配置vscode claude plugin+claude code cli的最佳实践。这种方法除了没法开&lt;code&gt;/thinking&lt;/code&gt;之外（需要LLM api provider日后支持）没有什么缺陷。&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/coding-agent/">coding agent</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/claude-code/">claude code</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/vscode/">vscode</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2026/03/29/VSC-Claude-in-CN/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>KVCache</title>
+      <link>https://tannlonggtaoo.github.io/2025/10/21/kvcache/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/10/21/kvcache/</guid>
+      <pubDate>Tue, 21 Oct 2025 09:59:37 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要介绍KVCache&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/HPC/">HPC</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/10/21/kvcache/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>BBPE</title>
+      <link>https://tannlonggtaoo.github.io/2025/10/21/bbpe/</link>
+      <guid>https://tannlonggtaoo.github.io/2025/10/21/bbpe/</guid>
+      <pubDate>Tue, 21 Oct 2025 07:19:51 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要介绍BBPE的核心思路，这是LLM（LLaMA，Qwen，etc.）普遍使用的初始化词表的方法&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/embedding/">embedding</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2025/10/21/bbpe/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>BGE-M3</title>
@@ -417,75 +484,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2025/06/22/CoT/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>ICL（in-context learning）简析</title>
-      <link>https://tannlonggtaoo.github.io/2025/06/22/ICL/</link>
-      <guid>https://tannlonggtaoo.github.io/2025/06/22/ICL/</guid>
-      <pubDate>Sat, 21 Jun 2025 16:11:45 GMT</pubDate>
-      
-      <description>&lt;p&gt;简要说明in-context learning是怎么一回事。主要参考&lt;a href=&quot;https://arxiv.org/abs/2301.00234&quot;&gt;ACL’24&lt;/a&gt;&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/prompt-engineering/">prompt engineering</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/inference/">inference</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2025/06/22/ICL/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>cachedecorator</title>
-      <link>https://tannlonggtaoo.github.io/2024/05/12/cachedecorator/</link>
-      <guid>https://tannlonggtaoo.github.io/2024/05/12/cachedecorator/</guid>
-      <pubDate>Sun, 12 May 2024 06:57:47 GMT</pubDate>
-      
-      <description>&lt;p&gt;简要介绍python的decorator：cache&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/programming/">programming</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/python/">python</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/decorator/">decorator</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2024/05/12/cachedecorator/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>傅里叶光学6</title>
-      <link>https://tannlonggtaoo.github.io/2023/09/15/optics6/</link>
-      <guid>https://tannlonggtaoo.github.io/2023/09/15/optics6/</guid>
-      <pubDate>Fri, 15 Sep 2023 07:14:25 GMT</pubDate>
-      
-      <description>&lt;p&gt;对应第六章&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/optics/">optics</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/intro/">intro</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2023/09/15/optics6/#disqus_thread</comments>
       
     </item>
     

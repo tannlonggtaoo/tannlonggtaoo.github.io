@@ -4652,7 +4652,28 @@ b^{\prime} &amp;=\tau n
 <p>但RoPE直接从“相对位置”这条约束出发，构造了一个只与相对距离有关的变换方式</p>
 <img src="/2025/06/22/RoPE/image-20250622205525645.png" alt="image-20250622205525645" style="zoom:40%;">
 <p>当然这个地方的推导只针对<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>m</mi></msub><mo separator="true">,</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">x_m,x_n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>都是2d向量（“二元”的普通复数）的情形，对于高维输入直接两两分组，分别使用旋转矩阵即可，因此完整矩阵形式中的R就是一个分块对角矩阵。如果高维输入是奇数，可以直接抛弃某一维（指这一维只乘1，相当于旋转0度）</p>
-<p>需要注意的细节：</p>
+<h4 id="关于为什么theta会定为下面的形式"><a class="markdownIt-Anchor" href="#关于为什么theta会定为下面的形式"></a> 关于为什么theta会定为下面的形式</h4>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>θ</mi><mi>i</mi></msub><mo>=</mo><mn>1000</mn><msup><mn>0</mn><mrow><mo>−</mo><mn>2</mn><mi>i</mi><mi mathvariant="normal">/</mi><mi>d</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\theta_i = 10000^{-2i/d}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">2</span><span class="mord mathnormal mtight">i</span><span class="mord mtight">/</span><span class="mord mathnormal mtight">d</span></span></span></span></span></span></span></span></span></span></span></span>，其中<strong>i是embedding方向的index</strong>，d是embedding的维度，注意这个公式中<strong>不包含序列（token）维度的任何信息</strong>，这个式子其实是Sinusoidal位置编码就在用了，RoPE只是借过来继续用</p>
+<ul>
+<li>
+<p>编入序列（token）方向信息的方式是给这个角度乘n（n代表序列中的位置）</p>
+</li>
+<li>
+<p>也就是说<strong>在embedding方向</strong>，index小一些的维度转得快，index大的维度转得慢</p>
+</li>
+<li>
+<p>关于长程衰减性：长程衰减指的就是在<strong>token方向</strong>上离得越远（即下图中的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>−</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m-n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span>越大），内积结果就更有可能偏小。<a href="https://kexue.fm/archives/8265">下图</a>中的m和n都是<strong>token方向</strong>的index（其实直观感觉不一定非要像苏这样推，但暂时没想到更合适的方法）</p>
+<p><img src="/2025/06/22/RoPE/image-20251021171842873.png" alt="image-20251021171842873"></p>
+</li>
+<li>
+<p>为什么可以直接规定index小的维度就是转得快，大的维度转的慢？为什么把转速绑定到特定的embedding方向的维度上是可行的，不会导致特定维度只能提取出与相应转速适配的信息而丢失其他的信息么？（注：面试题）</p>
+<ul>
+<li>注意：RoPE是在<strong>QK proj之后</strong>的（参考下图），proj过程中不同embedding维度方向的信息就已经相互接触过了，训练时会自适应地调整的，因此无需担心这个问题</li>
+<li><img src="/2025/06/22/RoPE/image-20251021164114803.png" alt="image-20251021164114803"></li>
+</ul>
+</li>
+</ul>
+<h4 id="需要注意的细节"><a class="markdownIt-Anchor" href="#需要注意的细节"></a> 需要注意的细节：</h4>
 <ul>
 <li>经典的positional encoding是加在输入x上的，而RoPE是乘在qkv上而非输入x上的</li>
 <li>不同2d子空间对应的转角是完全可以不同的，这个值可以自行选取，所以原作者直接借用了sinusoidal的方式。原则上当然也可以训练得到，但以sinusoidal形式定初值后训练中变化不大，因此就直接定为固定值了。</li>
@@ -8508,7 +8529,7 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <li>
 <p>基础模型：1.8/7/14/72B，后来Qwen 1.5又有0.5/1.8/4/7/14/32/72等。在LLaMA基础上调整，关键策略：</p>
 <ul>
-<li>Embedding and output projection不共享：之前会直接将二者设成互为转置，Qwen改为二者完全独立，提升表示能力</li>
+<li>Embedding and output projection不共享（非tie embedding）：之前会直接将二者设成互为转置，Qwen改为二者完全独立，提升表示能力（qwen3改为大的不共享小的共享）</li>
 <li>RoPE，但用FP32（更高精度）存inv_freq（好主意）</li>
 <li>Bias处理：去掉了FFN和layer norms里的bias（提高稳定性、稍微减少参数量，来自PaLM），但在QKV layer（就是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><msub><mi>W</mi><mi>Q</mi></msub><mi>x</mi><mo separator="true">,</mo><mi>K</mi><mo>=</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">Q=W_Q x, K=...</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">Q</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.328331em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">Q</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.10556em;vertical-align:0em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span></span></span></span>）这步加上了bias（来自RoPE）</li>
 <li>Pre-Norm &amp; RMSNorm</li>
@@ -8555,7 +8576,12 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <li>
 <p>Qwen2</p>
 <ul>
-<li>基础模型</li>
+<li>基础模型
+<ul>
+<li>GQA，SwiGLU，RoPE，QKV-bias，RMSNorm &amp; pre normalization</li>
+<li>DCA with YARN：见后</li>
+</ul>
+</li>
 <li>Qwen2-Instruct</li>
 <li>Qwen2-Math</li>
 <li>Qwen2-VL</li>
@@ -8565,12 +8591,16 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <li>
 <p>Qwen2.5</p>
 <ul>
-<li>基础模型</li>
+<li>基础模型
+<ul>
+<li>GQA，SwiGLU，RoPE，QKV-bias，RMSNorm &amp; pre normalization，看起来和qwen2没啥本质区别</li>
+</ul>
+</li>
 <li>Qwen2.5-Instruct</li>
 <li>Qwen2.5-Math</li>
 <li>Qwen2.5-Coder</li>
-<li>QVQ</li>
-<li>QwQ</li>
+<li>QVQ：Qwen-VL的衍生物，强调多模态推理能力</li>
+<li>QwQ：RL优化推理能力，强调CoT——后面Qwen3就把think和非think整合到一起去了</li>
 <li>Qwen2.5-VL</li>
 <li>Qwen2.5-Omni</li>
 </ul>
@@ -8578,16 +8608,106 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <li>
 <p>Qwen3</p>
 <ul>
-<li>基础模型</li>
-<li>Qwen3-Embedding</li>
-<li>Qwen-Image，Qwen-Image-Edit</li>
-<li>Qwen3-Next</li>
-<li>Qwen3-Omni</li>
-<li>Qwen3Guard</li>
-<li>Qwen3-VL</li>
-<li>Qwen3-Coder</li>
-<li>Qwen3-Max</li>
-<li>Qwen-Long</li>
+<li>
+<p>基础模型：0.6/1.7/4/8/14/32，MoE：30-A3/235-A22（A后面的数就是指单次activate的参数量，单位都是B）</p>
+<ul>
+<li>
+<p>GQA，SwiGLU，RoPE，RMSNorm &amp; pre-normalization，<strong>去掉QKV bias</strong></p>
+</li>
+<li>
+<p>小参数量模型上用tie embedding（直接把encoder转置当decoder）</p>
+</li>
+<li>
+<p><strong>QK-norm</strong>：主要是便于训练</p>
+<ul>
+<li>
+<p>之前为了防止attention里QK^T这个地方数值增长过大，就除一个scale(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><msub><mi>d</mi><mi>k</mi></msub></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{d_k}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.18278000000000005em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.85722em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.81722em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width="400em" height="1.08em" viewbox="0 0 400000 1080" preserveaspectratio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.18278000000000005em;"><span></span></span></span></span></span></span></span></span>)</p>
+</li>
+<li>
+<p>但除了之后其实还是有可能溢出，毕竟这就是一个定值而已。。。比如BF16的模型搬到FP16（数值范围窄一些，最大只能六万多）上就有概率在QK^T这个地方溢出，参考<a href="https://zhuanlan.zhihu.com/p/1919340508637016870">这篇知乎</a>（当然，qwen3文章里的说法是稳定训练）</p>
+</li>
+<li>
+<p>所以直接修改成<a href="https://arxiv.org/pdf/2010.04245">如下形式</a>（说实话，早该这么修了，这对低精度部署也有好处）：</p>
+<img src="/2025/10/13/qwen/image-20251021151006646.png" alt="image-20251021151006646" style="zoom:43%;">
+</li>
+</ul>
+</li>
+<li>
+<p>数据：多语言、用Qwen2.5-VL从PDF搞额外数据等等</p>
+</li>
+<li>
+<p>训练大致方法</p>
+<ul>
+<li>通用阶段</li>
+<li>推理阶段：增加语料库中和推理相关的内容</li>
+<li>长上下文阶段：最长32K，ABF+YARN+DCA配合使用
+<ul>
+<li>增大基频
+<ul>
+<li>把RoPE的基频从10000提升到1000000之类，防止超长序列时相位重叠</li>
+<li>问题：短距离的分辨力下降（转得很慢），因此要配合其他方法进行处理</li>
+</ul>
+</li>
+<li>YARN
+<ul>
+<li>PI：在token方向进行缩放，把序列index按比例缩放到特定范围</li>
+<li>NTK：低频不适用PI（避免破坏局部信息），只在高频使用PI（处理长程依赖）（有个阈值来分别低频和高频）</li>
+<li>Attention scaling：和普通的在QK^T下面加的temperature是一个东西</li>
+<li>以上三种方式直接整合到Positional encoding的计算公式里去，因此不会引入额外开销</li>
+</ul>
+</li>
+<li>DCA，Dual Chunk Attention
+<ul>
+<li>长输入分块，每块长度和预训练长度相同</li>
+<li>intra chunk：正常算</li>
+<li>inter chunk：对距离较远的块先压缩（比如K、V直接用块内均值代替），给这个均值代表元分配一个新的基于RoPE且不超出范围的的位置编码（这里有很多细节），最后正常用Q和均值KV算attention即可</li>
+<li>successive chunk（连续块处理）：魔改RoPE加一个位置偏移量（这里也有很多细节），然后正常算；如果不连续的话偏移量就会太大导致超出RoPE能处理的范围了（OOD）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Qwen3-Embedding</p>
+</li>
+<li>
+<p>Qwen-Image，Qwen-Image-Edit</p>
+</li>
+<li>
+<p>Qwen3-Next</p>
+</li>
+<li>
+<p>Qwen3-Omni</p>
+</li>
+<li>
+<p>Qwen3Guard</p>
+</li>
+<li>
+<p>Qwen3-VL</p>
+</li>
+<li>
+<p>Qwen3-Coder</p>
+</li>
+<li>
+<p>Qwen3-Max</p>
+</li>
+<li>
+<p>Qwen-Long</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -9076,6 +9196,7 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p>dense：把[CLS]的embedding提出来，归一化就得了</p>
 <blockquote>
 <p>[CLS]就是BERT里句首那个[CLS]，只不过这里没用来分类而已</p>
+<p>最早的bge就只有这个dense，没有把另外两种head加进来</p>
 </blockquote>
 </li>
 <li>
@@ -9101,7 +9222,13 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <li>posttrain
 <ul>
 <li>针对检索部分进行优化，在单语语料（要用其他方式构造正负样本对）、检索对数据集、翻译对文本数据（多语言能力在这了）间搞对比训练</li>
-<li>自知识蒸馏</li>
+<li>自知识蒸馏
+<ul>
+<li>主要目的是优化三种查询方式的协同性</li>
+<li>“自”的含义：三种查询方式互为师生（按paper的说法，既有已经在pretrain中训好的dense向另外两种匹配方式传递信号的功能，也有反过来优化dense的功能，不过这种说法有点抽象）</li>
+<li>三种查询方式得到score的权重系数还是需要人工根据场景确定，默认dense和multi-vector等权，但sparse权重会低一些</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -9111,6 +9238,93 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
       </categories>
       <tags>
         <tag>embedding</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VSC_Claude_in_CN</title>
+    <url>/2026/03/29/VSC-Claude-in-CN/</url>
+    <content><![CDATA[<p>简要介绍发文时间点上中国配置vscode claude plugin+claude code cli的最佳实践。这种方法除了没法开<code>/thinking</code>之外（需要LLM api provider日后支持）没有什么缺陷。</p>
+<span id="more"></span>
+<h1 id="准备"><a class="markdownIt-Anchor" href="#准备"></a> 准备</h1>
+<ul>
+<li>LLM API聚合平台key
+<ul>
+<li>由于claude不为中国提供服务，因此其中一种规避方式就是通过第三方平台转接</li>
+<li>目前在用openrouter，最大的好处是支持广，同时自己搞agent开发时也能用，比较方便</li>
+</ul>
+</li>
+<li>梯子或其他代理
+<ul>
+<li>主要是为了修改地址信息</li>
+</ul>
+</li>
+</ul>
+<h1 id="步骤"><a class="markdownIt-Anchor" href="#步骤"></a> 步骤</h1>
+<ul>
+<li>vscode直接搜索安装claude code official插件
+<ul>
+<li>这个插件其实自带cli，如果没有添加到环境变量（win上容易出现），直接到插件文件夹找到claude二进制文件所在目录加到环境变量path去</li>
+<li>如果之前没有装过claude code的话，此时无论通过右边栏还是cli打开，大概应该都是未连接状态</li>
+</ul>
+</li>
+<li>vscode配置claude code settings.json全局配置（这个配置形式三天两头改，可能需要自己琢磨）</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;claudeCode.environmentVariables&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;HTTPS_PROXY&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://127.0.0.1:7890&quot;</span>  <span class="comment">// 梯子或代理，注意端口号可能不一样（clash默认7890）</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ANTHROPIC_BASE_URL&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://openrouter.ai/api&quot;</span>  <span class="comment">// 根据api provider写</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ANTHROPIC_API_KEY&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span>  <span class="comment">// 必须留空</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ANTHROPIC_AUTH_TOKEN&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xxxx&quot;</span>  <span class="comment">// api provider的token</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="comment">// 下面这些可以根据model更新情况配置</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ANTHROPIC_DEFAULT_OPUS_MODEL&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;anthropic/claude-opus-4.6&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ANTHROPIC_DEFAULT_SONNET_MODEL&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;anthropic/claude-sonnet-4.6&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ANTHROPIC_DEFAULT_HAIKU_MODEL&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;anthropic/claude-haiku-4.5&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;CLAUDE_CODE_SUBAGENT_MODEL&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;anthropic/claude-opus-4.6&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>此时右边栏的claude code应该就可以进入了，但会发现redacted_thinking报错，这是api provider适配不佳导致的，可以期待升级。不过目前只能先关掉/thinking以立即使用</li>
+<li>然后再到terminal对应的profile把上面的环境变量全部写进去（export），claude cli也配置好了</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>coding agent</tag>
+        <tag>claude code</tag>
+        <tag>vscode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BBPE</title>
+    <url>/2025/10/21/bbpe/</url>
+    <content><![CDATA[<p>简要介绍BBPE的核心思路，这是LLM（LLaMA，Qwen，etc.）普遍使用的初始化词表的方法</p>
+<span id="more"></span>
+<h3 id="bpe"><a class="markdownIt-Anchor" href="#bpe"></a> BPE</h3>
+<ul>
+<li>初始化词表为<strong>字符</strong>表（比如把ascii字符加进去）</li>
+<li>找一段“训练文本”</li>
+<li>在文本中找到频率最高的符号对并<strong>添加</strong>到词表中（注意总是添加，不是替换，不会删除已经在表里的词，即词表总是封闭的），反复进行直到词表已满</li>
+<li>使用时根据贪心算法优先匹配后添加的词（尽可能分成大块的词）</li>
+</ul>
+<p>问题：字符表只能针对一部分语言，遇到多语言/emoji等特殊符号时就没法处理了（OOV）</p>
+<h3 id="bbpe"><a class="markdownIt-Anchor" href="#bbpe"></a> BBPE</h3>
+<ul>
+<li>初始化词表为<strong>所有可能的字节</strong>（即256个词），此后的处理都以字节为单位进行合并</li>
+<li>这样就彻底不可能OOV了</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>embedding</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KVCache</title>
+    <url>/2025/10/21/kvcache/</url>
+    <content><![CDATA[<p>简要介绍KVCache</p>
+<span id="more"></span>
+<ul>
+<li>只在推理段的decoder中使用</li>
+<li></li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>HPC</tag>
       </tags>
   </entry>
 </search>
