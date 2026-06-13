@@ -9407,4 +9407,73 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>speculative decoding</tag>
       </tags>
   </entry>
+  <entry>
+    <title>semantic caching</title>
+    <url>/2026/06/13/semantic-caching/</url>
+    <content><![CDATA[<p>简要介绍语义缓存的基本原理，这是一个更偏业务侧的Technic，通常要结合具体场景制定策略。</p>
+<span id="more"></span>
+<h1 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h1>
+<p>语义缓存通常指代一种较为规则的简易记忆机制，典型工作流为</p>
+<ul>
+<li>存储：将问题-答案对embedding缓存到向量数据库</li>
+<li>查询：以新问题为key搞相似度检索</li>
+<li>命中：当找到匹配分数超出阈值的问题后，直接使用缓存的原始答案，<strong>不再经过LLM</strong></li>
+</ul>
+<h2 id="细节可以和rag的选择对比"><a class="markdownIt-Anchor" href="#细节可以和rag的选择对比"></a> 细节（可以和RAG的选择对比）</h2>
+<ul>
+<li>存储：
+<ul>
+<li>需要满足低延迟高QPS高频读写
+<ul>
+<li>典型选择：Redis</li>
+</ul>
+</li>
+<li>往往需要权限/租户等业务相关字段，查的时候在filter那里加</li>
+<li>TTL</li>
+<li>典型的缓存策略：只缓存有价值的问题
+<ul>
+<li>非时效性问题，非隐私问题，etc</li>
+<li>长问题（短问题LLM消耗低，缓存性价比就偏低了）</li>
+<li>热点问题</li>
+<li>LLM回答出现明显问题的问题（“对不起，我无法回答……”）</li>
+<li>……</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查询
+<ul>
+<li>需要警惕是否确实可以直接以新问题为key，很多时候session是有上下文的
+<ul>
+<li>rewrite，用一个小LLM结合当前session若干历史问答改写问题</li>
+<li>也可以结合业务制定其他策略</li>
+</ul>
+</li>
+<li>embedding对否定词不敏感
+<ul>
+<li>可能需要一个小模型/关键词匹配，在score没有特别高时执行额外判断，传统NLP应该有相当多的工具</li>
+</ul>
+</li>
+<li>多语种mismatch
+<ul>
+<li>用高质量embedding model，要么就统一翻译</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>命中
+<ul>
+<li>通常会取很高的score threshold，否则性能要大跳水</li>
+<li>通常还是要加个后处理，重点是改一下实体（这个NER搞一下好办）或者加一些额外策略。但这里一定要快，通常用轻量规则搞一下就行</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>semantic caching</tag>
+      </tags>
+  </entry>
 </search>
