@@ -15,11 +15,34 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sun, 29 Mar 2026 06:37:30 GMT</pubDate>
+    <pubDate>Sat, 13 Jun 2026 10:28:12 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>VSC_Claude_in_CN</title>
+      <title>speculative decoding</title>
+      <link>https://tannlonggtaoo.github.io/2026/06/13/speculative-decoding/</link>
+      <guid>https://tannlonggtaoo.github.io/2026/06/13/speculative-decoding/</guid>
+      <pubDate>Sat, 13 Jun 2026 06:31:53 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要介绍投机解码的原理，源自Google 2023的&lt;a href=&quot;https://arxiv.org/abs/2211.17192&quot;&gt;paper&lt;/a&gt;&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/speculative-decoding/">speculative decoding</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2026/06/13/speculative-decoding/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>VSC Claude in CN</title>
       <link>https://tannlonggtaoo.github.io/2026/03/29/VSC-Claude-in-CN/</link>
       <guid>https://tannlonggtaoo.github.io/2026/03/29/VSC-Claude-in-CN/</guid>
       <pubDate>Sun, 29 Mar 2026 06:12:00 GMT</pubDate>
@@ -459,31 +482,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2025/06/22/RoPE/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Chain-of-thought (CoT) 简析</title>
-      <link>https://tannlonggtaoo.github.io/2025/06/22/CoT/</link>
-      <guid>https://tannlonggtaoo.github.io/2025/06/22/CoT/</guid>
-      <pubDate>Sun, 22 Jun 2025 06:49:32 GMT</pubDate>
-      
-      <description>&lt;p&gt;简要说明CoT是怎么一回事，主要参考&lt;a href=&quot;https://dl.acm.org/doi/10.5555/3600270.3602070&quot;&gt;NIPS’22&lt;/a&gt;&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/papers/">papers</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/prompt-engineering/">prompt engineering</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/inference/">inference</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2025/06/22/CoT/#disqus_thread</comments>
       
     </item>
     
