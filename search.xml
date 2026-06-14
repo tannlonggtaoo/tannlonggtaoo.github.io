@@ -9476,4 +9476,55 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>semantic caching</tag>
       </tags>
   </entry>
+  <entry>
+    <title>quantization (LLM)</title>
+    <url>/2026/06/14/quantization/</url>
+    <content><![CDATA[<p>简要介绍典型quantization方式</p>
+<span id="more"></span>
+<h1 id="awq"><a class="markdownIt-Anchor" href="#awq"></a> AWQ</h1>
+<p>重点处理少量最重要的权重</p>
+<ul>
+<li>calib set推一遍forward，看激活值</li>
+<li>太大的激活值<strong>对应的权重</strong>就定一个放大因子，让这些权重因为变大从而在量化时保留更多细节；输入的激活值相应缩小。</li>
+<li>激活值一般还是FP16</li>
+<li>速度快，泛化性更强（和GPTQ相比而言）</li>
+</ul>
+<h1 id="典型方案"><a class="markdownIt-Anchor" href="#典型方案"></a> 典型方案</h1>
+<p>通常的量化方案是：</p>
+<ul>
+<li>
+<p>注意模型尺寸</p>
+<ul>
+<li>太小的（&lt;3B）谨慎使用量化，这个道理对LLM也是适用的</li>
+</ul>
+</li>
+<li>
+<p>使用量化框架将原始权重做成量化版本</p>
+<ul>
+<li>QAT：能训再用，一般魔改STE</li>
+<li>PTQ：通常直接AWQ
+<ul>
+<li>准备calib set（前向推理统计分析权重值，这个不用太大但要包含足够比例的业务数据）</li>
+<li>定量化格式（AWQ基本就是W4A16，这个就是最常用的；新卡支持FP8要用其他工具，ModelOpt之类）</li>
+<li><em>注：目前<strong>部署</strong>的时候一般不会NF4</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>推理框架直接加载</p>
+<ul>
+<li>W4A16-Marlin</li>
+<li>kvcache的量化在推理时开启</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>quantization</tag>
+      </tags>
+  </entry>
 </search>

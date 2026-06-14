@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Sat, 13 Jun 2026 15:19:40 GMT</pubDate>
+    <pubDate>Sun, 14 Jun 2026 09:20:49 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>quantization (LLM)</title>
+      <link>https://tannlonggtaoo.github.io/2026/06/14/quantization/</link>
+      <guid>https://tannlonggtaoo.github.io/2026/06/14/quantization/</guid>
+      <pubDate>Sun, 14 Jun 2026 08:54:32 GMT</pubDate>
+      
+      <description>&lt;p&gt;简要介绍典型quantization方式&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/quantization/">quantization</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2026/06/14/quantization/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>semantic caching</title>
@@ -453,33 +474,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2025/09/07/langchain/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>不同repeat机制分析</title>
-      <link>https://tannlonggtaoo.github.io/2025/07/12/repeat-api/</link>
-      <guid>https://tannlonggtaoo.github.io/2025/07/12/repeat-api/</guid>
-      <pubDate>Sat, 12 Jul 2025 14:54:25 GMT</pubDate>
-      
-      <description>&lt;p&gt;简要介绍不同repeat在存储方面的机制差异，重点分析用通常方法实现的GQA为什么只能减小kv cache，但不能降低显存开销。&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/programming/">programming</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/memory/">memory</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/torch/">torch</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/numpy/">numpy</category>
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/einops/">einops</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2025/07/12/repeat-api/#disqus_thread</comments>
       
     </item>
     
