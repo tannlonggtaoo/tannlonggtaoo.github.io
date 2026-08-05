@@ -15,8 +15,29 @@
     <atom:link href="https://tannlonggtaoo.github.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>天国在何方？&lt;br&gt;就在那片青空中&lt;br&gt;就在你的身旁…</description>
-    <pubDate>Mon, 22 Jun 2026 07:10:17 GMT</pubDate>
+    <pubDate>Wed, 05 Aug 2026 16:07:21 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>deepspeed review</title>
+      <link>https://tannlonggtaoo.github.io/2026/08/05/deepspeed/</link>
+      <guid>https://tannlonggtaoo.github.io/2026/08/05/deepspeed/</guid>
+      <pubDate>Wed, 05 Aug 2026 14:34:28 GMT</pubDate>
+      
+      <description>&lt;p&gt;之前断断续续用deepspeed搞sft，但每次都只关注了一部分，这里再从头捋捋&lt;/p&gt;</description>
+      
+      
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
+      
+      
+      <category domain="https://tannlonggtaoo.github.io/tags/deepspeed/">deepspeed</category>
+      
+      
+      <comments>https://tannlonggtaoo.github.io/2026/08/05/deepspeed/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>quantization (LLM)</title>
@@ -453,27 +474,6 @@
       
       
       <comments>https://tannlonggtaoo.github.io/2025/09/07/react/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>langchain简析</title>
-      <link>https://tannlonggtaoo.github.io/2025/09/07/langchain/</link>
-      <guid>https://tannlonggtaoo.github.io/2025/09/07/langchain/</guid>
-      <pubDate>Sun, 07 Sep 2025 08:02:36 GMT</pubDate>
-      
-      <description>&lt;p&gt;简要介绍langchain（其实是一个较为简单的包装）&lt;/p&gt;</description>
-      
-      
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/categories/LLM/">LLM</category>
-      
-      
-      <category domain="https://tannlonggtaoo.github.io/tags/coding/">coding</category>
-      
-      
-      <comments>https://tannlonggtaoo.github.io/2025/09/07/langchain/#disqus_thread</comments>
       
     </item>
     

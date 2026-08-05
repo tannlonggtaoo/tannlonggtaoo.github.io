@@ -9535,4 +9535,93 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         <tag>quantization</tag>
       </tags>
   </entry>
+  <entry>
+    <title>deepspeed review</title>
+    <url>/2026/08/05/deepspeed/</url>
+    <content><![CDATA[<p>之前断断续续用deepspeed搞sft，但每次都只关注了一部分，这里再从头捋捋</p>
+<span id="more"></span>
+<h1 id="概念recap"><a class="markdownIt-Anchor" href="#概念recap"></a> 概念recap</h1>
+<h2 id="data-parallel-dp"><a class="markdownIt-Anchor" href="#data-parallel-dp"></a> Data parallel DP</h2>
+<ul>
+<li>数据集切分，不同GPU给到不同的batches</li>
+<li>GPUs独立forward-backword</li>
+<li>最后update参数才allreduce
+<ul>
+<li>注意提前在loss位置reduce没意义，因为算loss均值也是线性的，因此直接reduce出平均梯度就行</li>
+<li>当然也不会所有参数backward完才reduce，算完的部分就可以（分bucket）直接开始all reduce了</li>
+</ul>
+</li>
+<li>经典的pytorch dp是gpu0分享data到其他卡，然后算梯度也是收回gpu0，这个就是bottleneck
+<ul>
+<li>现在一般讲DP肯定是指DDP</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>之前实习是在&lt;2B的embedding LLM上full SFT，数据量极大（&gt;10T，当然其实不会全部用完），因此印象中是A100集群DP，每张卡塞3-4个实例，可以DP把等效batchsize搞得很大</p>
+<p>batchsize大除了加速训练，还有一点是embedding最后算InfoNCE是在batch内按照正负例相对值算的，大batchsize噪声小一点，这个和GRPO避免过小的groupsize的道理有些相通之处</p>
+<p>（<s>有点忘记算loss时有没有在DP全局算loss了。。。</s> 有的，当时all_gather还调了半天才搞通）</p>
+</blockquote>
+<h2 id="tensor-parallel-tp"><a class="markdownIt-Anchor" href="#tensor-parallel-tp"></a> Tensor parallel TP</h2>
+<ul>
+<li>底层矩阵切分，一个Layer分散到多个GPU计算，然后reduce</li>
+<li>高通信量</li>
+</ul>
+<h2 id="pipeline-parallel-pp"><a class="markdownIt-Anchor" href="#pipeline-parallel-pp"></a> Pipeline parallel PP</h2>
+<ul>
+<li>特指按Layer切，一个GPU装几层，然后逻辑上是串行执行</li>
+<li>当然实际上肯定类似流水线做法
+<ul>
+<li>特殊的点在于除了forward外还会有个时序相反的backward，和一般的流水线差这了</li>
+<li>这个东西带来的麻烦很大，比如PP高了之后由于前面forward结果都要存导致显存飙升</li>
+</ul>
+</li>
+</ul>
+<h2 id="sequence-parallel-sp"><a class="markdownIt-Anchor" href="#sequence-parallel-sp"></a> Sequence parallel SP</h2>
+<ul>
+<li>每层的input都切分放到不同GPU
+<ul>
+<li>只是用TP的话，每次attention部分搞完后、产生activation前，都要重新all reduce，然后每个GPU都要算一个一模一样的activation</li>
+<li>因此all reduce改成reduce scatter，每个GPU只算一段activation，最后all gather</li>
+<li>通信层面没省，但是显存&amp;计算量节省，对long seq友好</li>
+</ul>
+</li>
+<li>因此是TP后的自然结果，一般TP+SP – Megatron</li>
+</ul>
+<h2 id="moe-parallel-ep"><a class="markdownIt-Anchor" href="#moe-parallel-ep"></a> MoE parallel EP</h2>
+<ul>
+<li>不同expert放到不同的GPU去</li>
+</ul>
+<h2 id="offload"><a class="markdownIt-Anchor" href="#offload"></a> offload</h2>
+<ul>
+<li>特指显存不够时移到SSD</li>
+</ul>
+<h1 id="zero"><a class="markdownIt-Anchor" href="#zero"></a> ZeRO</h1>
+<ul>
+<li>针对的是<strong>training state</strong>做shard，<strong>训练流程（计算）上没有添加并行度</strong>，只是优化显存</li>
+</ul>
+<h2 id="zero-1"><a class="markdownIt-Anchor" href="#zero-1"></a> ZeRO-1</h2>
+<ul>
+<li>切Adam状态，依旧reduce-scatter + all gather</li>
+</ul>
+<h2 id="zero-2"><a class="markdownIt-Anchor" href="#zero-2"></a> ZeRO-2</h2>
+<ul>
+<li>切Adam和grad</li>
+</ul>
+<h2 id="zero-3"><a class="markdownIt-Anchor" href="#zero-3"></a> ZeRO-3</h2>
+<ul>
+<li>切Adam，grad和权重
+<ul>
+<li>注意这不是类似TP/PP那种切法，这里权重切完之后每次forward都要all reduce临时拼一下，计算过程和不使用TP/PP等是一模一样的（所以说<strong>ZeRO是纯粹的显存优化</strong>）</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LLM</category>
+      </categories>
+      <tags>
+        <tag>deepspeed</tag>
+      </tags>
+  </entry>
 </search>
